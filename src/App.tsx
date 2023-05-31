@@ -1,29 +1,16 @@
-import { useState } from "react";
-import styled from "@emotion/styled";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-
 import "./App.css";
-
-const Greetings = styled.label`
-  font-size: 50px;
-`;
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Intro from "./pages/intro/Intro";
+import WritingLetter from "./pages/writingLetter/WritingLetter";
 
 function App() {
   return (
-    <>
-      <Greetings>만나서 반가워요!</Greetings>
-      <CssBaseline />
-      <Container maxWidth="sm">
-        <Box sx={{ bgcolor: "#cfe8fc", width: "360px", height: "360px" }}>
-          <span>편지</span>
-        </Box>
-      </Container>
-      <Button>로그인</Button>
-      <Button>회원가입</Button>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Intro />}></Route>
+        <Route path="/writing" element={<WritingLetter />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
