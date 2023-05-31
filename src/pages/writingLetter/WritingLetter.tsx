@@ -1,5 +1,13 @@
+import Sidebar from "./Sidebar";
+import LetterSpace from "./LetterSpace";
+
 const WritingLetter = () => {
-  return <div>writing</div>;
+  return (
+    <>
+      <Sidebar />
+      <LetterSpace />
+    </>
+  );
 };
 
 export default WritingLetter;
