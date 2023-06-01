@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import register from "../../../apis/registerApi";
 
 function Copyright(props: any) {
   return (
@@ -39,13 +40,11 @@ export default function SignUpForm(props: SignUpFormProps) {
   useEffect(() => {
     setGreetings("회원가입");
   }, []);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.currentTarget);
+    const url = "http://127.0.0.1:3033";
+    await register(url, formData);
   };
 
   return (
@@ -68,19 +67,18 @@ export default function SignUpForm(props: SignUpFormProps) {
               <TextField
                 required
                 fullWidth
-                id="identification"
+                id="userId"
                 label="아이디"
-                name="identification"
+                name="userId"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
-                id="email"
+                id="nickName"
                 label="닉네임"
-                name="email"
-                autoComplete="email"
+                name="nickName"
               />
             </Grid>
             <Grid item xs={12}>

@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
+import login from "../../../apis/loginApi";
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -50,13 +51,11 @@ export default function LoginForm(props: LoginFormProps) {
   useEffect(() => {
     setGreetings("로그인");
   }, []);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.currentTarget);
+    const url = "http://127.0.0.1:3033";
+    localStorage.setItem("jwt", JSON.stringify(await login(url, formData)));
   };
 
   return (
@@ -76,10 +75,9 @@ export default function LoginForm(props: LoginFormProps) {
               <TextField
                 required
                 fullWidth
-                id="email"
-                label="이메일 주소"
-                name="email"
-                autoComplete="email"
+                id="userId"
+                label="아이디"
+                name="userId"
               />
             </Grid>
             <Grid item xs={12}>
