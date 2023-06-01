@@ -1,8 +1,8 @@
 export default async function register(url = "", formData: FormData) {
-  const data: any = {};
-  formData.forEach((value, key) => (data[key] = value));
   url = url + "/api/register";
-  console.log(data);
+  const data: any = {};
+  formData.delete("passwordVali");
+  formData.forEach((value, key) => (data[key] = value));
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",

@@ -1,5 +1,5 @@
 export default async function login(url = "", formData: FormData) {
-  console.log("loginAPI");
+  url = url + "/api/login";
   const data: any = {};
   formData.forEach((value, key) => (data[key] = value));
   const response = await fetch(url, {
