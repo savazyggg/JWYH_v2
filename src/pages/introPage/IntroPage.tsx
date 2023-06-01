@@ -1,23 +1,12 @@
 import { useState } from "react";
-import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-
-import "./IntroPage.css";
 import SignUpForm from "../../components/organisms/signUpForm/SignUpForm";
 import LoginForm from "../../components/organisms/loginForm/LoginForm";
-
-/* 스타일드 컴포넌트 코드
- * 폰트 사이즈
- */
-// const Greetings = styled.label`
-//   font-size: 50px;
-// `;
-//
+import "./IntroPage.css";
 
 function IntroPage() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
