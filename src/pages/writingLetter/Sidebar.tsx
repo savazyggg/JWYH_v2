@@ -2,64 +2,55 @@ import styled from "@emotion/styled";
 import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
 import { useState } from "react";
+import ExtraStyle from "./ExtraStyle";
 
-export const Sidebar = () => {
-  // const [sidebarStatus, setSidebarStatus] =
-  //   useState<Iprops["sideBarShow"]>(false);
-  // const [letterFormStatus, setLetterFormStatus] =
-  //   useState<Iprops["letterStyleShow"]>(true);
-  // const [letterStyle, setLetterStyle] =
-  //   useState<Iprops["letterStyleChoose"]>("#0000000");
-  // const [extraEditStatus, setExtraEditStatus] =
-  //   useState<Iprops["extraStyleEditShow"]>(false);
+export const Sidebar = ({ onClick }) => {
+  const [sidebarShow, setSidebarShow] = useState<boolean>(false);
+  const [letterStyleShow, setLetterStyleShow] = useState<boolean>(true);
 
-  const [show, setShow] = useState<boolean>(false);
-
-  return show ? (
-    <BugerNav show={show}>
+  return sidebarShow ? (
+    <SidebarNav show={sidebarShow}>
       <CloseWrapper>
-        <CustomClose onClick={() => setShow(false)}>X</CustomClose>
+        <ul>
+          <li onClick={() => setLetterStyleShow(true)}>편지지</li>
+          <li onClick={() => setLetterStyleShow(false)}>편집</li>
+        </ul>
+        <CustomClose onClick={() => setSidebarShow(false)}>X</CustomClose>
       </CloseWrapper>
-      <ul>
-        <li>
-          <a href="#">편지지</a>
-        </li>
-        <li>
-          <a href="#">편집</a>
-        </li>
-      </ul>
-      <LetterStyle />
-    </BugerNav>
+      {letterStyleShow ? <LetterStyle onClick={onClick} /> : <ExtraStyle />}
+    </SidebarNav>
   ) : (
-    <Button onClick={() => setShow(true)}>보이기</Button>
+    <Button onClick={() => setSidebarShow(true)}>보이기</Button>
   );
 };
 
 export default Sidebar;
 
-const BugerNav = styled.div<{ show: boolean }>`
+const SidebarNav = styled.div<{ show: boolean }>`
   margin-top: 40px; //헤더 높이만큼
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  background: white;
+  background: #343434;
   width: 260px;
   z-index: 16;
   transform: ${(show) => (show ? "translateX(0)" : "translateX(-100%)")};
   transition: transform 0.2s; //애니메이션이 안먹음 ..ㅠ
   overflow: auto;
 
-  padding: 20px;
+  padding: 15px 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: start;
-  color: black;
+  color: white;
+  font-weight: 600;
 
   ul {
-    margin: 0;
-    justify-content: start;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0px;
   }
   li {
     list-style: none;
@@ -68,11 +59,7 @@ const BugerNav = styled.div<{ show: boolean }>`
     margin: 0 5px;
     justify-content: center;
     text-align: center;
-
-    a {
-      font-weight: 600;
-      color: black;
-    }
+    cursor: pointer;
   }
 `;
 

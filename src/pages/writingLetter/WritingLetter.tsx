@@ -6,43 +6,56 @@ import SendButton from "./SendButton";
 import Input from "./InputBox";
 
 const WritingLetter = () => {
-  const [nameInputValue, setNameInputValue] = useState<string>("");
-  const [dateInputValue, setDateInputValue] = useState<string>("");
-  const onNameChange = (e) => setNameInputValue(e.target.value);
-  const onDateChange = (e) => setDateInputValue(e.target.value);
+  const [letterWriting, setLetterWriting] = useState<string>("");
+  const [lettrStyle, setLetterStyle] = useState<string>("");
+  const [senderName, setSenderName] = useState<string>("");
+  const [unlockDate, setUnlockDate] = useState<string>("");
 
-  // const sendLetterData = {
-  //   content,
-  //   style,
-  //   sender,
-  //   unlock-year,
-  //   unlock-month,
-  //   unlock-date
-  //   }
+  const onNameChange = (e) => setSenderName(e.target.value);
+  const onDateChange = (e) => setUnlockDate(e.target.value);
+  const onLetterWritingChange = (e) => setLetterWriting(e.target.value);
+  const onLetterStyleChange = (e) => {
+    const letterStyle = window
+      .getComputedStyle(e.target)
+      .getPropertyValue("background-color");
+    console.log(letterStyle);
+    setLetterStyle(letterStyle);
+  };
+
+  const unlockDateSpilt = unlockDate.split("-");
+
+  const sendData = {
+    content: letterWriting,
+    style: lettrStyle,
+    sender: senderName,
+    "unlock-year": unlockDateSpilt[0],
+    "unlock-month": unlockDateSpilt[1],
+    "unlock-date": unlockDateSpilt[2],
+  };
 
   return (
     <>
-      <Sidebar />
-      <>
-        <LetterSpace />
-        <Container>
-          <Input
-            type="text"
-            placeholder="보내는 사람의 이름을 입력해 주세요"
-            inputValue={nameInputValue}
-            onChange={onNameChange}
-          />
-          <Input
-            type="date"
-            placeholder="열리는 날짜를 입력해 주세요."
-            inputValue={dateInputValue}
-            onChange={onDateChange}
-          />
-          <SendButton
-            onClick={() => console.log(nameInputValue, dateInputValue)}
-          />
-        </Container>
-      </>
+      <Sidebar onClick={onLetterStyleChange} />
+      <LetterSpace
+        value={letterWriting}
+        onChange={onLetterWritingChange}
+        letterStyle={lettrStyle}
+      />
+      <Container>
+        <Input
+          type="text"
+          placeholder="보내는 사람의 이름을 입력해 주세요"
+          inputValue={senderName}
+          onChange={onNameChange}
+        />
+        <Input
+          type="date"
+          placeholder="열리는 날짜를 입력해 주세요."
+          inputValue={unlockDate}
+          onChange={onDateChange}
+        />
+        <SendButton onClick={() => console.log(sendData)} />
+      </Container>
     </>
   );
 };

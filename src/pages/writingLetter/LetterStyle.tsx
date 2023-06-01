@@ -1,7 +1,7 @@
 import { Stack, Card } from "@mui/material";
 import styled from "@emotion/styled";
 
-const LetterStyle = () => {
+const LetterStyle = ({ onClick }) => {
   const color = [
     "#A27BBA",
     "#93BA7B",
@@ -20,6 +20,7 @@ const LetterStyle = () => {
       {color.map((el) => {
         return (
           <Card
+            onClick={onClick}
             key={el}
             sx={{
               width: { md: "100px", xs: "100px" },
