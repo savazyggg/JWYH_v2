@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
+import { useState } from "react";
 
 export interface Iprops {
   sideBarShow: boolean;
@@ -10,15 +11,16 @@ export interface Iprops {
 }
 
 export const Sidebar = () => {
-  const [sidebarStatus, setSidebarStatus] =
-    useState<Iprops["sideBarShow"]>(false);
-  const [letterFormStatus, setLetterFormStatus] =
-    useState<Iprops["letterStyleShow"]>(true);
-  const [letterStyle, setLetterStyle] =
-    useState<Iprops["letterStyleChoose"]>("#0000000");
-  const [extraEditStatus, setExtraEditStatus] =
-    useState<Iprops["extraStyleEditShow"]>(false);
+  // const [sidebarStatus, setSidebarStatus] =
+  //   useState<Iprops["sideBarShow"]>(false);
+  // const [letterFormStatus, setLetterFormStatus] =
+  //   useState<Iprops["letterStyleShow"]>(true);
+  // const [letterStyle, setLetterStyle] =
+  //   useState<Iprops["letterStyleChoose"]>("#0000000");
+  // const [extraEditStatus, setExtraEditStatus] =
+  //   useState<Iprops["extraStyleEditShow"]>(false);
 
+  const [show, setShow] = useState<boolean>(false);
   return (
     <BugerNav show={show}>
       <CloseWrapper>
@@ -40,7 +42,7 @@ export const Sidebar = () => {
 
 export default Sidebar;
 
-const BugerNav = styled.div`
+const BugerNav = styled.div<{ show: boolean }>`
   margin-top: 40px; //헤더 높이만큼
   position: fixed;
   top: 0;
@@ -49,7 +51,7 @@ const BugerNav = styled.div`
   background: white;
   width: 300px;
   z-index: 16;
-
+  transform: ${(show) => (show ? "translateX(0)" : "translateX(100%)")};
   padding: 20px;
   display: flex;
   flex-direction: column;
