@@ -3,13 +3,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
 import { useState } from "react";
 
-export interface Iprops {
-  sideBarShow: boolean;
-  letterStyleShow: boolean;
-  letterStyleChoose: string;
-  extraStyleEditShow: boolean;
-}
-
 export const Sidebar = () => {
   // const [sidebarStatus, setSidebarStatus] =
   //   useState<Iprops["sideBarShow"]>(false);
@@ -21,12 +14,12 @@ export const Sidebar = () => {
   //   useState<Iprops["extraStyleEditShow"]>(false);
 
   const [show, setShow] = useState<boolean>(false);
-  return (
+
+  return show ? (
     <BugerNav show={show}>
       <CloseWrapper>
-        <CustomClose>X</CustomClose>
+        <CustomClose onClick={() => setShow(false)}>X</CustomClose>
       </CloseWrapper>
-
       <ul>
         <li>
           <a href="#">편지지</a>
@@ -37,6 +30,8 @@ export const Sidebar = () => {
       </ul>
       <LetterStyle />
     </BugerNav>
+  ) : (
+    <Button onClick={() => setShow(true)}>보이기</Button>
   );
 };
 
@@ -49,16 +44,19 @@ const BugerNav = styled.div<{ show: boolean }>`
   bottom: 0;
   left: 0;
   background: white;
-  width: 300px;
+  width: 260px;
   z-index: 16;
-  transform: ${(show) => (show ? "translateX(0)" : "translateX(100%)")};
+  transform: ${(show) => (show ? "translateX(0)" : "translateX(-100%)")};
+  transition: transform 0.2s; //애니메이션이 안먹음 ..ㅠ
+  overflow: auto;
+
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: start;
   color: black;
-  transition: transform 0.2s;
+
   ul {
     margin: 0;
     justify-content: start;
@@ -86,4 +84,10 @@ const CustomClose = styled(CloseIcon)`
 const CloseWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+const Button = styled.button`
+  margin: 0;
+  left: 0;
+  position: fixed;
 `;

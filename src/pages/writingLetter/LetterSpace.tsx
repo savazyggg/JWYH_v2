@@ -6,7 +6,7 @@ const Letter = styled.div`
   margin: 0 auto;
   width: 800px;
   height: 80vh;
-  background-color: blue;
+  background-color: #a27bba;
   border-radius: 15px;
 `;
 
