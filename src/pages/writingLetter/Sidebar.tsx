@@ -10,17 +10,17 @@ export interface Iprops {
 }
 
 export const Sidebar = () => {
-  //   const [sidebarStatus, setSidebarStatus] =
-  //     useState<Iprops["sideBarShow"]>(false);
-  //   const [letterFormStatus, setLetterFormStatus] =
-  //     useState<Iprops["letterStyleShow"]>(true);
-  //   const [letterStyle, setLetterStyle] =
-  //     useState<Iprops["letterStyleChoose"]>("#0000000");
-  //   const [extraEditStatus, setExtraEditStatus] =
-  //     useState<Iprops["extraStyleEditShow"]>(false);
+  const [sidebarStatus, setSidebarStatus] =
+    useState<Iprops["sideBarShow"]>(false);
+  const [letterFormStatus, setLetterFormStatus] =
+    useState<Iprops["letterStyleShow"]>(true);
+  const [letterStyle, setLetterStyle] =
+    useState<Iprops["letterStyleChoose"]>("#0000000");
+  const [extraEditStatus, setExtraEditStatus] =
+    useState<Iprops["extraStyleEditShow"]>(false);
 
   return (
-    <BugerNav>
+    <BugerNav show={show}>
       <CloseWrapper>
         <CustomClose>X</CustomClose>
       </CloseWrapper>
