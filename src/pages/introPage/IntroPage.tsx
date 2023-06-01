@@ -25,18 +25,18 @@ function IntroPage() {
   const [greetings, setGreetings] = useState<string>("만나서 반가워요!!");
   return (
     <>
-      <Typography component="h1" variant="h4">
-        {greetings}
-      </Typography>
+      <Container maxWidth="sm">
+        <Typography component="h1" variant="h4">
+          {greetings}
+        </Typography>
+      </Container>
+
       {isLogin || isSignUp ? null : (
         <>
           <CssBaseline />
           <Container maxWidth="sm">
-            <Box sx={{ bgcolor: "#cfe8fc", width: "360px", height: "360px" }}>
-              <span>편지</span>
-            </Box>
+            <img src="https://dummyimage.com/400x400/bababa/000000"></img>
           </Container>
-
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Button
