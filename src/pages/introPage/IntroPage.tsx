@@ -16,62 +16,44 @@ function IntroPage() {
         maxWidth="sm"
         style={{ display: "flex", justifyContent: "center" }}
       >
-        <Typography component="h1" variant="h4">
+        <Typography component="h1" variant="h4" style={{ color: "#93BA7B" }}>
           {greetings}
         </Typography>
       </Container>
-
-      {isLogin || isSignUp ? null : (
-        <>
-          <Container
-            maxWidth="sm"
-            style={{ display: "flex", justifyContent: "center" }}
+      <Container
+        maxWidth="sm"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <img src="https://dummyimage.com/400x400/bababa/000000"></img>
+      </Container>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={() => {
+              setIsLogin(!isLogin);
+            }}
           >
-            <img src="https://dummyimage.com/400x400/bababa/000000"></img>
-          </Container>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={() => {
-                  setIsLogin(!isLogin);
-                }}
-              >
-                로그인
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={() => {
-                  setIsSignUp(!isSignUp);
-                }}
-              >
-                회원가입
-              </Button>
-            </Grid>
-          </Grid>
-        </>
-      )}
-      <>
-        {isSignUp ? (
-          <SignUpForm
-            greetings={greetings}
-            setGreetings={setGreetings}
-            isSignUp={isSignUp}
-            setIsSignUp={setIsSignUp}
-          />
-        ) : null}
-        {isLogin ? (
-          <LoginForm greetings={greetings} setGreetings={setGreetings} />
-        ) : null}
-      </>
+            로그인
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+            }}
+          >
+            회원가입
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 }
