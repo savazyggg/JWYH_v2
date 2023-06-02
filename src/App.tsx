@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/writingletter" element={<WritingLetter />} />
-        {/* <Route Path="/letterspace" element={<LetterSpace/>} /> */}
+        {/* <Route Path="/letterspace" element={<MainPage/>} /> */}
       </Routes>
     </RecoilRoot>
   </BrowserRouter>
