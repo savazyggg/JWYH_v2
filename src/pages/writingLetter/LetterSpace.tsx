@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
 
-const LetterSpace = ({ value, onChange, letterStyle }) => {
+const LetterSpace = ({ required, value, onChange, letterStyle }) => {
   console.log("편지지컴포넌트에서 편지지색 :" + letterStyle);
 
   return (
@@ -11,7 +11,11 @@ const LetterSpace = ({ value, onChange, letterStyle }) => {
           backgroundColor: letterStyle ? letterStyle : "rgb(186, 138, 123)",
         }}
       >
-        <Textarea onChange={onChange} value={value}></Textarea>
+        <Textarea
+          required={required}
+          onChange={onChange}
+          value={value}
+        ></Textarea>
       </Letter>
     </Container>
   );

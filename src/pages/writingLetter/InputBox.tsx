@@ -1,14 +1,26 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
 
-const Input = ({ type, placeholder, inputValue, onChange }) => {
+const Input = ({
+  labelName,
+  required,
+  type,
+  placeholder,
+  inputValue,
+  onChange,
+}) => {
   return (
-    <InputBox
-      type={type}
-      placeholder={placeholder}
-      value={inputValue}
-      onChange={onChange}
-    ></InputBox>
+    <>
+      <label htmlFor={labelName}>{labelName}</label>
+      <InputBox
+        id={labelName}
+        name={labelName}
+        required={required}
+        type={type}
+        placeholder={placeholder}
+        value={inputValue}
+        onChange={onChange}
+      ></InputBox>
+    </>
   );
 };
 

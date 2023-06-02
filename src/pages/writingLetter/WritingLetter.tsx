@@ -24,38 +24,57 @@ const WritingLetter = () => {
 
   const unlockDateSpilt = unlockDate.split("-");
 
+  const unlockYear = unlockDateSpilt[0];
+  const unlockMonth =
+    unlockDateSpilt[1] && unlockDateSpilt[1][0] == "0"
+      ? unlockDateSpilt[1][1]
+      : unlockDateSpilt[1];
+  const unlockDay =
+    unlockDateSpilt[2] && unlockDateSpilt[2][0] == "0"
+      ? unlockDateSpilt[2][1]
+      : unlockDateSpilt[2];
+
+  //memo 6/2 윤지
+  //여기서 서버에 보낼 데이터 만져주는데 input박스에 name 속성 넣어야하는지?
   const sendData = {
     content: letterWriting,
     style: lettrStyle,
     sender: senderName,
-    "unlock-year": unlockDateSpilt[0],
-    "unlock-month": unlockDateSpilt[1],
-    "unlock-date": unlockDateSpilt[2],
+    "unlock-year": unlockYear,
+    "unlock-month": unlockMonth,
+    "unlock-date": unlockDay,
   };
 
   return (
     <>
       <Sidebar onClick={onLetterStyleChange} />
-      <LetterSpace
-        value={letterWriting}
-        onChange={onLetterWritingChange}
-        letterStyle={lettrStyle}
-      />
-      <Container>
-        <Input
-          type="text"
-          placeholder="보내는 사람의 이름을 입력해 주세요"
-          inputValue={senderName}
-          onChange={onNameChange}
+      <form>
+        <LetterSpace
+          value={letterWriting}
+          onChange={onLetterWritingChange}
+          letterStyle={lettrStyle}
+          required={true}
         />
-        <Input
-          type="date"
-          placeholder="열리는 날짜를 입력해 주세요."
-          inputValue={unlockDate}
-          onChange={onDateChange}
-        />
-        <SendButton onClick={() => console.log(sendData)} />
-      </Container>
+        <Container>
+          <Input
+            labelName="sender"
+            type="text"
+            placeholder="보내는 사람의 이름을 입력해 주세요"
+            inputValue={senderName}
+            onChange={onNameChange}
+            required={true}
+          />
+          <Input
+            labelName="unlockDate"
+            type="date"
+            placeholder="열리는 날짜를 입력해 주세요."
+            inputValue={unlockDate}
+            onChange={onDateChange}
+            required={true}
+          />
+          <SendButton type="submit" onClick={() => console.log(sendData)} />
+        </Container>
+      </form>
     </>
   );
 };

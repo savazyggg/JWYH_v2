@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-const SendButton = ({ onClick }) => {
+const SendButton = ({ type, onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button type={type} onClick={onClick}>
       <span>편지 보내기</span>
       <svg
         width="35"
