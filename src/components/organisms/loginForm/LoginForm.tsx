@@ -52,9 +52,11 @@ export default function LoginForm(props: LoginFormProps) {
   }, []);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    //TODO FormData 말고 interface 받아서 하기
     const formData = new FormData(event.currentTarget);
     const url = "http://127.0.0.1:3033";
-    localStorage.setItem("jwt", JSON.stringify(await login(url, formData)));
+    const jwt = JSON.stringify(await login(url, formData));
+    localStorage.setItem("jwt", jwt);
   };
 
   return (
