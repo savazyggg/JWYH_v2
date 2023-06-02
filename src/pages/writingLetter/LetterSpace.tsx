@@ -1,39 +1,42 @@
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
-import { useState } from "react";
 
-const Letter = styled.div`
-  margin: 0 auto;
-  width: 800px;
-  height: 80vh;
-  background-color: blue;
-  border-radius: 15px;
-`;
-
-const Textarea = styled.textarea`
-  visibility: visible;
-  background-color: transparent;
-  width: 800px;
-  height: 80vh;
-  color: black;
-  z-index: 16;
-  border: none;
-`;
-
-const LetterSpace = () => {
-  const [letter, setLetter] = useState("");
-
-  const onChange = (e) => {
-    setLetter(e.target.value);
-  };
-
+const LetterSpace = ({ value, onChange, letterStyle }) => {
+  console.log("편지지컴포넌트에서 편지지색 :" + letterStyle);
   return (
     <Container>
-      <Letter>
-        <Textarea onChange={onChange} value={letter}></Textarea>
+      <Letter
+        style={{
+          backgroundColor: letterStyle ? letterStyle : "rgb(186, 138, 123)",
+        }}
+      >
+        <Textarea onChange={onChange} value={value}></Textarea>
       </Letter>
     </Container>
   );
 };
 
 export default LetterSpace;
+
+const Letter = styled.div<{ letterStyle: string }>`
+  margin: 0 auto;
+  width: 800px;
+  height: 80vh;
+  border-radius: 15px;
+  overflow: auto;
+`;
+
+const Textarea = styled.textarea`
+  visibility: visible;
+  font-size: 20px;
+  background-color: transparent;
+  margin-top: 80px;
+  width: 700px;
+  height: 60vh;
+  color: black;
+  z-index: 16;
+  border: none;
+  :focus-visible {
+    outline: 0px;
+  }
+`;
