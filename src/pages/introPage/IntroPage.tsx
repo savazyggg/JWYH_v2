@@ -1,5 +1,4 @@
 import { useState } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -22,7 +21,6 @@ function IntroPage() {
 
       {isLogin || isSignUp ? null : (
         <>
-          <CssBaseline />
           <Container maxWidth="sm">
             <img src="https://dummyimage.com/400x400/bababa/000000"></img>
           </Container>

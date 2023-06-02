@@ -1,6 +1,5 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -60,7 +59,6 @@ export default function LoginForm(props: LoginFormProps) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
