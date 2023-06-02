@@ -1,7 +1,7 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -69,35 +69,29 @@ export default function LoginForm(props: LoginFormProps) {
           alignItems: "center",
         }}
       >
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="userId"
-                label="아이디"
-                name="userId"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="비밀번호"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-              />
+        <Box component="form" noValidate onSubmit={handleSubmit}>
+          <Stack>
+            <Grid>
+              <FormControl variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-userId">
+                  아이디
+                </InputLabel>
+                <OutlinedInput
+                  id="userId"
+                  name="userId"
+                  type="text"
+                  label="아이디"
+                />
+              </FormControl>
             </Grid>
             <Grid>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+              <FormControl variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
                 </InputLabel>
                 <OutlinedInput
-                  id="outlined-adornment-password"
+                  id="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
@@ -111,17 +105,12 @@ export default function LoginForm(props: LoginFormProps) {
                       </IconButton>
                     </InputAdornment>
                   }
-                  label="Passsssword"
+                  label="비밀번호"
                 />
               </FormControl>
             </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          </Stack>
+          <Button type="submit" fullWidth variant="contained">
             로그인
           </Button>
         </Box>
