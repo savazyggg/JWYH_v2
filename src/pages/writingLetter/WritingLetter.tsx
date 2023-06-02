@@ -42,8 +42,6 @@ const WritingLetter = () => {
       ? unlockDateSpilt[2][1]
       : unlockDateSpilt[2];
 
-  //memo 6/2 윤지
-  //여기서 서버에 보낼 데이터 만져주는데 input박스에 name 속성 넣어야하는지?
   const sendData = {
     content: letterWriting,
     style: lettrStyle,
@@ -61,26 +59,21 @@ const WritingLetter = () => {
           value={letterWriting}
           onChange={onLetterWritingChange}
           letterStyle={lettrStyle}
-          required={true}
         />
         <Container>
           <Input
-            labelName="sender"
             type="text"
             placeholder="보내는 사람의 이름을 입력해 주세요"
             inputValue={senderName}
             onChange={onNameChange}
-            required={true}
           />
           <Input
-            labelName="unlockDate"
             type="date"
             placeholder="열리는 날짜를 입력해 주세요."
             inputValue={unlockDate}
             onChange={onDateChange}
-            required={true}
           />
-          <SendButton type="submit" onClick={onSubmit} />
+          <SendButton type="button" onClick={onSubmit} />
           {successSendingStatus && <SuccesSending />}
         </Container>
       </form>

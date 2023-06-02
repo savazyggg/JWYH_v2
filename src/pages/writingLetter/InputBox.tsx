@@ -1,20 +1,9 @@
 import styled from "@emotion/styled";
 
-const Input = ({
-  labelName,
-  required,
-  type,
-  placeholder,
-  inputValue,
-  onChange,
-}) => {
+const Input = ({ type, placeholder, inputValue, onChange }) => {
   return (
     <>
-      <label htmlFor={labelName}>{labelName}</label>
       <InputBox
-        id={labelName}
-        name={labelName}
-        required={required}
         type={type}
         placeholder={placeholder}
         value={inputValue}
