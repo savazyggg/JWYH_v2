@@ -4,12 +4,15 @@ import LetterSpace from "./LetterSpace";
 import { useState } from "react";
 import SendButton from "./SendButton";
 import Input from "./InputBox";
+import SuccesSending from "./SuccesSending";
 
 const WritingLetter = () => {
   const [letterWriting, setLetterWriting] = useState<string>("");
   const [lettrStyle, setLetterStyle] = useState<string>("");
   const [senderName, setSenderName] = useState<string>("");
   const [unlockDate, setUnlockDate] = useState<string>("");
+  const [successSendingStatus, setSuccessSendingStatus] =
+    useState<boolean>(false);
 
   const onNameChange = (e) => setSenderName(e.target.value);
   const onDateChange = (e) => setUnlockDate(e.target.value);
@@ -21,7 +24,12 @@ const WritingLetter = () => {
     console.log(letterStyle);
     setLetterStyle(letterStyle);
   };
-
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(sendData);
+    setSuccessSendingStatus(true);
+    console.log(successSendingStatus);
+  };
   const unlockDateSpilt = unlockDate.split("-");
 
   const unlockYear = unlockDateSpilt[0];
@@ -72,7 +80,8 @@ const WritingLetter = () => {
             onChange={onDateChange}
             required={true}
           />
-          <SendButton type="submit" onClick={() => console.log(sendData)} />
+          <SendButton type="submit" onClick={onSubmit} />
+          {successSendingStatus && <SuccesSending />}
         </Container>
       </form>
     </>
