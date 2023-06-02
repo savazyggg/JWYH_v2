@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import SignUpForm from "../../components/organisms/signUpForm/SignUpForm";
 import LoginForm from "../../components/organisms/loginForm/LoginForm";
-import "./IntroPage.css";
 
 function IntroPage() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -13,7 +12,10 @@ function IntroPage() {
   const [greetings, setGreetings] = useState<string>("만나서 반가워요!!");
   return (
     <>
-      <Container maxWidth="sm">
+      <Container
+        maxWidth="sm"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
         <Typography component="h1" variant="h4">
           {greetings}
         </Typography>
@@ -21,7 +23,10 @@ function IntroPage() {
 
       {isLogin || isSignUp ? null : (
         <>
-          <Container maxWidth="sm">
+          <Container
+            maxWidth="sm"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <img src="https://dummyimage.com/400x400/bababa/000000"></img>
           </Container>
           <Grid container spacing={2}>
