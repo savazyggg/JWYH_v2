@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
+import LetterForm from "../../components/organisms/letterForm/LetterForm";
 
 const LetterSpace = ({ value, onChange, letterStyle }) => {
   console.log("편지지컴포넌트에서 편지지색 :" + letterStyle);
@@ -10,7 +11,7 @@ const LetterSpace = ({ value, onChange, letterStyle }) => {
           backgroundColor: letterStyle ? letterStyle : "rgb(186, 138, 123)",
         }}
       >
-        <Textarea onChange={onChange} value={value}></Textarea>
+        <LetterForm value={value} onChange={onChange} />
       </Letter>
     </Container>
   );
@@ -24,19 +25,4 @@ const Letter = styled.div<{ letterStyle: string }>`
   height: 80vh;
   border-radius: 15px;
   overflow: auto;
-`;
-
-const Textarea = styled.textarea`
-  visibility: visible;
-  font-size: 20px;
-  background-color: transparent;
-  margin-top: 80px;
-  width: 700px;
-  height: 60vh;
-  color: black;
-  z-index: 16;
-  border: none;
-  :focus-visible {
-    outline: 0px;
-  }
 `;
