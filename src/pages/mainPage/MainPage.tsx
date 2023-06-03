@@ -2,6 +2,10 @@ import Header from "../../components/organisms/header/Header";
 import GetLetter from "./GetLetter";
 import UserInputText from "./UserInputText";
 import WritingLetterButton from "./WritingLetterButton";
+import { styled as muiStyled } from "@mui/system";
+import Box from "@mui/material/Box";
+import LetterCarousel from "./LetterCarousel";
+
 import { useEffect, useState } from "react";
 
 //TODO 06.03 윤지 : 로그인 상태는 localstorage, recoilstore 둘다 받아야될듯
@@ -30,13 +34,30 @@ const MainPage = () => {
   }, [isLogin]);
 
   return (
-    <>
-      <Header isLogin={isLogin} onLogOut={onLogOut} />
-      <UserInputText isLogin={isLogin} />
-      <GetLetter />
-      <WritingLetterButton isLogin={isLogin} />
-    </>
+    <Container>
+      <>
+        <Header isLogin={isLogin} onLogOut={onLogOut} />
+        <UserInputText isLogin={isLogin} />
+      </>
+      <>
+        <GetLetter />
+        <WritingLetterButton isLogin={isLogin} />
+      </>
+      <LetterCarousel></LetterCarousel>
+    </Container>
   );
 };
 
 export default MainPage;
+
+const Container = muiStyled(Box)({
+  display: "grid",
+  height: "100%",
+  gridTemplateRows: "100px 300px 1fr",
+});
+// const InfoDiv = muiStyled(Box)({
+//   border: "1px solid red",
+// });
+// const SHeader = muiStyled(Box)({
+//   border: "1px solid red",
+// });
