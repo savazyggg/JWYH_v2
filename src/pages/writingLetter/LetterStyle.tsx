@@ -1,7 +1,11 @@
 import { Stack, Card } from "@mui/material";
 import styled from "@emotion/styled";
 
-const LetterStyle = ({ onClick }) => {
+interface Props {
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
+
+const LetterStyle: React.FC<Props> = ({ onClick }) => {
   const color = [
     "#A27BBA",
     "#93BA7B",
@@ -23,8 +27,8 @@ const LetterStyle = ({ onClick }) => {
             onClick={onClick}
             key={el}
             sx={{
-              width: { md: "100px", xs: "100px" },
-              height: 120,
+              width: { md: "80px", xs: "80px" },
+              height: 105,
               boxShadow: "none",
               borderRadius: "13px",
               backgroundColor: `${el}`,

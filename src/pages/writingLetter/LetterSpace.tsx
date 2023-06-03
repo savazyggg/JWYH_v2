@@ -1,16 +1,22 @@
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
+import LetterForm from "../../components/organisms/letterForm/LetterForm";
+interface Props {
+  value: string;
+  onChange: (value: string) => void;
+  letterStyle?: string;
+}
 
-const LetterSpace = ({ value, onChange, letterStyle }) => {
+const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
   console.log("편지지컴포넌트에서 편지지색 :" + letterStyle);
   return (
     <Container>
       <Letter
         style={{
-          backgroundColor: letterStyle ? letterStyle : "rgb(186, 138, 123)",
+          backgroundColor: letterStyle,
         }}
       >
-        <Textarea onChange={onChange} value={value}></Textarea>
+        <LetterForm value={value} onChange={onChange} />
       </Letter>
     </Container>
   );
@@ -18,25 +24,10 @@ const LetterSpace = ({ value, onChange, letterStyle }) => {
 
 export default LetterSpace;
 
-const Letter = styled.div<{ letterStyle: string }>`
-  margin: 0 auto;
+const Letter = styled.div`
+  margin: 61px auto 10px;
   width: 800px;
   height: 80vh;
   border-radius: 15px;
   overflow: auto;
-`;
-
-const Textarea = styled.textarea`
-  visibility: visible;
-  font-size: 20px;
-  background-color: transparent;
-  margin-top: 80px;
-  width: 700px;
-  height: 60vh;
-  color: black;
-  z-index: 16;
-  border: none;
-  :focus-visible {
-    outline: 0px;
-  }
 `;

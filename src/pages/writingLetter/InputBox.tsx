@@ -1,6 +1,18 @@
 import styled from "@emotion/styled";
 
-const Input = ({ type, placeholder, inputValue, onChange }) => {
+interface Props {
+  type: "text" | "date";
+  placeholder: string;
+  inputValue: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+//TODO 6.3 인풋 범위 좁히기 넣어야됨
+const Input: React.FC<Props> = ({
+  type,
+  placeholder,
+  inputValue,
+  onChange,
+}) => {
   return (
     <>
       <InputBox
@@ -16,10 +28,9 @@ const Input = ({ type, placeholder, inputValue, onChange }) => {
 export default Input;
 
 const InputBox = styled.input`
-  margin-top: 10px;
   margin-bottom: 20px;
-  background-color: #242424;
-  border-radius: 0px;
+  background-color: #343434;
+  color: white;
   width: 31%;
   height: 50px;
   border: 0px;
