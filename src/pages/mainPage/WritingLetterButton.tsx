@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-const WritingLetterButton = () => {
+
+const WritingLetterButton = ({ isLogin }) => {
+  //console.log("writing letter button islogin:" + isLogin);
   return (
-    <div>
-      <Link to="/writingletter">
-        <Button>편지쓰러가기!</Button>
-      </Link>
-    </div>
+    isLogin || (
+      <div>
+        <Link to="/writingletter">
+          <Button>편지쓰러가기!</Button>
+        </Link>
+      </div>
+    )
   );
 };
 

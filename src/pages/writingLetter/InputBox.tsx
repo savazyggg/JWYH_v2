@@ -28,10 +28,9 @@ const Input: React.FC<Props> = ({
 export default Input;
 
 const InputBox = styled.input`
-  margin-top: 10px;
   margin-bottom: 20px;
-  background-color: #242424;
-  border-radius: 0px;
+  background-color: #343434;
+  color: white;
   width: 31%;
   height: 50px;
   border: 0px;

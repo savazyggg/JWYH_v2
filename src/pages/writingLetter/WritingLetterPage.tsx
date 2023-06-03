@@ -4,7 +4,7 @@ import LetterSpace from "./LetterSpace";
 import { useState } from "react";
 import SendButton from "./SendButton";
 import Input from "./InputBox";
-import SuccesSending from "./SuccesSending";
+import Header from "../../components/organisms/header/Header";
 
 interface SendData {
   content: string;
@@ -15,9 +15,9 @@ interface SendData {
   "unlock-date": string;
 }
 
-const WritingLetter: React.FC = () => {
+const WritingLetterPage: React.FC = () => {
   const [letterWriting, setLetterWriting] = useState<string>("");
-  const [lettrStyle, setLetterStyle] = useState<string>("");
+  const [lettrStyle, setLetterStyle] = useState<string>("rgb(186, 138, 123)");
   const [senderName, setSenderName] = useState<string>("");
   const [unlockDate, setUnlockDate] = useState<string>("");
   const [successSendingStatus, setSuccessSendingStatus] =
@@ -36,11 +36,11 @@ const WritingLetter: React.FC = () => {
     console.log(letterStyle);
     setLetterStyle(letterStyle);
   };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = () => {
     console.log(sendData);
     setSuccessSendingStatus(true);
-    console.log(successSendingStatus);
+    //console.log(successSendingStatus);
+    //필수값 넣었는지 확인후 버튼 활성화하게 해야될듯, 이벤트 변경 필요
   };
   const unlockDateSpilt = unlockDate.split("-");
 
@@ -62,45 +62,43 @@ const WritingLetter: React.FC = () => {
     "unlock-month": unlockMonth,
     "unlock-date": unlockDay,
   };
-
+  //todo 06.03 윤지 header넣고 브라우저에 스크롤바 생김, 이미 사이드바, 편지지안에 내부 스크롤바가 있음으로 브라우저에선 없어야함, 어떻게 없애지..?
+  //todo header nickname값은 컴포넌트안에서 fetch 받아서 유지되는데 로그인 값은 페이지에서 상태값 받아서 로컬이나 스토어에서 가져오지 않는이상 유지가 안됨.
   return (
     <>
+      <Header />
       <Sidebar onClick={onLetterStyleChange} />
-      <form>
-        <LetterSpace
-          value={letterWriting}
-          onChange={onLetterWritingChange}
-          letterStyle={lettrStyle}
+
+      <LetterSpace
+        value={letterWriting}
+        onChange={onLetterWritingChange}
+        letterStyle={lettrStyle}
+      />
+      <Container>
+        <Input
+          type="text"
+          placeholder="보내는 사람의 이름을 입력해 주세요"
+          inputValue={senderName}
+          onChange={onNameChange}
         />
-        <Container>
-          <Input
-            type="text"
-            placeholder="보내는 사람의 이름을 입력해 주세요"
-            inputValue={senderName}
-            onChange={onNameChange}
-          />
-          <Input
-            type="date"
-            placeholder="열리는 날짜를 입력해 주세요."
-            inputValue={unlockDate}
-            onChange={onDateChange}
-          />
-          <SendButton type="button" onClick={onSubmit} />
-          {successSendingStatus && <SuccesSending />}
-        </Container>
-      </form>
+        <Input
+          type="date"
+          placeholder="열리는 날짜를 입력해 주세요."
+          inputValue={unlockDate}
+          onChange={onDateChange}
+        />
+        <SendButton type="button" onClick={onSubmit} />
+      </Container>
     </>
   );
 };
 
-export default WritingLetter;
+export default WritingLetterPage;
 
 const Container = styled.div`
   width: 780px;
-  height: 50px;
-  margin-left: 30px;
+  margin-left: 250px;
   display: flex;
-  text-align: center;
-
+  align-items: center;
   justify-content: space-between;
 `;

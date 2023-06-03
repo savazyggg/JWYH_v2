@@ -13,7 +13,7 @@ const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
     <Container>
       <Letter
         style={{
-          backgroundColor: letterStyle ? letterStyle : "rgb(186, 138, 123)",
+          backgroundColor: letterStyle,
         }}
       >
         <LetterForm value={value} onChange={onChange} />
@@ -24,8 +24,8 @@ const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
 
 export default LetterSpace;
 
-const Letter = styled.div<{ letterStyle: string }>`
-  margin: 0 auto;
+const Letter = styled.div`
+  margin: 61px auto 10px;
   width: 800px;
   height: 80vh;
   border-radius: 15px;

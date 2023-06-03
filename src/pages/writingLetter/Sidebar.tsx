@@ -23,14 +23,14 @@ const Sidebar: React.FC<Props> = ({ onClick }) => {
       {letterStyleShow ? <LetterStyle onClick={onClick} /> : <ExtraStyle />}
     </SidebarNav>
   ) : (
-    <Button onClick={() => setSidebarShow(true)}>보이기</Button>
+    <Button onClick={() => setSidebarShow(true)}>사이드바</Button>
   );
 };
 
 export default Sidebar;
 
 const SidebarNav = styled.div<{ show: boolean }>`
-  margin-top: 40px; //헤더 높이만큼
+  margin-top: 50px; //헤더 높이만큼
   position: fixed;
   top: 0;
   bottom: 0;
@@ -77,7 +77,6 @@ const CloseWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  margin: 0;
   left: 0;
   position: fixed;
 `;
