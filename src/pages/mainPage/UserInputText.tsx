@@ -30,7 +30,7 @@ const UserInputText = ({ isLogin }) => {
         value={loginUserInput}
         onChange={onInputChange}
         ref={inputRef}
-        placeholder={loginUserInput ? "" : placeholderText}
+        placeholder={isLogin ? (loginUserInput ? "" : placeholderText) : ""}
         autoFocus={inputEdit}
       ></Input>
 
