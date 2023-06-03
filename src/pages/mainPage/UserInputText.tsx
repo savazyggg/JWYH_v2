@@ -2,20 +2,11 @@ import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useRef } from "react";
 
-//TODO 임의로 로그인 status 해당 컴포넌트에서 설정 추후에 프롭으로 내려받을것
-const UserInputText = () => {
+const UserInputText = ({ isLogin }) => {
   const [inputEdit, setInputEdit] = useState<boolean>(false);
   const [loginUserInput, setLoginUserInput] = useState<string>("");
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-
-  const localStorageCheck = localStorage.getItem("jwt");
-  const loginCheck = () => localStorageCheck && setIsLogin(true);
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    loginCheck();
-  }, [isLogin]);
 
   console.log(inputEdit);
   const onInputChange = (e) => {

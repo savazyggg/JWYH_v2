@@ -6,7 +6,7 @@ interface Props {
   inputValue: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
+//TODO 6.3 인풋 범위 좁히기 넣어야됨
 const Input: React.FC<Props> = ({
   type,
   placeholder,

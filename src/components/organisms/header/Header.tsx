@@ -4,12 +4,11 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ isLogin, onLogOut }) => {
   const [nickName, setNickName] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [isLogin, setIsLogin] = useState<boolean>(true);
+
   //const API = "닉네임api"
-  const onLogout = () => setIsLogin(false);
 
   useEffect(() => {
     async function fetchNickNameData() {
@@ -50,7 +49,7 @@ const Header = () => {
                   <li>보관함</li>
                 </Link>
               </ul>
-              <Button onClick={onLogout}>Log out</Button>
+              <Button onClick={onLogOut}>Log out</Button>
             </LoginContainer>
           ) : (
             <div>
