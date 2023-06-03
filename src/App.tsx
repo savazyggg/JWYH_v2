@@ -9,7 +9,9 @@ import "@fontsource/roboto/700.css";
 import { Routes, Route } from "react-router-dom";
 import IntroPage from "./pages/introPage/IntroPage";
 import WritingLetter from "./pages/writingLetter/WritingLetter";
+import MainPage from "./pages/mainPage/MainPage";
 import "./App.css";
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
     <CssBaseline />
@@ -17,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/writingletter" element={<WritingLetter />} />
-        {/* <Route Path="/letterspace" element={<MainPage/>} /> */}
+        <Route path="/mainpage" element={<MainPage />} />
       </Routes>
     </RecoilRoot>
   </BrowserRouter>
