@@ -54,8 +54,9 @@ const Input = styled.input`
 `;
 
 const Container = styled.div`
-  margin-top: 20px;
-  margin-left: 100px;
+  margin-top: 60px;
+  margin-left: 10%;
   position: fixed;
+  top: 0;
   left: 0;
 `;
