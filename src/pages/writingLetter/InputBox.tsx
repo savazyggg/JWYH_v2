@@ -1,6 +1,18 @@
 import styled from "@emotion/styled";
 
-const Input = ({ type, placeholder, inputValue, onChange }) => {
+interface Props {
+  type: "text" | "date";
+  placeholder: string;
+  inputValue: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Input: React.FC<Props> = ({
+  type,
+  placeholder,
+  inputValue,
+  onChange,
+}) => {
   return (
     <>
       <InputBox

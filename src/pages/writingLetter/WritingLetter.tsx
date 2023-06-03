@@ -6,7 +6,16 @@ import SendButton from "./SendButton";
 import Input from "./InputBox";
 import SuccesSending from "./SuccesSending";
 
-const WritingLetter = () => {
+interface SendData {
+  content: string;
+  style: string;
+  sender: string;
+  "unlock-year": string;
+  "unlock-month": string;
+  "unlock-date": string;
+}
+
+const WritingLetter: React.FC = () => {
   const [letterWriting, setLetterWriting] = useState<string>("");
   const [lettrStyle, setLetterStyle] = useState<string>("");
   const [senderName, setSenderName] = useState<string>("");
@@ -14,17 +23,20 @@ const WritingLetter = () => {
   const [successSendingStatus, setSuccessSendingStatus] =
     useState<boolean>(false);
 
-  const onNameChange = (e) => setSenderName(e.target.value);
-  const onDateChange = (e) => setUnlockDate(e.target.value);
-  const onLetterWritingChange = (e) => setLetterWriting(e.target.value);
-  const onLetterStyleChange = (e) => {
+  const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSenderName(e.target.value);
+  const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setUnlockDate(e.target.value);
+  const onLetterWritingChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setLetterWriting(e.target.value);
+  const onLetterStyleChange = (e: React.MouseEvent<HTMLDivElement>) => {
     const letterStyle = window
-      .getComputedStyle(e.target)
+      .getComputedStyle(e.currentTarget)
       .getPropertyValue("background-color");
     console.log(letterStyle);
     setLetterStyle(letterStyle);
   };
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(sendData);
     setSuccessSendingStatus(true);
@@ -42,7 +54,7 @@ const WritingLetter = () => {
       ? unlockDateSpilt[2][1]
       : unlockDateSpilt[2];
 
-  const sendData = {
+  const sendData: SendData = {
     content: letterWriting,
     style: lettrStyle,
     sender: senderName,

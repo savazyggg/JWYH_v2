@@ -3,8 +3,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
 import { useState } from "react";
 import ExtraStyle from "./ExtraStyle";
+interface Props {
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
 
-export const Sidebar = ({ onClick }) => {
+const Sidebar: React.FC<Props> = ({ onClick }) => {
   const [sidebarShow, setSidebarShow] = useState<boolean>(false);
   const [letterStyleShow, setLetterStyleShow] = useState<boolean>(true);
 

@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 
-const SendButton = ({ type, onClick }) => {
+interface Props {
+  type: "button" | "submit" | "reset" | undefined;
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+const SendButton: React.FC<Props> = ({ type, onClick }) => {
   return (
     <Button type={type} onClick={onClick}>
       <span>편지 보내기</span>
@@ -14,9 +19,9 @@ const SendButton = ({ type, onClick }) => {
         <path
           d="M45.5001 2.19049L15.643 26.9524V39.3333L23.7858 31.9048M2.07153 18.2857L45.5001 2.10382L37.9001 38.0952L2.07153 18.2857Z"
           stroke="white"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </Button>
