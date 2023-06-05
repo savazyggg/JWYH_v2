@@ -3,8 +3,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
 import { useState } from "react";
 import ExtraStyle from "./ExtraStyle";
+interface Props {
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
 
-export const Sidebar = ({ onClick }) => {
+const Sidebar: React.FC<Props> = ({ onClick }) => {
   const [sidebarShow, setSidebarShow] = useState<boolean>(false);
   const [letterStyleShow, setLetterStyleShow] = useState<boolean>(true);
 
@@ -20,14 +23,14 @@ export const Sidebar = ({ onClick }) => {
       {letterStyleShow ? <LetterStyle onClick={onClick} /> : <ExtraStyle />}
     </SidebarNav>
   ) : (
-    <Button onClick={() => setSidebarShow(true)}>보이기</Button>
+    <Button onClick={() => setSidebarShow(true)}>사이드바</Button>
   );
 };
 
 export default Sidebar;
 
 const SidebarNav = styled.div<{ show: boolean }>`
-  margin-top: 40px; //헤더 높이만큼
+  margin-top: 50px; //헤더 높이만큼
   position: fixed;
   top: 0;
   bottom: 0;
@@ -74,7 +77,6 @@ const CloseWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  margin: 0;
   left: 0;
   position: fixed;
 `;

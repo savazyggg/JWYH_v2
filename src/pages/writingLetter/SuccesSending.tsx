@@ -3,17 +3,14 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const SuccesSending = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const SuccesSending = ({ open, onClose }) => {
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -22,7 +19,9 @@ const SuccesSending = () => {
             편지보내기 성공
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <Link to="/main">
+              <button>확인하기</button>
+            </Link>
           </Typography>
         </Box>
       </Modal>
