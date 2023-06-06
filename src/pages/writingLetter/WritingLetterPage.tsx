@@ -11,9 +11,9 @@ interface SendData {
   content: string;
   style: string;
   sender: string;
-  "unlock-year": string;
-  "unlock-month": string;
-  "unlock-date": string;
+  unlockYear: number;
+  unlockMonth: number;
+  unlockDate: number;
 }
 
 const WritingLetterPage: React.FC = () => {
@@ -24,7 +24,7 @@ const WritingLetterPage: React.FC = () => {
   const [successSendingStatus, setSuccessSendingStatus] =
     useState<boolean>(false);
 
-  const { userID } = useParams();
+  const { userID } = useParams(); //api에 userID로 바꿀것 지금은 test로 aaa로 지정
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSenderName(e.target.value);
@@ -41,15 +41,15 @@ const WritingLetterPage: React.FC = () => {
   };
 
   const onSubmit = async () => {
-    const SEND_LETTER_API = `http://34.64.195.153:5000/letters/send/${userID}`;
+    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/6479a10af202ae0a7070c8aa`;
 
     const sendData: SendData = {
       content: letterWriting,
       style: lettrStyle,
       sender: senderName,
-      "unlock-year": unlockYear,
-      "unlock-month": unlockMonth,
-      "unlock-date": unlockDay,
+      unlockYear,
+      unlockMonth: unlockMonth,
+      unlockDate: unlockDay,
     };
 
     const response = await fetch(SEND_LETTER_API, {
@@ -73,15 +73,15 @@ const WritingLetterPage: React.FC = () => {
 
   const unlockDateSpilt = unlockDate.split("-");
 
-  const unlockYear = unlockDateSpilt[0];
+  const unlockYear = +unlockDateSpilt[0];
   const unlockMonth =
     unlockDateSpilt[1] && unlockDateSpilt[1][0] == "0"
-      ? unlockDateSpilt[1][1]
-      : unlockDateSpilt[1];
+      ? +unlockDateSpilt[1][1]
+      : +unlockDateSpilt[1];
   const unlockDay =
     unlockDateSpilt[2] && unlockDateSpilt[2][0] == "0"
-      ? unlockDateSpilt[2][1]
-      : unlockDateSpilt[2];
+      ? +unlockDateSpilt[2][1]
+      : +unlockDateSpilt[2];
 
   //todo 06.03 윤지 header넣고 브라우저에 스크롤바 생김, 이미 사이드바, 편지지안에 내부 스크롤바가 있음으로 브라우저에선 없어야함, 어떻게 없애지..?
   //todo header nickname값은 컴포넌트안에서 fetch 받아서 유지되는데 로그인 값은 페이지에서 상태값 받아서 로컬이나 스토어에서 가져오지 않는이상 유지가 안됨.
