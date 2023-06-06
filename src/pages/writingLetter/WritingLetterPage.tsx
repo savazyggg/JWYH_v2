@@ -5,6 +5,7 @@ import { useState } from "react";
 import SendButton from "./SendButton";
 import Input from "./InputBox";
 import Header from "../../components/organisms/header/Header";
+import { useParams } from "react-router-dom";
 
 interface SendData {
   content: string;
@@ -23,6 +24,8 @@ const WritingLetterPage: React.FC = () => {
   const [successSendingStatus, setSuccessSendingStatus] =
     useState<boolean>(false);
 
+  const { userID } = useParams();
+
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSenderName(e.target.value);
   const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -36,12 +39,38 @@ const WritingLetterPage: React.FC = () => {
     console.log(letterStyle);
     setLetterStyle(letterStyle);
   };
-  const onSubmit = () => {
+
+  const onSubmit = async () => {
+    const SEND_LETTER_API = `http://34.64.195.153:5000/letters/send/${userID}`;
+
+    const sendData: SendData = {
+      content: letterWriting,
+      style: lettrStyle,
+      sender: senderName,
+      "unlock-year": unlockYear,
+      "unlock-month": unlockMonth,
+      "unlock-date": unlockDay,
+    };
+
+    const response = await fetch(SEND_LETTER_API, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(sendData),
+    });
     console.log(sendData);
     setSuccessSendingStatus(true);
-    //console.log(successSendingStatus);
+    return response.json();
+
     //필수값 넣었는지 확인후 버튼 활성화하게 해야될듯, 이벤트 변경 필요
   };
+
   const unlockDateSpilt = unlockDate.split("-");
 
   const unlockYear = unlockDateSpilt[0];
@@ -54,14 +83,6 @@ const WritingLetterPage: React.FC = () => {
       ? unlockDateSpilt[2][1]
       : unlockDateSpilt[2];
 
-  const sendData: SendData = {
-    content: letterWriting,
-    style: lettrStyle,
-    sender: senderName,
-    "unlock-year": unlockYear,
-    "unlock-month": unlockMonth,
-    "unlock-date": unlockDay,
-  };
   //todo 06.03 윤지 header넣고 브라우저에 스크롤바 생김, 이미 사이드바, 편지지안에 내부 스크롤바가 있음으로 브라우저에선 없어야함, 어떻게 없애지..?
   //todo header nickname값은 컴포넌트안에서 fetch 받아서 유지되는데 로그인 값은 페이지에서 상태값 받아서 로컬이나 스토어에서 가져오지 않는이상 유지가 안됨.
   return (
