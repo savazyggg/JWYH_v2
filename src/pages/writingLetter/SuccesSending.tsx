@@ -1,11 +1,14 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SuccesSending = ({ open, onClose }) => {
+interface SuccesSendingProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const SuccesSending = ({ open, onClose }: SuccesSendingProps) => {
   return (
     <>
       <Modal
