@@ -51,9 +51,9 @@ const MainPage = () => {
 export default MainPage;
 
 const Container = muiStyled(Box)({
-  display: "grid",
+  // display: "grid",
   height: "100%",
-  gridTemplateRows: "100px 250px 1fr",
+  gridTemplateRows: "100px 250px 100px 1fr",
 });
 // const InfoDiv = muiStyled(Box)({
 //   border: "1px solid red",
