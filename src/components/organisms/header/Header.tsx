@@ -1,44 +1,51 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
-const Header = ({ isLogin, onLogOut }) => {
-  const [nickName, setNickName] = useState<string>("");
-  const [error, setError] = useState<string>("");
+type User = {
+  id: string;
+  password: string;
+  nickName: string;
+  objectId: string;
+  iat: number;
+};
 
-  //TODO 06.03 윤지 ** api, 링크 가안임, 갈아껴야됨
-  //memo 헤더 명확하게 보려고 일단 색 다르게 설정해둠
+type HeaderProps = {
+  isLogin: boolean;
+  onLogOut: () => void;
+  token: string;
+};
+
+const Header = ({ isLogin, onLogOut, token }: HeaderProps) => {
+  const [user, setUser] = useState<User>({
+    id: "",
+    password: "",
+    nickName: "",
+    objectId: "",
+    iat: 0,
+  });
+
   useEffect(() => {
-    async function fetchNickNameData() {
-      try {
-        const response = await fetch("https://api.github.com/users/openai");
-        if (!response.ok) {
-          throw new Error("HTTP error " + response.status);
-        }
-        const data = await response.json();
-        setNickName(data.name);
-      } catch (err) {
-        setError(err);
-      }
-    }
-    fetchNickNameData();
-  }, []);
-  //console.log(nickName);
+    setUser(token);
+  }, [token]);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!nickName) {
-    return <div>Loading...</div>;
-  } else {
-    return (
-      <SHeader>
-        <Container>
-          <LeftContainer>
-            {nickName && <h3>{nickName} 님의 레터 스페이스 입니다.</h3>}
-            {isLogin && <Button>링크 복사</Button>}
-          </LeftContainer>
-          <>
-            {isLogin ? (
+  return (
+    <SHeader>
+      <Container>
+        <LeftContainer>
+          <h3>{user.nickName && `${user.nickName}님의 레터스페이스 입니다`}</h3>
+          {isLogin && <Button>Login</Button>}
+        </LeftContainer>
+        <>
+          {isLogin ? (
+            <>
+              <LeftContainer>
+                <h3>
+                  {user.nickName && `${user.nickName}님의 레터스페이스 입니다`}
+                </h3>
+                {isLogin && <Button>Login</Button>}
+              </LeftContainer>
               <LoginContainer>
                 <ul>
                   <Link to="/">
@@ -50,21 +57,21 @@ const Header = ({ isLogin, onLogOut }) => {
                 </ul>
                 <Button onClick={onLogOut}>Log out</Button>
               </LoginContainer>
-            ) : (
-              <div>
-                <Link to="/">
-                  <Button>Log in</Button>
-                </Link>
-                <Link to="/">
-                  <Button>Sign up</Button>
-                </Link>
-              </div>
-            )}
-          </>
-        </Container>
-      </SHeader>
-    );
-  }
+            </>
+          ) : (
+            <div>
+              <Link to="/">
+                <Button>Log in</Button>
+              </Link>
+              <Link to="/">
+                <Button>Sign up</Button>
+              </Link>
+            </div>
+          )}
+        </>
+      </Container>
+    </SHeader>
+  );
 };
 
 export default Header;

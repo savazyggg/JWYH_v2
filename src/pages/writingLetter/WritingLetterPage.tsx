@@ -41,7 +41,7 @@ const WritingLetterPage: React.FC = () => {
   };
 
   const onSubmit = async () => {
-    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/6479a10af202ae0a7070c8aa`;
+    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/648083852d72b49c7c0d98b3`;
 
     const sendData: SendData = {
       content: letterWriting,
@@ -82,6 +82,10 @@ const WritingLetterPage: React.FC = () => {
     unlockDateSpilt[2] && unlockDateSpilt[2][0] == "0"
       ? +unlockDateSpilt[2][1]
       : +unlockDateSpilt[2];
+
+  // const dateStr = "2023-05-29";
+  // const [year, month, day] = dateStr.match(/\d{1,4}/g);
+  // 위의 코드 리팩토링
 
   //todo 06.03 윤지 header넣고 브라우저에 스크롤바 생김, 이미 사이드바, 편지지안에 내부 스크롤바가 있음으로 브라우저에선 없어야함, 어떻게 없애지..?
   //todo header nickname값은 컴포넌트안에서 fetch 받아서 유지되는데 로그인 값은 페이지에서 상태값 받아서 로컬이나 스토어에서 가져오지 않는이상 유지가 안됨.
