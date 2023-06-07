@@ -25,7 +25,7 @@ const Header = ({ isLogin, onLogOut, token }: HeaderProps) => {
     objectId: "",
     iat: 0,
   });
-
+  console.log(token.id);
   useEffect(() => {
     setUser(token);
   }, [token]);
@@ -35,17 +35,10 @@ const Header = ({ isLogin, onLogOut, token }: HeaderProps) => {
       <Container>
         <LeftContainer>
           <h3>{user.nickName && `${user.nickName}님의 레터스페이스 입니다`}</h3>
-          {isLogin && <Button>Login</Button>}
         </LeftContainer>
         <>
           {isLogin ? (
             <>
-              <LeftContainer>
-                <h3>
-                  {user.nickName && `${user.nickName}님의 레터스페이스 입니다`}
-                </h3>
-                {isLogin && <Button>Login</Button>}
-              </LeftContainer>
               <LoginContainer>
                 <ul>
                   <Link to="/">

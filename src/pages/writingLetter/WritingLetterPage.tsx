@@ -91,7 +91,7 @@ const WritingLetterPage: React.FC = () => {
   //todo header nickname값은 컴포넌트안에서 fetch 받아서 유지되는데 로그인 값은 페이지에서 상태값 받아서 로컬이나 스토어에서 가져오지 않는이상 유지가 안됨.
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Sidebar onClick={onLetterStyleChange} />
 
       <LetterSpace

@@ -20,16 +20,16 @@ const MainPage = () => {
   // recoil
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [token, setToken] = useState();
+  const [token1, setToken] = useState();
   const localStorageCheck = localStorage.getItem("jwt");
 
   const loginCheck = () => {
-    if (localStorageCheck) {
-      let jwtString = JSON.parse(localStorage.getItem("jwt"));
-      setToken(jwt_decode(jwtString.token));
-      // console.log(token);
-      setIsLogin(true);
-    }
+    const jwtString = localStorage.getItem("jwt");
+    setToken(jwt_decode(jwtString));
+    // console.log(token1);
+    setIsLogin(true);
+    // if (localStorageCheck) {
+    // }
   };
 
   const onLogOut = () => {
@@ -47,7 +47,7 @@ const MainPage = () => {
       <>
         <Header
           isLogin={isLogin}
-          token={isLogin ? token : ""}
+          token={isLogin ? token1 : ""}
           onLogOut={onLogOut}
         />
         <UserInputText isLogin={isLogin} />
