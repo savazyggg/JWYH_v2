@@ -27,18 +27,19 @@ function Copyright(props: any) {
   );
 }
 
-interface SignUpFormProps {
-  greetings: string;
-  setGreetings: React.Dispatch<React.SetStateAction<string>>;
-  isSignUp: boolean;
-  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// interface SignUpFormProps {
+//   greetings: string;
+//   setGreetings: React.Dispatch<React.SetStateAction<string>>;
+//   isSignUp: boolean;
+//   setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+// }
 
-export default function SignUpForm(props: SignUpFormProps) {
-  const { greetings, setGreetings, isSignUp, setIsSignUp } = props;
-  useEffect(() => {
-    setGreetings("회원가입");
-  }, []);
+// export default function SignUpForm(props: SignUpFormProps) {
+export default function SignUpForm() {
+  // const { greetings, setGreetings, isSignUp, setIsSignUp } = props;
+  // useEffect(() => {
+  //   setGreetings("회원가입");
+  // }, []);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
