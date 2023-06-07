@@ -14,6 +14,7 @@ interface SendData {
   unlockYear: number;
   unlockMonth: number;
   unlockDate: number;
+  [key: string]: string | number;
 }
 
 const WritingLetterPage: React.FC = () => {
@@ -24,7 +25,7 @@ const WritingLetterPage: React.FC = () => {
   const [successSendingStatus, setSuccessSendingStatus] =
     useState<boolean>(false);
 
-  const { userID } = useParams(); //api에 userID로 바꿀것 지금은 test로 aaa로 지정
+  const { userID } = useParams(); //api에 userID로 바꿀것 지금은 test로 6479a10af202ae0a7070c8aa로 지정
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSenderName(e.target.value);
@@ -51,7 +52,7 @@ const WritingLetterPage: React.FC = () => {
       unlockMonth: unlockMonth,
       unlockDate: unlockDay,
     };
-    console.log(sendData);
+    //console.log(sendData);
 
     const keys = Object.keys(sendData);
     for (const key of keys) {
@@ -81,8 +82,6 @@ const WritingLetterPage: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
-
-    //필수값 넣었는지 확인후 버튼 활성화하게 해야될듯, 이벤트 변경 필요
   };
 
   const unlockDateSpilt = unlockDate.split("-");

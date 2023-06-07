@@ -3,8 +3,10 @@ import { useState } from "react";
 import SuccesSending from "./SuccesSending";
 
 interface Props {
-  type: "button" | "submit" | "reset" | undefined;
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  type: "button";
+  onClick: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => Promise<string>;
   onSuccessSendingStatus: boolean;
 }
 
@@ -17,8 +19,10 @@ const SendButton: React.FC<Props> = ({
   const onHandleOpen = () => onSuccessSendingStatus && setOpen(true);
   const onHandleClose = () => setOpen(false);
 
-  const onClickHandler = () => {
-    onClick();
+  const onClickHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    onClick(e);
     onHandleOpen();
   };
 
