@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 // import Link from "@mui/material/Link";
-import register from "../../../apis/registerApi";
+import { register, SingUpData } from "../../../apis/registerApi";
 import { Link } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -58,11 +58,16 @@ export default function SignUpForm() {
   ) => {
     event.preventDefault();
   };
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const url = "http://127.0.0.1:3033";
-    await register(url, formData);
+  const handleSignUp = async (e: any) => {
+    e.preventDefault();
+    console.log("SignUp Clicked");
+    const data: SingUpData = {
+      userId: idValue,
+      nickName: nickValue,
+      password: pwValue,
+    };
+    const url = "http://34.64.195.153:5000";
+    await register(url, data);
   };
 
   return (
@@ -151,7 +156,13 @@ export default function SignUpForm() {
         />
         <FormHelperText>{pwcErMsg}</FormHelperText>
       </FormControl>
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        onClick={handleSignUp}
+        type="button"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >
         회원가입
       </Button>
       <Link style={{ color: "white", width: "100%" }} to="/login">
