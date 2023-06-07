@@ -2,18 +2,35 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
-import TextField from "@mui/material/TextField";
 import { LoginData, login } from "../../../apis/loginApi";
 import { Link } from "react-router-dom";
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormHelperText from "@mui/material/FormHelperText";
 
 export default function LoginForm() {
   const [idValue, setIdValue] = useState<string>("");
+  const [isIdError, setIdIsError] = useState(true);
+  const [idErMsg, setIdErMsg] = useState("id Error");
   const [pwValue, setPwValue] = useState<string>("");
-  // const [showPassword, setShowPassword] = useState(false);
+  const [isPwError, setPwIsError] = useState(true);
+  const [pwErMsg, setPwErMsg] = useState("pw Error");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
   const googleUrl = "http://localhost:3000";
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    //TODO FormData 말고 interface 받아서 하기
     console.log("logined");
     const url = "http://34.64.195.153:5000";
     const data: LoginData = {
@@ -25,28 +42,47 @@ export default function LoginForm() {
   };
 
   return (
-    <Stack spacing={1}>
-      <TextField
-        id="identification"
-        label="아이디"
-        variant="outlined"
-        helperText="Some important text"
-        color="primary"
-        value={idValue}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setIdValue(e.target.value);
-        }}
-      />
-      <TextField
-        id="password"
-        label="비밀번호"
-        variant="outlined"
-        helperText="Some important text"
-        value={pwValue}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setPwValue(e.target.value);
-        }}
-      />
+    <Stack spacing={2}>
+      <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
+        <InputLabel htmlFor="identification">아이디</InputLabel>
+        <OutlinedInput
+          id="identification"
+          type="text"
+          value={idValue}
+          aria-describedby="id-input"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setIdValue(e.target.value);
+          }}
+          label="아이디"
+        />
+        <FormHelperText>{idErMsg}</FormHelperText>
+      </FormControl>
+      <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
+        <InputLabel htmlFor="password">비밀번호</InputLabel>
+        <OutlinedInput
+          id="password"
+          type={showPassword ? "text" : "password"}
+          value={pwValue}
+          aria-describedby="password-input"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setPwValue(e.target.value);
+          }}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="비밀번호"
+        />
+        <FormHelperText>{pwErMsg}</FormHelperText>
+      </FormControl>
       <Button
         sx={{ width: "100%" }}
         type="button"
