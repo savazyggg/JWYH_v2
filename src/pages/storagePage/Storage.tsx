@@ -24,33 +24,62 @@ const Storage = (): JSX.Element => {
   const [data2022, setData2022] = useState<number[]>(arr_2022);
   const [data2023, setData2023] = useState<number[]>(arr_2023);
 
+  const monthArray = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ];
+  const yearArray = [""];
   useEffect(() => {
     axios
       .get(`http://34.64.195.153:5000/api/box/choi`)
       .then((response) => {
+        console.log("찍힌 데이터" + response.data);
         if (response.data === "편지가 없어요") {
+          const obj = response.data;
+          console.log(obj["2021"]["6"]); //1
+
           console.log("편지가 없어요");
         } else {
-          setLetterCount(response.data);
-          console.log(letterCount);
-          console.log(letterCount.year.month + "여기는 년도");
-          console.log(letterCount.month + "여기는 월");
-          const year = response.data;
-          const month = response.data.data;
-          const index = Number(month) - 1; // int로 형변환
+          const obj = response.data;
+          console.log(obj);
+          const yearArray = Object.keys(obj);
+          console.log(yearArray + "년도별 array");
+          // for (let i = 0; i < yearArray.length; i++) {
+          //   for (let j = 0; j < monthArray.length; j++) {
+          //         console.log(obj[yearArray[i]][monthArray[j]]+"여기임");
+          //         if(yearArray[i]==="2023"){
+          //           // setData2023(data2023=>[...data2023,[obj[yearArray[i]][monthArray[j]]]]);
+          //           // console.log("hi");
+          //         }
+
+          //   }
+          //   console.log(data2023);
+          // }
           const year2023 = "2023";
           const year2022 = "2022";
-          console.log(year);
-          if (year === year2023) {
-            arr_2023[index] = arr_2023[index] + 1;
-          } else if (year === year2022) {
-            arr_2022[index] = arr_2022[index] + 1;
+          // const month=1;
+          // // const index=Number(month)-1;
+          for (let i = 0; i < yearArray.length; i++) {
+            for (let j = 0; j < monthArray.length; j++) {
+              console.log(obj[year2023] + "안녕");
+              if (yearArray[i] === year2023) {
+                arr_2023[j] = obj[year2023][j];
+                console.log(arr_2023[j]);
+              }
+              setData2023(() => [...arr_2023]);
+            }
+            console.log(data2023 + "여기다");
           }
-          console.log("편지는 들어왔음");
-
-          console.log(letterCount.year + "추상화");
-          setData2023(() => [...arr_2023]);
-          setData2022(() => [...arr_2022]);
         }
       })
       .catch((error) => {
@@ -85,7 +114,7 @@ const Storage = (): JSX.Element => {
             <span
               id="welcome"
               onClick={() => {
-                document.location.href = `/login`;
+                document.location.href = `/login`; //로그인 여부에 따라 다르게
               }}
             >
               로그인/회원가입
@@ -96,7 +125,8 @@ const Storage = (): JSX.Element => {
             id="storage"
             onClick={() => {
               if (curr_user == id) {
-                document.location.href = `/mypage/${id}`;
+                document.location.href = `/mypage/${id}`; // 유저의 레터스페이스로 이동 (로그인 유저와 같아야 함)
+              } else {
                 alert("자신의 보관함만 열람 가능합니다.");
               }
             }}
