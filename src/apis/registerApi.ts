@@ -1,3 +1,8 @@
+interface SingUpData {
+  userId: string;
+  nickName: string;
+  password: string;
+}
 /**
  * 회원가입정보를 보내고 response 받아옴
  * @module register
@@ -8,11 +13,8 @@
  * @returns {JSON} 회원가입후 return을 뭘 받아야함?
  */
 //TODO interface 만들어서 하는게 더 편할듯
-export default async function register(url = "", formData: FormData) {
+async function register(url = "", data: SingUpData) {
   url = url + "/api/register";
-  const data: any = {};
-  formData.delete("passwordVali");
-  formData.forEach((value, key) => (data[key] = value));
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",
@@ -27,3 +29,5 @@ export default async function register(url = "", formData: FormData) {
   });
   return response.json();
 }
+export { register };
+export type { SingUpData };
