@@ -1,121 +1,104 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { useEffect, useState } from "react";
-import login from "../../../apis/loginApi";
-import InputLabel from "@mui/material/InputLabel";
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useState } from "react";
+import { LoginData, login } from "../../../apis/loginApi";
+import { Link } from "react-router-dom";
 import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormHelperText from "@mui/material/FormHelperText";
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-interface LoginFormProps {
-  greetings: string;
-  setGreetings: React.Dispatch<React.SetStateAction<string>>;
-}
-export default function LoginForm(props: LoginFormProps) {
-  const { greetings, setGreetings } = props;
+export default function LoginForm() {
+  const [idValue, setIdValue] = useState<string>("");
+  const [isIdError, setIdIsError] = useState(true);
+  const [idErMsg, setIdErMsg] = useState("id Error");
+  const [pwValue, setPwValue] = useState<string>("");
+  const [isPwError, setPwIsError] = useState(true);
+  const [pwErMsg, setPwErMsg] = useState("pw Error");
   const [showPassword, setShowPassword] = useState(false);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
   };
-  useEffect(() => {
-    setGreetings("로그인");
-  }, []);
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    //TODO FormData 말고 interface 받아서 하기
-    const formData = new FormData(event.currentTarget);
-    const url = "http://127.0.0.1:3033";
-    const jwt = JSON.stringify(await login(url, formData));
+  const googleUrl = "http://localhost:3000";
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    console.log("logined");
+    const url = "http://34.64.195.153:5000";
+    const data: LoginData = {
+      userId: idValue,
+      password: pwValue,
+    };
+    const jwt = JSON.stringify(await login(url, data));
     localStorage.setItem("jwt", jwt);
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+    <Stack spacing={2}>
+      <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
+        <InputLabel htmlFor="identification">아이디</InputLabel>
+        <OutlinedInput
+          id="identification"
+          type="text"
+          value={idValue}
+          aria-describedby="id-input"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setIdValue(e.target.value);
+          }}
+          label="아이디"
+        />
+        <FormHelperText>{idErMsg}</FormHelperText>
+      </FormControl>
+      <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
+        <InputLabel htmlFor="password">비밀번호</InputLabel>
+        <OutlinedInput
+          id="password"
+          type={showPassword ? "text" : "password"}
+          value={pwValue}
+          aria-describedby="password-input"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setPwValue(e.target.value);
+          }}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="비밀번호"
+        />
+        <FormHelperText>{pwErMsg}</FormHelperText>
+      </FormControl>
+      <Button
+        sx={{ width: "100%" }}
+        type="button"
+        variant="contained"
+        onClick={handleLogin}
       >
-        <Box component="form" noValidate onSubmit={handleSubmit}>
-          <Stack>
-            <Grid>
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-userId">
-                  아이디
-                </InputLabel>
-                <OutlinedInput
-                  id="userId"
-                  name="userId"
-                  type="text"
-                  label="아이디"
-                />
-              </FormControl>
-            </Grid>
-            <Grid>
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="비밀번호"
-                />
-              </FormControl>
-            </Grid>
-          </Stack>
-          <Button type="submit" fullWidth variant="contained">
-            로그인
-          </Button>
-        </Box>
-      </Box>
-      <Copyright sx={{ mt: 5 }} />
-    </Container>
+        로그인
+      </Button>
+      <Link
+        style={{ width: "100%" }}
+        to={googleUrl + "/login/federated/google"}
+      >
+        <Button sx={{ width: "100%" }} type="button" variant="contained">
+          구글 로그인
+        </Button>
+      </Link>
+    </Stack>
   );
 }
