@@ -1,27 +1,26 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { useEffect, useState } from "react";
-import login from "../../../apis/loginApi";
-import InputLabel from "@mui/material/InputLabel";
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormControl from "@mui/material/FormControl";
-import Visibility from "@mui/icons-material/Visibility";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
+import { LoginData, login } from "../../../apis/loginApi";
 
 export default function LoginForm() {
-  const [idValue, setIdValue] = useState("");
-  const [pwValue, setPwValue] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-
+  const [idValue, setIdValue] = useState<string>("");
+  const [pwValue, setPwValue] = useState<string>("");
+  // const [showPassword, setShowPassword] = useState(false);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    //TODO FormData 말고 interface 받아서 하기
+    console.log("logined");
+    const url = "http://34.64.195.153:5000";
+    const data: LoginData = {
+      userId: idValue,
+      password: pwValue,
+    };
+    const jwt = JSON.stringify(await login(url, data));
+    localStorage.setItem("jwt", jwt);
+  };
   return (
     <Stack>
       <TextField
@@ -40,12 +39,17 @@ export default function LoginForm() {
         label="비밀번호"
         variant="outlined"
         helperText="Some important text"
-        value={idValue}
+        value={pwValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setIdValue(e.target.value);
+          setPwValue(e.target.value);
         }}
       />
-      <Button sx={{ width: "100%" }} type="button" variant="contained">
+      <Button
+        sx={{ width: "100%" }}
+        type="button"
+        variant="contained"
+        onClick={handleSubmit}
+      >
         로그인
       </Button>
     </Stack>
