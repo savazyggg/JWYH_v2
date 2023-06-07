@@ -8,8 +8,10 @@ import LetterCarousel from "./LetterCarousel";
 
 import { useEffect, useState } from "react";
 
+//리코일
 import { useRecoilState } from "recoil";
 import { isLoginedState } from "../../recoilStore";
+//리코일
 
 //TODO 06.03 윤지 : 로그인 상태는 localstorage, recoilstore 둘다 받아야될듯
 //TODO 목적 localstorge : 브라우저 종료 후에 재접속시에도 로그인 유지, recoilstore: 로그인 상태 컴포넌트에 전달
@@ -18,7 +20,9 @@ import { isLoginedState } from "../../recoilStore";
 //TODO 로그인한 유저가 링크복사 전송 -> 접속 -> url: 1) 로그인 x : 도메인/난수 2) 로그인o 도메인/userID 여기서 로그아웃하면? 난수로 또 바뀔지? 그리고 링크생성자와 들어가서 로그인한 아이디가 다르면? url, 랜딩 바뀜 다시생각해보기
 
 const MainPage = () => {
+  //리코일
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  //리코일
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const localStorageCheck = localStorage.getItem("jwt");
@@ -31,11 +35,19 @@ const MainPage = () => {
   /** 로그아웃 상태변경은 상태변경 험수 헤더로 props내려주어 헤더에서 상태변경되어 메인페이지에서 상태 반영 */
   const onLogOut = () => {
     localStorage.removeItem("jwt");
+
+    //리코일
+    setIsLogined(!isLogined);
+    //리코일
+
     setIsLogin(!isLogin);
   };
 
   useEffect(() => {
+    //리코일
     console.log("로그인 성공 ? " + isLogined);
+    //리코일
+
     loginCheck();
   }, [isLogin]);
 

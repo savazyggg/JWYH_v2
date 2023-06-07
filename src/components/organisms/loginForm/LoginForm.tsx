@@ -13,8 +13,10 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormHelperText from "@mui/material/FormHelperText";
 
+//리코일
 import { useRecoilState } from "recoil";
 import { isLoginedState } from "../../../recoilStore";
+//리코일
 
 export default function LoginForm() {
   const [idValue, setIdValue] = useState<string>("");
@@ -24,7 +26,10 @@ export default function LoginForm() {
   const [isPwError, setPwIsError] = useState(true);
   const [pwErMsg, setPwErMsg] = useState("pw Error");
   const [showPassword, setShowPassword] = useState(false);
+
+  //리코일
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  //리코일
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
@@ -44,7 +49,11 @@ export default function LoginForm() {
     };
     const jwt = JSON.stringify(await login(url, data));
     localStorage.setItem("jwt", jwt);
+
+    //리코일
     setIsLogined(!isLogined);
+    //리코일
+
     navigate("/main");
   };
 
