@@ -15,107 +15,39 @@ import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
+import TextField from "@mui/material/TextField";
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-interface LoginFormProps {
-  greetings: string;
-  setGreetings: React.Dispatch<React.SetStateAction<string>>;
-}
-export default function LoginForm(props: LoginFormProps) {
-  const { greetings, setGreetings } = props;
+export default function LoginForm() {
+  const [idValue, setIdValue] = useState("");
+  const [pwValue, setPwValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-  useEffect(() => {
-    setGreetings("로그인");
-  }, []);
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    //TODO FormData 말고 interface 받아서 하기
-    const formData = new FormData(event.currentTarget);
-    const url = "http://127.0.0.1:3033";
-    const jwt = JSON.stringify(await login(url, formData));
-    localStorage.setItem("jwt", jwt);
-  };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+    <Stack>
+      <TextField
+        id="identification"
+        label="아이디"
+        variant="outlined"
+        helperText="Some important text"
+        color="primary"
+        value={idValue}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setIdValue(e.target.value);
         }}
-      >
-        <Box component="form" noValidate onSubmit={handleSubmit}>
-          <Stack>
-            <Grid>
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-userId">
-                  아이디
-                </InputLabel>
-                <OutlinedInput
-                  id="userId"
-                  name="userId"
-                  type="text"
-                  label="아이디"
-                />
-              </FormControl>
-            </Grid>
-            <Grid>
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="비밀번호"
-                />
-              </FormControl>
-            </Grid>
-          </Stack>
-          <Button type="submit" fullWidth variant="contained">
-            로그인
-          </Button>
-        </Box>
-      </Box>
-      <Copyright sx={{ mt: 5 }} />
-    </Container>
+      />
+      <TextField
+        id="password"
+        label="비밀번호"
+        variant="outlined"
+        helperText="Some important text"
+        value={idValue}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setIdValue(e.target.value);
+        }}
+      />
+      <Button sx={{ width: "100%" }} type="button" variant="contained">
+        로그인
+      </Button>
+    </Stack>
   );
 }
