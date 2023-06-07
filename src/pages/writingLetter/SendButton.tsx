@@ -14,7 +14,7 @@ const SendButton: React.FC<Props> = ({
   onSuccessSendingStatus,
 }) => {
   const [open, setOpen] = useState(false);
-  const onHandleOpen = () => setOpen(true);
+  const onHandleOpen = () => onSuccessSendingStatus && setOpen(true);
   const onHandleClose = () => setOpen(false);
 
   const onClickHandler = () => {
@@ -42,9 +42,8 @@ const SendButton: React.FC<Props> = ({
           />
         </svg>
       </Button>
-      {onSuccessSendingStatus && (
-        <SuccesSending open={open} onClose={onHandleClose} />
-      )}
+
+      <SuccesSending open={open} onClose={onHandleClose} />
     </>
   );
 };

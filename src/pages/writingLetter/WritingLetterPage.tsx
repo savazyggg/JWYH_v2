@@ -51,29 +51,35 @@ const WritingLetterPage: React.FC = () => {
       unlockMonth: unlockMonth,
       unlockDate: unlockDay,
     };
+    console.log(sendData);
 
     const keys = Object.keys(sendData);
     for (const key of keys) {
-      if (sendData[key] === "" || sendData[key] === undefined) {
+      if (!sendData[key]) {
         alert("편지, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
         return;
-      } else {
-        const response = await fetch(SEND_LETTER_API, {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
-          body: JSON.stringify(sendData),
-        });
-        console.log(sendData);
-        setSuccessSendingStatus(true);
-        return response.json();
       }
+    }
+
+    try {
+      const response = await fetch(SEND_LETTER_API, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(sendData),
+      });
+
+      console.log(sendData);
+      setSuccessSendingStatus(true);
+      return response.json();
+    } catch (error) {
+      console.error(error);
     }
 
     //필수값 넣었는지 확인후 버튼 활성화하게 해야될듯, 이벤트 변경 필요
