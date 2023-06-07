@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { LoginData, login } from "../../../apis/loginApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import IconButton from "@mui/material/IconButton";
@@ -13,6 +13,9 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormHelperText from "@mui/material/FormHelperText";
 
+import { useRecoilState } from "recoil";
+import { isLoginedState } from "../../../recoilStore";
+
 export default function LoginForm() {
   const [idValue, setIdValue] = useState<string>("");
   const [isIdError, setIdIsError] = useState(true);
@@ -21,6 +24,7 @@ export default function LoginForm() {
   const [isPwError, setPwIsError] = useState(true);
   const [pwErMsg, setPwErMsg] = useState("pw Error");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
@@ -29,6 +33,7 @@ export default function LoginForm() {
     event.preventDefault();
   };
   const googleUrl = "http://localhost:3000";
+  const navigate = useNavigate();
   const handleLogin = async (e: any) => {
     e.preventDefault();
     console.log("logined");
@@ -39,6 +44,8 @@ export default function LoginForm() {
     };
     const jwt = JSON.stringify(await login(url, data));
     localStorage.setItem("jwt", jwt);
+    setIsLogined(!isLogined);
+    navigate("/main");
   };
 
   return (
