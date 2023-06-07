@@ -4,11 +4,13 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { LoginData, login } from "../../../apis/loginApi";
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
   const [idValue, setIdValue] = useState<string>("");
   const [pwValue, setPwValue] = useState<string>("");
   // const [showPassword, setShowPassword] = useState(false);
+  const googleUrl = "http://localhost:3000";
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     //TODO FormData 말고 interface 받아서 하기
@@ -21,8 +23,9 @@ export default function LoginForm() {
     const jwt = JSON.stringify(await login(url, data));
     localStorage.setItem("jwt", jwt);
   };
+
   return (
-    <Stack>
+    <Stack spacing={1}>
       <TextField
         id="identification"
         label="아이디"
@@ -52,6 +55,14 @@ export default function LoginForm() {
       >
         로그인
       </Button>
+      <Link
+        style={{ width: "100%" }}
+        to={googleUrl + "/login/federated/google"}
+      >
+        <Button sx={{ width: "100%" }} type="button" variant="contained">
+          구글 로그인
+        </Button>
+      </Link>
     </Stack>
   );
 }
