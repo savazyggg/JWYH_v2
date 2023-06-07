@@ -29,7 +29,7 @@ export default function LoginForm() {
     event.preventDefault();
   };
   const googleUrl = "http://localhost:3000";
-  const handleSubmit = async (e: any) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
     console.log("logined");
     const url = "http://34.64.195.153:5000";
@@ -87,7 +87,7 @@ export default function LoginForm() {
         sx={{ width: "100%" }}
         type="button"
         variant="contained"
-        onClick={handleSubmit}
+        onClick={handleLogin}
       >
         로그인
       </Button>
