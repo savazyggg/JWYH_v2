@@ -9,7 +9,7 @@ function IntroPage() {
   return (
     <>
       <Container style={{ display: "flex", justifyContent: "center" }}>
-        <Stack direction={"column"}>
+        <Stack gap={3} direction={"column"}>
           <Typography
             sx={{ width: "100%" }}
             component="h1"
@@ -18,7 +18,14 @@ function IntroPage() {
           >
             만나서 반가워요!!
           </Typography>
-          <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "end",
+              width: "100%",
+              height: "500px",
+            }}
+          >
             <Envelope></Envelope>
             {/* <img
               style={{ width: "100%" }}
