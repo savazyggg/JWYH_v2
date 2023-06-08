@@ -9,7 +9,8 @@ const Envelope = () => {
     console.log("openEnvelopeOnHover");
     envelopeTopRef.current?.classList.remove("close");
     envelopeTopRef.current?.classList.add("open");
-    pullOutPartial;
+
+    pullOutPartial();
   };
 
   const pullOutPartial = () => {
@@ -19,9 +20,11 @@ const Envelope = () => {
   };
 
   const closeEnvelopeOnHover = () => {
-    putIn;
-    envelopeTopRef.current?.classList.remove("open");
-    envelopeTopRef.current?.classList.add("close");
+    putIn();
+    setTimeout(function () {
+      envelopeTopRef.current?.classList.remove("open");
+      envelopeTopRef.current?.classList.add("close");
+    }, 400);
     console.log("closeEnvelopeOnHover");
   };
 
@@ -33,10 +36,10 @@ const Envelope = () => {
 
   useEffect(() => {
     envelopeRef.current?.addEventListener("mouseover", () => {
-      openEnvelopeOnHover;
+      openEnvelopeOnHover();
     });
     envelopeRef.current?.addEventListener("mouseout", () => {
-      closeEnvelopeOnHover;
+      closeEnvelopeOnHover();
     });
   }, []);
 
