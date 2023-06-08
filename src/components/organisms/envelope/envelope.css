@@ -32,9 +32,10 @@
   z-index: 3;
 }
 .envelope {
+  --envelopeHeight: 300px;
   position: inherit;
   width: 400px;
-  height: 300px;
+  height: var(--envelopeHeight);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   margin-left: auto;
@@ -48,7 +49,8 @@
   width: inherit;
   margin-left: auto;
   margin-right: auto;
-  height: inherit;
+  height: calc(var(--envelopeHeight) - 10px);
+  /* height: inherit; */
   border-radius: 10px;
   box-sizing: border-box;
   padding: 10px;
