@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Box, Stack } from "@mui/material";
+import Envelope from "../../components/organisms/envelope/Envelope";
 function IntroPage() {
   return (
     <>
@@ -18,10 +19,11 @@ function IntroPage() {
             만나서 반가워요!!
           </Typography>
           <Box sx={{ width: "100%" }}>
-            <img
+            <Envelope></Envelope>
+            {/* <img
               style={{ width: "100%" }}
               src="https://dummyimage.com/400x400/bababa/000000"
-            ></img>
+            ></img> */}
           </Box>
           <Stack direction={"row"}>
             <Link style={{ width: "100%" }} to="/login">
