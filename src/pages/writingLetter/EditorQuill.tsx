@@ -61,12 +61,13 @@ const EditorQill: React.FC<Props> = ({ value, onChange }) => {
 export default EditorQill;
 
 const Quill = styled(ReactQuill)`
-  width: 650px;
-  height: 400px;
+  margin-left: 10px;
+  width: 780px;
+  height: 700px;
 
   border: none;
   .ql-container {
-    border: none;
+    border: 1px solid black;
   }
   .ql-toolbar {
     border: none;
