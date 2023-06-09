@@ -44,7 +44,7 @@ const MainPage = () => {
   return (
     <Container>
       <>
-        <Header token={isLogined && token} path={path} />
+        <Header></Header>
         {/* <UserInputText isLogin={isLogin} /> */}
       </>
       <>
