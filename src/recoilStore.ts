@@ -4,4 +4,10 @@ const isLoginedState = atom({
   key: "isLogined",
   default: false,
 });
-export { isLoginedState };
+
+const uniqueIdState = atom({
+  key: "uniqueId",
+  default: "",
+});
+
+export { isLoginedState, uniqueIdState };
