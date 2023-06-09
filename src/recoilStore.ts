@@ -4,12 +4,6 @@ const isLoginedState = atom({
   key: "isLogined",
   default: false,
 });
-
-const uniqueIdState = atom({
-  key: "uniqueId",
-  default: "",
-});
-
 const uniqueIdState = atom({
   key: "uniqueId",
   default: "",

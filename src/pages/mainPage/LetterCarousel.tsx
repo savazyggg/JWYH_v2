@@ -30,19 +30,19 @@ const OkButton = muiStyled(Button)({
 /**
  * 편지 캐러셀 컴포넌트
  */
-export default function LetterCard({ token }) {
-  console.log(token);
+export default function LetterCard(token) {
+  console.log(token.token);
   const [letters, setLetters] = useState<Letter[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
 
   const fetchdata = async () => {
-    await fetch(`http://34.64.195.153:5000/api/main/${token.id}`)
+    await fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
       .then((response) => response.json())
       .then((data) => {
         setLetters(data);
-        console.log(data);
+        // console.log(data);
       });
   };
 
@@ -55,7 +55,7 @@ export default function LetterCard({ token }) {
    * @param {Letter} letter - 클릭한 편지 객체
    */
   const handleSlideClick = (letter: Letter) => {
-    fetch(`http://34.64.195.153:5000/api/main/${token.id}/${letter.index}`)
+    fetch(`http://34.64.195.153:5000/api/main/${token.token}/${letter.index}`)
       .then((response) => response.json())
       .then((data) => {
         setLetterContent(data);
@@ -99,7 +99,7 @@ export default function LetterCard({ token }) {
    */
   const closeModal = () => {
     setModalVisible(false);
-    fetch(`http://34.64.195.153:5000/api/main/${token.id}`)
+    fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
       .then((response) => response.json())
       .then((data) => {
         setLetters(data);
@@ -119,7 +119,7 @@ export default function LetterCard({ token }) {
           letters.map((letter) => (
             <SwiperSlide
               key={letter.id}
-              onClick={() => handleSlideClick(letter)}
+              // onClick={() => handleSlideClick(letter)}
               className={!isDatePassed(letter) ? "glowing" : "locked-on"}
             >
               <div className="date-div">
@@ -130,7 +130,7 @@ export default function LetterCard({ token }) {
           ))}
       </Swiper>
 
-      {modalVisible && (
+      {/* {modalVisible && (
         <div className={`modal ${modalVisible ? "visible" : ""}`}>
           <div
             className="modal-content"
@@ -144,7 +144,7 @@ export default function LetterCard({ token }) {
             </OkButton>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

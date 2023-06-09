@@ -15,31 +15,31 @@ import { useRecoilState } from "recoil";
 import { isLoginedState } from "../../recoilStore";
 // recoil
 
-const MainPage = () => {
+const GuestMainPage = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
 
-  const [token, setToken] = useState({});
-  const [path, setPath] = useState([]);
-
+  //   const [token, setToken] = useState({});
+  const [path, setPath] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
-  const tockenStr = localStorage.getItem("jwt");
-  const loginCheck = () => {
-    if (tockenStr) {
-      setIsLogined(true);
-      const user = jwt_decode(tockenStr);
-      console.log(user);
-      setToken(user);
-      console.log(isLogined);
-    } else {
-      setPath([...location.pathname.split("/")]);
-    }
-  };
+  // console.log(location.pathname.split("/").pop());
+  // console.log(path.token);
+  //   const tockenStr = localStorage.getItem("jwt");
+  //   const loginCheck = () => {
+  //     if (tockenStr) {
+  //       setIsLogined(true);
+  //       const user = jwt_decode(tockenStr);
+  //       console.log(user);
+  //       setToken(user);
+  //       console.log(isLogined);
+  //     } else {
+  //       setPath([...location.pathname.split("/")]);
+  //     }
+  //   };
 
   useEffect(() => {
-    loginCheck();
-  }, [isLogined]);
+    setPath(location.pathname.split("/").pop());
+  }, []);
 
   return (
     <Container>
@@ -48,16 +48,15 @@ const MainPage = () => {
         {/* <UserInputText isLogin={isLogin} /> */}
       </>
       <>
-        {isLogined && <GetLetter token={token} />}
+        {/* {isLogined && <GetLetter token={token} />} */}
         <WritingLetterButton isLogin={isLogined} />
       </>
-      {token && <LetterCarousel token={token}></LetterCarousel>}
       {path && <LetterCarousel token={path}></LetterCarousel>}
     </Container>
   );
 };
 
-export default MainPage;
+export default GuestMainPage;
 
 const Container = muiStyled(Box)({
   height: "100%",

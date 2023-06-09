@@ -1,16 +1,11 @@
 import styled from "@emotion/styled";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isLoginedState, uniqueIdState } from "../../../recoilStore";
 import { useEffect, useState } from "react";
 import { getNickName } from "../../../apis/getNickName";
-import { isLoginedState, uniqueIdState } from "../../../recoilStore";
-import { useEffect, useState } from "react";
-import { getNickName } from "../../../apis/getNickName";
 
-const Header = () => {
 const Header = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   const [uniqueId, setUniqueId] = useRecoilState(uniqueIdState);
@@ -70,15 +65,11 @@ const Header = () => {
     if (isLogined === true) onLogIn();
     if (isLogined === false) onGuestIn();
   }, [isLogined]);
-    if (isLogined === true) onLogIn();
-    if (isLogined === false) onGuestIn();
-  }, [isLogined]);
 
   return (
     <SHeader>
       <Container>
         <LeftContainer>
-          <div>{nickName} 님의 레터스페이스 입니다</div>
           <div>{nickName} 님의 레터스페이스 입니다</div>
           {/* <div>{!isLogined && `${userNick}님의 레터스페이스 입니다`}</div> */}
         </LeftContainer>
@@ -98,14 +89,15 @@ const Header = () => {
               </LoginContainer>
             </>
           ) : (
-            <div>
-              <Link to="/login">
-                <Button>Log in</Button>
-              </Link>
-              <Link to="/signup">
-                <Button>Sign up</Button>
-              </Link>
-            </div>
+            <></>
+            // <div>
+            //   <Link to="/login">
+            //     <Button>Log in</Button>
+            //   </Link>
+            //   <Link to="/signup">
+            //     <Button>Sign up</Button>
+            //   </Link>
+            // </div>
           )}
         </>
       </Container>
