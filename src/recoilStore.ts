@@ -10,9 +10,9 @@ const uniqueIdState = atom({
   default: "",
 });
 
-const tokenState = atom({
-  key: "tokenState",
-  default: null, // 기본값 설정
+const uniqueIdState = atom({
+  key: "uniqueId",
+  default: "",
 });
 
-export { isLoginedState, tokenState, uniqueIdState };
+export { isLoginedState, uniqueIdState };
