@@ -39,6 +39,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/writingletter" element={<WritingLetterPage />} />
         <Route path="/main" element={<MainPage />} />
+        <Route path="/main/:_id" element={<MainPage />} />
         <Route path="/storage" element={<Storage />} />
         <Route path="/:id/:year/:month" element={<StorageLetter />} />
         {/* 위 주소를 제외한 모든 주소는 error 페이지로 */}

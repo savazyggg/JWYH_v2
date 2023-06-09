@@ -1,40 +1,38 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-
-type User = {
-  id: string;
-  password: string;
-  nickName: string;
-  objectId: string;
-  iat: number;
-};
+import { Link, useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   isLogin: boolean;
   onLogOut: () => void;
-  token: string;
+  token: any;
+  path: any;
 };
 
-const Header = ({ isLogin, onLogOut, token }: HeaderProps) => {
-  const [user, setUser] = useState<User>({
-    id: "",
-    password: "",
-    nickName: "",
-    objectId: "",
-    iat: 0,
-  });
-  console.log(token.id);
+const Header = ({ isLogin, onLogOut, token, path }: HeaderProps) => {
+  const [userNick, setUserNick] = useState(null);
+  console.log(token);
   useEffect(() => {
-    setUser(token);
-  }, [token]);
+    if (!token) {
+      let userId = path[path.length - 1];
+      fetch(`http://34.64.195.153:5000/api/nickName/${userId}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setUserNick(res);
+        });
+    }
+  }, [token, path]);
 
+  const logout = () => {
+    onLogOut();
+  };
   return (
     <SHeader>
       <Container>
         <LeftContainer>
-          <h3>{user.nickName && `${user.nickName}님의 레터스페이스 입니다`}</h3>
+          <div>{isLogin && `${token.nickName}님의 레터스페이스 입니다`}</div>
+          <div>{!isLogin && `${userNick}님의 레터스페이스 입니다`}</div>
         </LeftContainer>
         <>
           {isLogin ? (
@@ -48,15 +46,15 @@ const Header = ({ isLogin, onLogOut, token }: HeaderProps) => {
                     <li>보관함</li>
                   </Link>
                 </ul>
-                <Button onClick={onLogOut}>Log out</Button>
+                <Button onClick={logout}>Log out</Button>
               </LoginContainer>
             </>
           ) : (
             <div>
-              <Link to="/">
+              <Link to="/login">
                 <Button>Log in</Button>
               </Link>
-              <Link to="/">
+              <Link to="/signup">
                 <Button>Sign up</Button>
               </Link>
             </div>

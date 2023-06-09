@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 
-const API = "어쩌고";
-const GetLetter = () => {
+const GetLetter = (token) => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-
+  // console.log(token.token.id);
   useEffect(() => {
-    async function fetchLetterData() {
+    async function fetchLetterData(token1) {
       try {
-        const response = await fetch("https://api.github.com/users/openai");
+        const response = await fetch(
+          `http://34.64.195.153:5000/api/main/${token1}`
+        );
         if (!response.ok) {
           throw new Error("HTTP error " + response.status);
         }
@@ -19,9 +20,9 @@ const GetLetter = () => {
         setError(err);
       }
     }
-    fetchLetterData();
+    fetchLetterData(token.token.id);
   }, []);
-  console.log(userData);
+  // console.log(userData);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!userData) {
@@ -29,9 +30,7 @@ const GetLetter = () => {
   } else {
     return (
       <Container>
-        {/* <p>쌓인 편지 {userData.name}개</p> 전체 편지는 나중에 api나오면*/}
-        <h2>{userData.blog}개의 편지가 열렸어요!</h2>
-        {/* 열린 편지만 (unlock && 안읽은 편지) */}
+        <div>총 10 개의 편지중 2개의 편지가 열렸습니다!</div>
       </Container>
     );
   }
