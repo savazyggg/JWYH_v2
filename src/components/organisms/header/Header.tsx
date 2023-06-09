@@ -2,19 +2,26 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { isLoginedState } from "../../../recoilStore";
 
 type HeaderProps = {
-  isLogin: boolean;
-  onLogOut: () => void;
   token: any;
   path: any;
 };
 
-const Header = ({ isLogin, onLogOut, token, path }: HeaderProps) => {
+const Header = ({ token, path }: HeaderProps) => {
   const [userNick, setUserNick] = useState(null);
-  console.log(token, isLogin);
+  const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  console.log("헤더 " + token, isLogined);
+
+  const onLogOut = () => {
+    setIsLogined(false);
+    localStorage.removeItem("jwt");
+  };
+
   useEffect(() => {
-    if (!token) {
+    if (!isLogined) {
       let userId = path[path.length - 1];
       fetch(`http://34.64.195.153:5000/api/nickName/${userId}`)
         .then((res) => res.json())
@@ -24,18 +31,15 @@ const Header = ({ isLogin, onLogOut, token, path }: HeaderProps) => {
     }
   }, [token, path]);
 
-  const logout = () => {
-    onLogOut();
-  };
   return (
     <SHeader>
       <Container>
         <LeftContainer>
-          <div>{isLogin && `${token.nickName}님의 레터스페이스 입니다`}</div>
-          <div>{!isLogin && `${userNick}님의 레터스페이스 입니다`}</div>
+          <div>{isLogined && `${token.nickName}님의 레터스페이스 입니다`}</div>
+          {/* <div>{!isLogined && `${userNick}님의 레터스페이스 입니다`}</div> */}
         </LeftContainer>
         <>
-          {isLogin ? (
+          {isLogined ? (
             <>
               <LoginContainer>
                 <ul>
@@ -46,7 +50,7 @@ const Header = ({ isLogin, onLogOut, token, path }: HeaderProps) => {
                     <li>보관함</li>
                   </Link>
                 </ul>
-                <Button onClick={logout}>Log out</Button>
+                <Button onClick={onLogOut}>Log out</Button>
               </LoginContainer>
             </>
           ) : (

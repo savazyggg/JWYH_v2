@@ -4,4 +4,10 @@ const isLoginedState = atom({
   key: "isLogined",
   default: false,
 });
-export { isLoginedState };
+
+const tokenState = atom({
+  key: 'tokenState',
+  default: null, // 기본값 설정
+});
+
+export { isLoginedState, tokenState };

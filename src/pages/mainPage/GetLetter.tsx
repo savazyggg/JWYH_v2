@@ -1,11 +1,19 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { isLoginedState } from "../../recoilStore";
 
 const GetLetter = ({ token }) => {
+  const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+
+  console.log(isLogined);
+  console.log(token.id);
+
   useEffect(() => {
     async function fetchLetterData(token) {
+      console.log(token);
       try {
         const response = await fetch(
           `http://34.64.195.153:5000/api/main/${token.id}`
@@ -20,7 +28,7 @@ const GetLetter = ({ token }) => {
       }
     }
     fetchLetterData(token);
-  }, []);
+  }, [isLoginedState]);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!userData) {

@@ -1,6 +1,5 @@
-import Header from "../../components/organisms/header/Header";
-
 import GetLetter from "./GetLetter";
+import Header from "../../components/organisms/header/Header";
 import UserInputText from "./UserInputText";
 import WritingLetterButton from "./WritingLetterButton";
 import { styled as muiStyled } from "@mui/system";
@@ -17,59 +16,43 @@ import { isLoginedState } from "../../recoilStore";
 // recoil
 
 const MainPage = () => {
-  // recoil
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
-  // recoil
 
-  const [isLogin, setIsLogin] = useState<boolean>(true);
-  const [token, setToken] = useState();
+  const [token, setToken] = useState({});
   const [path, setPath] = useState([]);
-  // const [jwt, setjwt] = useState();
+  const [jwt, setjwt] = useState();
+
   const location = useLocation();
   const navigate = useNavigate();
 
+  const tockenStr = localStorage.getItem("jwt");
   const loginCheck = () => {
-    const tokenStr = localStorage.getItem("jwt");
-    console.log(tokenStr);
-    if (tokenStr) {
-      const user = jwt_decode(tokenStr);
+    if (tockenStr) {
+      setIsLogined(true);
+      const user = jwt_decode(tockenStr);
       console.log(user);
       setToken(user);
-      setIsLogin(true);
-      console.log(isLogin);
+      console.log(isLogined);
     } else {
-      setIsLogin(false);
       setPath([...location.pathname.split("/")]);
     }
   };
 
-  const onLogOut = () => {
-    localStorage.removeItem("jwt");
-    setIsLogined(!isLogined);
-    setIsLogin(false);
-    navigate("/login");
-  };
-
   useEffect(() => {
     loginCheck();
-  }, []);
+  }, [isLogined]);
 
   return (
     <Container>
       <>
-        <Header
-          isLogin={isLogin}
-          onLogOut={onLogOut}
-          token={isLogin ? token : null}
-          path={path}
-        />
+        <Header token={isLogined && token} path={path} />
         {/* <UserInputText isLogin={isLogin} /> */}
       </>
       <>
-        {/* {isLogin && <GetLetter token={token} />}
-        <WritingLetterButton isLogin={isLogin} /> */}
+        {isLogined && <GetLetter token={token} />}
+        {/* <WritingLetterButton isLogin={isLogined} /> */}
       </>
-      {/* <LetterCarousel token={token}></LetterCarousel> */}
+      {/* {token && <LetterCarousel token={token}></LetterCarousel>} */}
     </Container>
   );
 };

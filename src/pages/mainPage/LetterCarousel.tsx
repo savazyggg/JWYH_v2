@@ -31,6 +31,7 @@ const OkButton = muiStyled(Button)({
  * 편지 캐러셀 컴포넌트
  */
 export default function LetterCard({ token }) {
+  console.log(token);
   const [letters, setLetters] = useState<Letter[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
@@ -53,6 +54,7 @@ export default function LetterCard({ token }) {
       .then((response) => response.json())
       .then((data) => {
         setLetterContent(data);
+        console.log(letter);
       });
     if (isDatePassed(letter)) {
       setModalContent({
