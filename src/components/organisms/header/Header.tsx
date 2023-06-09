@@ -88,14 +88,15 @@ const Header = () => {
               </LoginContainer>
             </>
           ) : (
-            <div>
-              <Link to="/login">
-                <Button>Log in</Button>
-              </Link>
-              <Link to="/signup">
-                <Button>Sign up</Button>
-              </Link>
-            </div>
+            <></>
+            // <div>
+            //   <Link to="/login">
+            //     <Button>Log in</Button>
+            //   </Link>
+            //   <Link to="/signup">
+            //     <Button>Sign up</Button>
+            //   </Link>
+            // </div>
           )}
         </>
       </Container>

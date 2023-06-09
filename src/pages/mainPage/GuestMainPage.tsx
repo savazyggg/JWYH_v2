@@ -6,43 +6,39 @@ import { styled as muiStyled } from "@mui/system";
 import Box from "@mui/material/Box";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { getLetters } from "../../apis/getLetters";
+import { LetterCarousel, LetterInterface } from "./LetterCarousel";
 
 import { useEffect, useState, lazy, Suspense } from "react";
 
 // recoil
 import { useRecoilState } from "recoil";
 import { isLoginedState } from "../../recoilStore";
-import { LetterCarousel, LetterInterface } from "./LetterCarousel";
+import { getLetters } from "../../apis/getLetters";
 // recoil
 
-const MainPage = () => {
+const GuestMainPage = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   const [letters, setLetters] = useState<LetterInterface[]>([]);
-  // const [token, setToken] = useState({});
-  const [userId, setUserId] = useState("");
-  const [path, setPath] = useState([]);
+  const [_userId, set_userId] = useState("");
 
+  //   const [token, setToken] = useState({});
+  const [path, setPath] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
-  const loginCheck = () => {
-    const tokenStr = localStorage.getItem("jwt");
-    if (tokenStr !== null) {
-      interface JwtDecoded {
-        iat: number;
-        id: string;
-        nickName: string;
-        objectId: string;
-      }
-      const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
-      // console.log(JwtDecoded);
-      setUserId(JwtDecoded.id);
-      handleLetterData(JwtDecoded.id);
-      // setToken(user);
-      // console.log(isLogined);
-    }
-  };
+  // console.log(location.pathname.split("/").pop());
+  // console.log(path.token);
+  //   const tockenStr = localStorage.getItem("jwt");
+  //   const loginCheck = () => {
+  //     if (tockenStr) {
+  //       setIsLogined(true);
+  //       const user = jwt_decode(tockenStr);
+  //       console.log(user);
+  //       setToken(user);
+  //       console.log(isLogined);
+  //     } else {
+  //       setPath([...location.pathname.split("/")]);
+  //     }
+  //   };
   const handleLetterData = async (userId = "") => {
     const url = "http://34.64.195.153:5000";
     if (userId.length !== 0) {
@@ -51,13 +47,15 @@ const MainPage = () => {
       });
     }
   };
-  useEffect(() => {
-    handleLetterData(userId);
-  }, [letters, userId]);
 
   useEffect(() => {
-    loginCheck();
-  }, [isLogined]);
+    handleLetterData(_userId);
+  }, [letters, _userId]);
+
+  useEffect(() => {
+    const guestId = location.pathname.split("/").pop();
+    if (guestId !== undefined) set_userId(guestId);
+  }, []);
 
   return (
     <Container>
@@ -66,17 +64,17 @@ const MainPage = () => {
         {/* <UserInputText isLogin={isLogin} /> */}
       </>
       <>
-        {/* {isLogined && <GetLetter token={token} />}
-        <WritingLetterButton isLogin={isLogined} /> */}
+        {/* {isLogined && <GetLetter token={token} />} */}
+        {/* <WritingLetterButton isLogin={isLogined} /> */}
       </>
       {letters.length && (
-        <LetterCarousel isGuest={false} letters={letters}></LetterCarousel>
-      )}
+        <LetterCarousel isGuest={true} letters={letters}></LetterCarousel>
+      )}{" "}
     </Container>
   );
 };
 
-export default MainPage;
+export default GuestMainPage;
 
 const Container = muiStyled(Box)({
   height: "100%",
