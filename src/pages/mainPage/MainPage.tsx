@@ -20,7 +20,6 @@ const MainPage = () => {
 
   const [token, setToken] = useState({});
   const [path, setPath] = useState([]);
-  const [jwt, setjwt] = useState();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,7 +49,7 @@ const MainPage = () => {
       </>
       <>
         {isLogined && <GetLetter token={token} />}
-        {/* <WritingLetterButton isLogin={isLogined} /> */}
+        <WritingLetterButton isLogin={isLogined} />
       </>
       {token && <LetterCarousel token={token}></LetterCarousel>}
     </Container>

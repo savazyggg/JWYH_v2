@@ -48,7 +48,7 @@ export default function LetterCard({ token }) {
 
   useEffect(() => {
     fetchdata();
-  }, [token, letters]);
+  }, [token]);
 
   /**
    * 슬라이드 클릭 이벤트 핸들러
@@ -99,7 +99,7 @@ export default function LetterCard({ token }) {
    */
   const closeModal = () => {
     setModalVisible(false);
-    fetch("http://34.64.195.153:5000/api/main/aaa")
+    fetch(`http://34.64.195.153:5000/api/main/${token.id}`)
       .then((response) => response.json())
       .then((data) => {
         setLetters(data);
@@ -115,7 +115,7 @@ export default function LetterCard({ token }) {
         className="mySwiper"
         navigation={true}
       >
-        {letters &&
+        {letters.length &&
           letters.map((letter) => (
             <SwiperSlide
               key={letter.id}

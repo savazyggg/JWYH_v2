@@ -14,10 +14,11 @@ const Header = ({ token, path }: HeaderProps) => {
   const [userNick, setUserNick] = useState(null);
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   console.log("헤더 " + token, isLogined);
-
+  const nav = useNavigate();
   const onLogOut = () => {
     setIsLogined(false);
     localStorage.removeItem("jwt");
+    nav("/login");
   };
 
   useEffect(() => {
