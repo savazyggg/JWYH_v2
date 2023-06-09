@@ -20,13 +20,12 @@ const MainPage = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   const [letters, setLetters] = useState<LetterInterface[]>([]);
   // const [token, setToken] = useState({});
-  // const [ userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("");
   const [path, setPath] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  let userId = "";
   const loginCheck = () => {
     const tokenStr = localStorage.getItem("jwt");
     if (tokenStr !== null) {
@@ -38,24 +37,23 @@ const MainPage = () => {
       }
       const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
       // console.log(JwtDecoded);
-      userId = JwtDecoded.id;
-      // setUserId(JwtDecoded.id);
-
+      setUserId(JwtDecoded.id);
+      handleLetterData(JwtDecoded.id);
       // setToken(user);
       // console.log(isLogined);
     }
   };
-  const handleLetterData = async () => {
+  const handleLetterData = async (userId = "") => {
     const url = "http://34.64.195.153:5000";
-    // const userId = "aaa";
-    // const userId = "zzz123";
-    await getLetters(url, userId).then((value) => {
-      setLetters(value);
-    });
+    if (userId.length !== 0) {
+      await getLetters(url, userId).then((value) => {
+        setLetters(value);
+      });
+    }
   };
   useEffect(() => {
-    handleLetterData();
-  }, [letters]);
+    handleLetterData(userId);
+  }, [letters, userId]);
 
   useEffect(() => {
     loginCheck();
