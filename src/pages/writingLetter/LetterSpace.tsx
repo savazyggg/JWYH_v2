@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import EditorQill from "./EditorQuill";
 interface Props {
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (value: string) => void;
   letterStyle?: string;
 }
 

@@ -31,7 +31,7 @@ const WritingLetterPage: React.FC = () => {
     setSenderName(e.target.value);
   const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUnlockDate(e.target.value);
-  const onLetterWritingChange = (value) => setLetterWriting(value);
+  const onLetterWritingChange = (value: string) => setLetterWriting(value);
   const onLetterStyleChange = (e: React.MouseEvent<HTMLDivElement>) => {
     const letterStyle = window
       .getComputedStyle(e.currentTarget)

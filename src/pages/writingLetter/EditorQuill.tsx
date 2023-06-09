@@ -1,16 +1,13 @@
-import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "@emotion/styled";
 
-function EditorQill({ value, onChange }) {
-  const [text, setText] = useState(value);
+interface Props {
+  value: string;
+  onChange: (value: string) => void;
+}
 
-  // function onTextChange(value) {
-  //   setText(value);
-  //   onChange(value);
-  // }
-
+const EditorQill: React.FC<Props> = ({ value, onChange }) => {
   const modules = {
     toolbar: [
       //[{ 'font': [] }],
@@ -59,7 +56,7 @@ function EditorQill({ value, onChange }) {
       />
     </div>
   );
-}
+};
 
 export default EditorQill;
 
