@@ -9,37 +9,22 @@ const GetLetter = ({ token }) => {
   const [error, setError] = useState(null);
 
   console.log(isLogined);
-  console.log(token.id);
+  console.log(token);
 
   useEffect(() => {
-    async function fetchLetterData(token) {
-      console.log(token);
-      try {
-        const response = await fetch(
-          `http://34.64.195.153:5000/api/main/${token.id}`
-        );
-        if (!response.ok) {
-          throw new Error("HTTP error " + response.status);
-        }
-        const data = await response.json();
-        setUserData(data);
-      } catch (err) {
-        setError(err);
-      }
+    async function fetchLetterData() {
+      // console.log(token);
+      const response = await fetch(`http://34.64.195.153:5000/api/main/aaa`);
+      const data = await response.json();
+      setUserData(data);
     }
-    fetchLetterData(token);
-  }, [isLoginedState]);
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!userData) {
-    return <div>Loading...</div>;
-  } else {
-    return (
-      <Container>
-        <div>{`총 ${userData.length}개의 편지가 도착했어요`}</div>
-      </Container>
-    );
-  }
+    fetchLetterData();
+  }, []);
+  return (
+    <Container>
+      <div>{`총 ${userData.length}개의 편지가 도착했어요`}</div>
+    </Container>
+  );
 };
 
 export default GetLetter;
