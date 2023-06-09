@@ -25,11 +25,13 @@ const MainPage = () => {
 
   const loginCheck = () => {
     const jwtString = localStorage.getItem("jwt");
-    setToken(jwt_decode(jwtString));
-    // console.log(token1);
-    setIsLogin(true);
-    // if (localStorageCheck) {
-    // }
+    if (jwtString !== null) {
+      setToken(jwt_decode(jwtString));
+      // console.log(token1);
+      setIsLogin(true);
+      // if (localStorageCheck) {
+      // }
+    }
   };
 
   const onLogOut = () => {
