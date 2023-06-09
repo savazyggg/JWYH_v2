@@ -4,19 +4,22 @@ import UserInputText from "./UserInputText";
 import WritingLetterButton from "./WritingLetterButton";
 import { styled as muiStyled } from "@mui/system";
 import Box from "@mui/material/Box";
-import LetterCarousel from "./LetterCarousel";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { LetterCarousel, LetterInterface } from "./LetterCarousel";
 
 import { useEffect, useState, lazy, Suspense } from "react";
 
 // recoil
 import { useRecoilState } from "recoil";
 import { isLoginedState } from "../../recoilStore";
+import { getLetters } from "../../apis/getLetters";
 // recoil
 
 const GuestMainPage = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  const [letters, setLetters] = useState<LetterInterface[]>([]);
+  const [_userId, set_userId] = useState("");
 
   //   const [token, setToken] = useState({});
   const [path, setPath] = useState("");
@@ -36,9 +39,22 @@ const GuestMainPage = () => {
   //       setPath([...location.pathname.split("/")]);
   //     }
   //   };
+  const handleLetterData = async (userId = "") => {
+    const url = "http://34.64.195.153:5000";
+    if (userId.length !== 0) {
+      await getLetters(url, userId).then((value) => {
+        setLetters(value);
+      });
+    }
+  };
 
   useEffect(() => {
-    setPath(location.pathname.split("/").pop());
+    handleLetterData(_userId);
+  }, [letters, _userId]);
+
+  useEffect(() => {
+    const guestId = location.pathname.split("/").pop();
+    if (guestId !== undefined) set_userId(guestId);
   }, []);
 
   return (
@@ -49,9 +65,11 @@ const GuestMainPage = () => {
       </>
       <>
         {/* {isLogined && <GetLetter token={token} />} */}
-        <WritingLetterButton isLogin={isLogined} />
+        {/* <WritingLetterButton isLogin={isLogined} /> */}
       </>
-      {path && <LetterCarousel token={path}></LetterCarousel>}
+      {letters.length && (
+        <LetterCarousel isGuest={true} letters={letters}></LetterCarousel>
+      )}{" "}
     </Container>
   );
 };
