@@ -52,7 +52,7 @@ const MainPage = () => {
         {isLogined && <GetLetter token={token} />}
         {/* <WritingLetterButton isLogin={isLogined} /> */}
       </>
-      {/* {token && <LetterCarousel token={token}></LetterCarousel>} */}
+      {token && <LetterCarousel token={token}></LetterCarousel>}
     </Container>
   );
 };

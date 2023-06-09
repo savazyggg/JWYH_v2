@@ -36,14 +36,19 @@ export default function LetterCard({ token }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
-  useEffect(() => {
-    fetch(`http://34.64.195.153:5000/api/main/${token.id}`)
+
+  const fetchdata = async () => {
+    await fetch(`http://34.64.195.153:5000/api/main/${token.id}`)
       .then((response) => response.json())
       .then((data) => {
         setLetters(data);
         console.log(data);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchdata();
+  }, [token, letters]);
 
   /**
    * 슬라이드 클릭 이벤트 핸들러
@@ -110,18 +115,19 @@ export default function LetterCard({ token }) {
         className="mySwiper"
         navigation={true}
       >
-        {letters.map((letter) => (
-          <SwiperSlide
-            key={letter.id}
-            onClick={() => handleSlideClick(letter)}
-            className={!isDatePassed(letter) ? "glowing" : "locked-on"}
-          >
-            <div className="date-div">
-              {`Unlock: ${letter.unlockYear}년 ${letter.unlockMonth}월 ${letter.unlockDate}일`}
-            </div>
-            <div className="sender-div">{`From .. ${letter.sender}`}</div>
-          </SwiperSlide>
-        ))}
+        {letters &&
+          letters.map((letter) => (
+            <SwiperSlide
+              key={letter.id}
+              onClick={() => handleSlideClick(letter)}
+              className={!isDatePassed(letter) ? "glowing" : "locked-on"}
+            >
+              <div className="date-div">
+                {`Unlock: ${letter.unlockYear}년 ${letter.unlockMonth}월 ${letter.unlockDate}일`}
+              </div>
+              <div className="sender-div">{`From .. ${letter.sender}`}</div>
+            </SwiperSlide>
+          ))}
       </Swiper>
 
       {modalVisible && (

@@ -10,19 +10,20 @@ const GetLetter = ({ token }) => {
 
   console.log(isLogined);
   console.log(token);
-
+  async function fetchLetterData() {
+    const response = await fetch(
+      `http://34.64.195.153:5000/api/main/${token.id}`
+    );
+    const data = await response.json();
+    setUserData(data);
+  }
   useEffect(() => {
-    async function fetchLetterData() {
-      // console.log(token);
-      const response = await fetch(`http://34.64.195.153:5000/api/main/aaa`);
-      const data = await response.json();
-      setUserData(data);
-    }
     fetchLetterData();
-  }, []);
+  }, [token]); // userData를 의존성 배열로 추가
+
   return (
     <Container>
-      <div>{`총 ${userData.length}개의 편지가 도착했어요`}</div>
+      <div>{`총 ${userData?.length}개의 편지가 도착했어요`}</div>
     </Container>
   );
 };
