@@ -30,17 +30,17 @@ const OkButton = muiStyled(Button)({
 /**
  * 편지 캐러셀 컴포넌트
  */
-export default function LetterCard() {
+export default function LetterCard({ token }) {
   const [letters, setLetters] = useState<Letter[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
-
   useEffect(() => {
-    fetch("http://34.64.195.153:5000/api/main/aaa")
+    fetch(`http://34.64.195.153:5000/api/main/${token.id}`)
       .then((response) => response.json())
       .then((data) => {
         setLetters(data);
+        console.log(data);
       });
   }, []);
 
@@ -49,7 +49,7 @@ export default function LetterCard() {
    * @param {Letter} letter - 클릭한 편지 객체
    */
   const handleSlideClick = (letter: Letter) => {
-    fetch(`http://34.64.195.153:5000/api/main/aaa/${letter.index}`)
+    fetch(`http://34.64.195.153:5000/api/main/${token.id}/${letter.index}`)
       .then((response) => response.json())
       .then((data) => {
         setLetterContent(data);

@@ -21,20 +21,24 @@ const MainPage = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   // recoil
 
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(true);
   const [token, setToken] = useState();
   const [path, setPath] = useState([]);
-
+  // const [jwt, setjwt] = useState();
   const location = useLocation();
   const navigate = useNavigate();
 
   const loginCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      setIsLogin(true);
-      const tokenStr = localStorage.getItem("jwt");
+    const tokenStr = localStorage.getItem("jwt");
+    console.log(tokenStr);
+    if (tokenStr) {
       const user = jwt_decode(tokenStr);
+      console.log(user);
       setToken(user);
+      setIsLogin(true);
+      console.log(isLogin);
     } else {
+      setIsLogin(false);
       setPath([...location.pathname.split("/")]);
     }
   };
@@ -62,10 +66,10 @@ const MainPage = () => {
         {/* <UserInputText isLogin={isLogin} /> */}
       </>
       <>
-        <GetLetter token={isLogin ? token : null} />
-        {/* <WritingLetterButton isLogin={isLogin} /> */}
+        {/* {isLogin && <GetLetter token={token} />}
+        <WritingLetterButton isLogin={isLogin} /> */}
       </>
-      {/* <LetterCarousel></LetterCarousel> */}
+      {/* <LetterCarousel token={token}></LetterCarousel> */}
     </Container>
   );
 };
@@ -76,3 +80,25 @@ const Container = muiStyled(Box)({
   height: "100%",
   gridTemplateRows: "100px 250px 100px 1fr",
 });
+
+// const MainPage = () => {
+//   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+
+//   setIsLogined(true);
+//   console.log(isLogined);
+
+//   return (
+//     <Container>
+//       {/* <> */}
+//       {/* <Header />
+//         <UserInputText isLogin={isLogined} />
+//       </>
+//       <>
+//         <GetLetter />
+//         <WritingLetterButton isLogin={isLogined} />
+//       </>
+//       <LetterCarousel></LetterCarousel> */}
+//     </Container>
+//   );
+// };
+// export default MainPage;

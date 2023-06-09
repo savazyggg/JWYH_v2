@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 
-const GetLetter = (token) => {
+const GetLetter = ({ token }) => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  // console.log(token.token.id);
   useEffect(() => {
-    async function fetchLetterData(token1) {
+    async function fetchLetterData(token) {
       try {
         const response = await fetch(
-          `http://34.64.195.153:5000/api/main/${token1}`
+          `http://34.64.195.153:5000/api/main/${token.id}`
         );
         if (!response.ok) {
           throw new Error("HTTP error " + response.status);
@@ -20,9 +19,8 @@ const GetLetter = (token) => {
         setError(err);
       }
     }
-    fetchLetterData(token.token.id);
+    fetchLetterData(token);
   }, []);
-  // console.log(userData);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!userData) {
@@ -30,7 +28,7 @@ const GetLetter = (token) => {
   } else {
     return (
       <Container>
-        <div>총 10 개의 편지중 2개의 편지가 열렸습니다!</div>
+        <div>{`총 ${userData.length}개의 편지가 도착했어요`}</div>
       </Container>
     );
   }

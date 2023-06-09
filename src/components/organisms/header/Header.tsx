@@ -12,7 +12,7 @@ type HeaderProps = {
 
 const Header = ({ isLogin, onLogOut, token, path }: HeaderProps) => {
   const [userNick, setUserNick] = useState(null);
-  console.log(token);
+  console.log(token, isLogin);
   useEffect(() => {
     if (!token) {
       let userId = path[path.length - 1];
