@@ -7,7 +7,7 @@ import "swiper/css/effect-cards";
 import "./LetterCarousel.css";
 import { EffectCards, Navigation } from "swiper";
 
-interface Letter {
+interface LetterInterface {
   id: number;
   index: string;
   unlockYear: number;
@@ -30,31 +30,36 @@ const OkButton = muiStyled(Button)({
 /**
  * 편지 캐러셀 컴포넌트
  */
-export default function LetterCard(token) {
-  console.log(token.token);
-  const [letters, setLetters] = useState<Letter[]>([]);
+interface LetterCarouselProps {
+  isGuest: boolean;
+  letters: LetterInterface;
+}
+function LetterCarousel(props: LetterCarouselProps) {
+  const { isGuest, letters } = props;
+  // console.log(token.token);
+  // const [letters, setLetters] = useState<LetterInterface[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
 
-  const fetchdata = async () => {
-    await fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setLetters(data);
-        // console.log(data);
-      });
-  };
+  // const fetchdata = async () => {
+  //   await fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setLetters(data);
+  //       // console.log(data);
+  //     });
+  // };
 
-  useEffect(() => {
-    fetchdata();
-  }, [token]);
+  // useEffect(() => {
+  //   fetchdata();
+  // }, [token]);
 
   /**
    * 슬라이드 클릭 이벤트 핸들러
    * @param {Letter} letter - 클릭한 편지 객체
    */
-  const handleSlideClick = (letter: Letter) => {
+  const handleSlideClick = (letter: LetterInterface) => {
     fetch(`http://34.64.195.153:5000/api/main/${token.token}/${letter.index}`)
       .then((response) => response.json())
       .then((data) => {
@@ -84,7 +89,7 @@ export default function LetterCard(token) {
    * @param {Letter} letter - 확인할 편지 객체
    * @returns {boolean} - 날짜가 지났을 경우 true, 그렇지 않을 경우 false
    */
-  const isDatePassed = (letter: Letter) => {
+  const isDatePassed = (letter: LetterInterface) => {
     const unlockDate = new Date(
       letter.unlockYear,
       letter.unlockMonth - 1,
@@ -97,14 +102,14 @@ export default function LetterCard(token) {
   /**
    * 모달을 닫습니다.
    */
-  const closeModal = () => {
-    setModalVisible(false);
-    fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setLetters(data);
-      });
-  };
+  // const closeModal = () => {
+  //   setModalVisible(false);
+  //   fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setLetters(data);
+  //     });
+  // };
 
   return (
     <div className="container">
@@ -148,3 +153,5 @@ export default function LetterCard(token) {
     </div>
   );
 }
+export { LetterCarousel };
+export type { LetterInterface };
