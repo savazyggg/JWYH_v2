@@ -1,0 +1,80 @@
+.envelopeWrapper {
+  margin: 0px;
+  padding: 0px;
+}
+.cover {
+  position: absolute;
+  height: 0px;
+  width: 0px;
+}
+.cover.top {
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-bottom: 150px solid transparent;
+  border-top: 150px solid #ff8789;
+  transform-origin: top;
+}
+.cover.bottom.right {
+  border-left: 200px solid transparent;
+  border-right: 200px solid #ff393c;
+  border-bottom: 150px solid #ff393c;
+  border-top: 150px solid transparent;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 3;
+}
+.cover.left {
+  border-left: 200px solid #ff5355;
+  border-right: 200px solid transparent;
+  border-bottom: 150px solid transparent;
+  border-top: 150px solid transparent;
+  border-bottom-left-radius: 10px;
+  z-index: 3;
+}
+.envelope {
+  --envelopeHeight: 300px;
+  position: inherit;
+  width: 400px;
+  height: var(--envelopeHeight);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 200px;
+  background-color: #ff8789;
+}
+.letter {
+  position: absolute;
+  background: #dedede;
+  width: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  height: calc(var(--envelopeHeight) - 10px);
+  /* height: inherit; */
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  font-family: "Kalam", cursive;
+}
+.open {
+  transform: rotateX(180deg);
+  transition: transform 0.4s ease;
+  z-index: 1;
+}
+.close {
+  transform: rotateX(0deg);
+  transition: transform 0.4s 0.4s ease;
+  z-index: 3;
+}
+
+.in {
+  transform: translateY(0px);
+  transition: transform 0.4s ease;
+  z-index: 2;
+}
+.out-partial {
+  transform: translateY(-100px);
+  transition: transform 0.4s 0.6s ease;
+  z-index: 2;
+}
