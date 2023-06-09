@@ -1,6 +1,7 @@
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
 import LetterForm from "../../components/organisms/letterForm/LetterForm";
+import EditorQill from "./EditorQuill";
 interface Props {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -16,7 +17,7 @@ const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
           backgroundColor: letterStyle,
         }}
       >
-        <LetterForm value={value} onChange={onChange} />
+        <EditorQill value={value} onChange={onChange} />
       </Letter>
     </Container>
   );

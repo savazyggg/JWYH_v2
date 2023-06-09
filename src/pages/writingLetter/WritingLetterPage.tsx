@@ -57,7 +57,7 @@ const WritingLetterPage: React.FC = () => {
     const keys = Object.keys(sendData);
     for (const key of keys) {
       if (!sendData[key]) {
-        alert("편지, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
+        alert("편지 내용, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
         return;
       }
     }
@@ -96,8 +96,6 @@ const WritingLetterPage: React.FC = () => {
       ? +unlockDateSpilt[2][1]
       : +unlockDateSpilt[2];
 
-  //todo 06.03 윤지 header넣고 브라우저에 스크롤바 생김, 이미 사이드바, 편지지안에 내부 스크롤바가 있음으로 브라우저에선 없어야함, 어떻게 없애지..?
-  //todo header nickname값은 컴포넌트안에서 fetch 받아서 유지되는데 로그인 값은 페이지에서 상태값 받아서 로컬이나 스토어에서 가져오지 않는이상 유지가 안됨.
   return (
     <>
       <Header />

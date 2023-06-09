@@ -11,7 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import IntroPage from "./pages/introPage/IntroPage";
 import WritingLetterPage from "./pages/writingLetter/WritingLetterPage";
 import "./App.css";
-import MainPage from "./pages/mainPage/MainPage";
+import MainPage from "./pages/mainPage_d/MainPage";
 import Storage from "./pages/storagePage/Storage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import SignUpPage from "./pages/signUpPage/SignUpPage";
@@ -42,7 +42,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/storage" element={<Storage />} />
         <Route path="/:id/:year/:month" element={<StorageLetter />} />
         {/* 위 주소를 제외한 모든 주소는 error 페이지로 */}
-        <Route path="*" element={<ErrorPage />} />
+        {/* <Route path="/main" element={<ErrorPage />} /> */}
       </Routes>
     </RecoilRoot>
     {/* </ThemeProvider> */}
