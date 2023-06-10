@@ -14,6 +14,7 @@ interface SendData {
   unlockYear: number;
   unlockMonth: number;
   unlockDate: number;
+  [key: string]: string | number;
 }
 
 const WritingLetterPage: React.FC = () => {
@@ -24,14 +25,13 @@ const WritingLetterPage: React.FC = () => {
   const [successSendingStatus, setSuccessSendingStatus] =
     useState<boolean>(false);
 
-  const { userID } = useParams(); //api에 userID로 바꿀것 지금은 test로 aaa로 지정
+  const { userID } = useParams(); //api에 userID로 바꿀것 지금은 test로 6479a10af202ae0a7070c8aa로 지정
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSenderName(e.target.value);
   const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUnlockDate(e.target.value);
-  const onLetterWritingChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setLetterWriting(e.target.value);
+  const onLetterWritingChange = (value: string) => setLetterWriting(value);
   const onLetterStyleChange = (e: React.MouseEvent<HTMLDivElement>) => {
     const letterStyle = window
       .getComputedStyle(e.currentTarget)
@@ -41,7 +41,7 @@ const WritingLetterPage: React.FC = () => {
   };
 
   const onSubmit = async () => {
-    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/648083852d72b49c7c0d98b3`;
+    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/6479a10af202ae0a7070c8aa`;
 
     const sendData: SendData = {
       content: letterWriting,
@@ -51,24 +51,36 @@ const WritingLetterPage: React.FC = () => {
       unlockMonth: unlockMonth,
       unlockDate: unlockDay,
     };
+    //console.log(sendData);
 
-    const response = await fetch(SEND_LETTER_API, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(sendData),
-    });
-    console.log(sendData);
-    setSuccessSendingStatus(true);
-    return response.json();
+    const keys = Object.keys(sendData);
+    for (const key of keys) {
+      if (!sendData[key]) {
+        alert("편지 내용, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
+        return;
+      }
+    }
 
-    //필수값 넣었는지 확인후 버튼 활성화하게 해야될듯, 이벤트 변경 필요
+    try {
+      const response = await fetch(SEND_LETTER_API, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(sendData),
+      });
+
+      console.log(sendData);
+      setSuccessSendingStatus(true);
+      return response.json();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const unlockDateSpilt = unlockDate.split("-");
@@ -83,15 +95,9 @@ const WritingLetterPage: React.FC = () => {
       ? +unlockDateSpilt[2][1]
       : +unlockDateSpilt[2];
 
-  // const dateStr = "2023-05-29";
-  // const [year, month, day] = dateStr.match(/\d{1,4}/g);
-  // 위의 코드 리팩토링
-
-  //todo 06.03 윤지 header넣고 브라우저에 스크롤바 생김, 이미 사이드바, 편지지안에 내부 스크롤바가 있음으로 브라우저에선 없어야함, 어떻게 없애지..?
-  //todo header nickname값은 컴포넌트안에서 fetch 받아서 유지되는데 로그인 값은 페이지에서 상태값 받아서 로컬이나 스토어에서 가져오지 않는이상 유지가 안됨.
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Sidebar onClick={onLetterStyleChange} />
 
       <LetterSpace
@@ -112,7 +118,11 @@ const WritingLetterPage: React.FC = () => {
           inputValue={unlockDate}
           onChange={onDateChange}
         />
-        <SendButton type="button" onClick={onSubmit} />
+        <SendButton
+          type="button"
+          onClick={onSubmit}
+          onSuccessSendingStatus={successSendingStatus}
+        />
       </Container>
     </>
   );
