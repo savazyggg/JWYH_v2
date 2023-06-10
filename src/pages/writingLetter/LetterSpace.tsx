@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
-import LetterForm from "../../components/organisms/letterForm/LetterForm";
+import EditorQill from "./EditorQuill";
 interface Props {
   value: string;
   onChange: (value: string) => void;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
-  console.log("편지지컴포넌트에서 편지지색 :" + letterStyle);
+  //console.log("편지지컴포넌트에서 편지지색 :" + letterStyle);
   return (
     <Container>
       <Letter
@@ -16,7 +16,7 @@ const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
           backgroundColor: letterStyle,
         }}
       >
-        <LetterForm value={value} onChange={onChange} />
+        <EditorQill value={value} onChange={onChange} />
       </Letter>
     </Container>
   );
