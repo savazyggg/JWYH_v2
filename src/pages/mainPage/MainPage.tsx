@@ -20,8 +20,6 @@ const MainPage = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   const [userId, setUserId] = useRecoilState(userIdState);
   const [letters, setLetters] = useState<LetterInterface[]>([]);
-  // const [token, setToken] = useState({});
-  // const [userId, setUserId] = useState("");
 
   const loginCheck = () => {
     const tokenStr = localStorage.getItem("jwt");

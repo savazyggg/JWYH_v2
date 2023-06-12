@@ -19,9 +19,6 @@ interface LetterInterface {
   style: string;
 }
 
-const modalContents = muiStyled("div")(({ color }) => ({
-  backgroundColor: color,
-}));
 const OkButton = muiStyled(Button)({
   backgroundColor: "#7B6F93",
   "&:hover": {
@@ -39,25 +36,11 @@ interface LetterCarouselProps {
 }
 function LetterCarousel(props: LetterCarouselProps) {
   const { isGuest, letters, handleLetterData } = props;
-  // console.log(token.token);
-  // const [letters, setLetters] = useState<LetterInterface[]>([]);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
   const [userId, setUserId] = useRecoilState(userIdState);
-  // const fetchdata = async () => {
-  //   await fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setLetters(data);
-  //       // console.log(data);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   console.log(userId);
-  // }, []);
-
   /**
    * 슬라이드 클릭 이벤트 핸들러
    * @param {Letter} letter - 클릭한 편지 객체
@@ -90,23 +73,6 @@ function LetterCarousel(props: LetterCarouselProps) {
       });
     setModalVisible(true);
   };
-
-  // if (isDatePassed(letter)) {
-  //   setModalContent({
-  //     unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
-  //     sender: `from : ${letter.sender} `,
-  //     content: "아직 이 편지를 읽을 수 없습니다",
-  //     color: "#93BA7B",
-  //   });
-  // } else {
-  //   setModalContent({
-  //     unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
-  //     sender: letter.sender,
-  //     content: letterContents.content,
-  //     color: letter.style,
-  //   });
-  // }
-
   /**
    * 특정 편지의 날짜가 현재 날짜를 지났는지 확인합니다.
    * @param {Letter} letter - 확인할 편지 객체
