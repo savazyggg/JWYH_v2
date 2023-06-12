@@ -12,19 +12,16 @@ import { useEffect, useState, lazy, Suspense } from "react";
 
 // recoil
 import { useRecoilState } from "recoil";
-import { isLoginedState } from "../../recoilStore";
+import { isLoginedState, userIdState } from "../../recoilStore";
 import { LetterCarousel, LetterInterface } from "./LetterCarousel";
 // recoil
 
 const MainPage = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  const [userId, setUserId] = useRecoilState(userIdState);
   const [letters, setLetters] = useState<LetterInterface[]>([]);
   // const [token, setToken] = useState({});
-  const [userId, setUserId] = useState("");
-  const [path, setPath] = useState([]);
-
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const [userId, setUserId] = useState("");
 
   const loginCheck = () => {
     const tokenStr = localStorage.getItem("jwt");
@@ -36,11 +33,9 @@ const MainPage = () => {
         objectId: string;
       }
       const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
-      // console.log(JwtDecoded);
       setUserId(JwtDecoded.id);
+      console.log(userId);
       handleLetterData(JwtDecoded.id);
-      // setToken(user);
-      // console.log(isLogined);
     }
   };
   const handleLetterData = async (userId = "") => {
@@ -53,7 +48,7 @@ const MainPage = () => {
   };
   useEffect(() => {
     handleLetterData(userId);
-  }, [letters, userId]);
+  }, [userId]);
 
   useEffect(() => {
     loginCheck();
@@ -70,7 +65,11 @@ const MainPage = () => {
         <WritingLetterButton isLogin={isLogined} /> */}
       </>
       {letters.length && (
-        <LetterCarousel isGuest={false} letters={letters}></LetterCarousel>
+        <LetterCarousel
+          isGuest={false}
+          letters={letters}
+          setLetters={setLetters}
+        ></LetterCarousel>
       )}
     </Container>
   );

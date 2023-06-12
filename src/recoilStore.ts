@@ -9,5 +9,9 @@ const uniqueIdState = atom({
   key: "uniqueId",
   default: "",
 });
+const userIdState = atom({
+  key: "userId",
+  default: "",
+});
 
-export { isLoginedState, uniqueIdState };
+export { isLoginedState, uniqueIdState, userIdState };

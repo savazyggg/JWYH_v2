@@ -6,6 +6,8 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import "./LetterCarousel.css";
 import { EffectCards, Navigation } from "swiper";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userIdState } from "../../recoilStore";
 
 interface LetterInterface {
   id: number;
@@ -33,15 +35,17 @@ const OkButton = muiStyled(Button)({
 interface LetterCarouselProps {
   isGuest: boolean;
   letters: LetterInterface;
+  setLetters: any;
 }
 function LetterCarousel(props: LetterCarouselProps) {
-  const { isGuest, letters } = props;
+  const { isGuest, letters, setLetters } = props;
   // console.log(token.token);
   // const [letters, setLetters] = useState<LetterInterface[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
-
+  const [userId, setUserId] = useRecoilValue(userIdState);
+  // console.log(userId);
   // const fetchdata = async () => {
   //   await fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
   //     .then((response) => response.json())
@@ -52,15 +56,15 @@ function LetterCarousel(props: LetterCarouselProps) {
   // };
 
   // useEffect(() => {
-  //   fetchdata();
-  // }, [token]);
+  //   console.log(userId);
+  // }, []);
 
   /**
    * 슬라이드 클릭 이벤트 핸들러
    * @param {Letter} letter - 클릭한 편지 객체
    */
   const handleSlideClick = (letter: LetterInterface) => {
-    fetch(`http://34.64.195.153:5000/api/main/${token.token}/${letter.index}`)
+    fetch(`http://34.64.195.153:5000/api/main/${userId}/${letter.index}`)
       .then((response) => response.json())
       .then((data) => {
         setLetterContent(data);
@@ -102,14 +106,9 @@ function LetterCarousel(props: LetterCarouselProps) {
   /**
    * 모달을 닫습니다.
    */
-  // const closeModal = () => {
-  //   setModalVisible(false);
-  //   fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setLetters(data);
-  //     });
-  // };
+  const closeModal = () => {
+    // setLetters([]);
+  };
 
   return (
     <div className="container">
@@ -124,7 +123,7 @@ function LetterCarousel(props: LetterCarouselProps) {
           letters.map((letter) => (
             <SwiperSlide
               key={letter.id}
-              // onClick={() => handleSlideClick(letter)}
+              onClick={!isGuest ? () => handleSlideClick(letter) : undefined}
               className={!isDatePassed(letter) ? "glowing" : "locked-on"}
             >
               <div className="date-div">
@@ -135,7 +134,7 @@ function LetterCarousel(props: LetterCarouselProps) {
           ))}
       </Swiper>
 
-      {/* {modalVisible && (
+      {modalVisible && (
         <div className={`modal ${modalVisible ? "visible" : ""}`}>
           <div
             className="modal-content"
@@ -149,7 +148,7 @@ function LetterCarousel(props: LetterCarouselProps) {
             </OkButton>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 }
