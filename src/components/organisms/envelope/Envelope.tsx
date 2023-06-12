@@ -6,7 +6,6 @@ const Envelope = () => {
   const letterRef = useRef<HTMLDivElement>(null);
 
   const openEnvelopeOnHover = () => {
-    console.log("openEnvelopeOnHover");
     envelopeTopRef.current?.classList.remove("close");
     envelopeTopRef.current?.classList.add("open");
 
@@ -14,7 +13,6 @@ const Envelope = () => {
   };
 
   const pullOutPartial = () => {
-    console.log("pullOutPartial");
     letterRef.current?.classList.remove("in");
     letterRef.current?.classList.add("out-partial");
   };
@@ -25,11 +23,9 @@ const Envelope = () => {
       envelopeTopRef.current?.classList.remove("open");
       envelopeTopRef.current?.classList.add("close");
     }, 400);
-    console.log("closeEnvelopeOnHover");
   };
 
   const putIn = () => {
-    console.log("putIn");
     letterRef.current?.classList.remove("out-partial");
     letterRef.current?.classList.add("in");
   };
