@@ -14,37 +14,17 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import Stack from "@mui/material/Stack";
 
-// function Copyright(props: any) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
 export default function SignUpForm() {
+  const [isIdError, setIsIdError] = useState(false);
+  const [isPwError, setIsPwError] = useState(false);
+  const [isPwcError, setIsPwcError] = useState(false);
+
   const [idValue, setIdValue] = useState<string>("");
-  const [isIdError, setIdIsError] = useState(true);
-  const [idErMsg, setIdErMsg] = useState("id Error");
   const [nickValue, setNickValue] = useState<string>("");
-  const [isNickError, setNickIsError] = useState(true);
-  const [nickErMsg, setNickErMsg] = useState("nick Error");
   const [pwValue, setPwValue] = useState<string>("");
-  const [isPwError, setPwIsError] = useState(true);
-  const [pwErMsg, setPwErMsg] = useState("pw Error");
-  const [showPassword, setShowPassword] = useState(false);
   const [pwcValue, setPwcValue] = useState<string>("");
-  const [isPwcError, setPwcIsError] = useState(true);
-  const [pwcErMsg, setPwcErMsg] = useState("pwc Error");
+
+  const [showPassword, setShowPassword] = useState(false);
   const [showPasswordChk, setShowPasswordChk] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
@@ -80,17 +60,23 @@ export default function SignUpForm() {
           value={idValue}
           aria-describedby="id-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setIdValue(e.target.value);
+            setIdValue(() => {
+              const eventValue = e.target.value;
+              const regxId = new RegExp(/^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/);
+              const isValidId = regxId.test(eventValue);
+              if (isValidId) {
+                setIsIdError(false);
+              } else {
+                setIsIdError(true);
+              }
+              return eventValue;
+            });
           }}
           label="아이디"
         />
-        <FormHelperText>{idErMsg}</FormHelperText>
+        <FormHelperText>영문 소문자, 숫자 6~12 입력 해주세요</FormHelperText>
       </FormControl>
-      <FormControl
-        error={isNickError}
-        sx={{ width: "100%" }}
-        variant="outlined"
-      >
+      <FormControl sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="nickname">닉네임</InputLabel>
         <OutlinedInput
           id="nickname"
@@ -102,7 +88,6 @@ export default function SignUpForm() {
           }}
           label="닉네임"
         />
-        <FormHelperText>{nickErMsg}</FormHelperText>
       </FormControl>
       <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="password">비밀번호</InputLabel>
@@ -112,7 +97,22 @@ export default function SignUpForm() {
           value={pwValue}
           aria-describedby="password-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPwValue(e.target.value);
+            setPwValue(() => {
+              const eventValue = e.target.value;
+              const regxPw = new RegExp(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
+              );
+              const isValidPw = regxPw.test(eventValue);
+              console.log(isValidPw);
+              console.log(eventValue);
+              if (isValidPw) {
+                setIsPwError(false);
+                return eventValue;
+              } else {
+                setIsPwError(true);
+              }
+              return eventValue;
+            });
           }}
           endAdornment={
             <InputAdornment position="end">
@@ -128,9 +128,16 @@ export default function SignUpForm() {
           }
           label="비밀번호"
         />
-        <FormHelperText>{pwErMsg}</FormHelperText>
+        <FormHelperText>
+          *()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력
+          해주세요
+        </FormHelperText>
       </FormControl>
-      <FormControl error={isPwcError} sx={{ width: "100%" }} variant="outlined">
+      <FormControl
+        error={isPwError || isPwcError}
+        sx={{ width: "100%" }}
+        variant="outlined"
+      >
         <InputLabel htmlFor="passwordChk">비밀번호 확인</InputLabel>
         <OutlinedInput
           id="passwordChk"
@@ -138,7 +145,19 @@ export default function SignUpForm() {
           value={pwcValue}
           aria-describedby="passwordChk-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPwcValue(e.target.value);
+            setPwcValue(() => {
+              const eventValue = e.target.value;
+              const regxPw = new RegExp(pwValue);
+              const isValidPwc = regxPw.test(eventValue);
+              console.log(isValidPwc);
+              console.log(eventValue);
+              if (isValidPwc) {
+                setIsPwcError(false);
+              } else {
+                setIsPwcError(true);
+              }
+              return eventValue;
+            });
           }}
           endAdornment={
             <InputAdornment position="end">
@@ -154,7 +173,9 @@ export default function SignUpForm() {
           }
           label="비밀번호"
         />
-        <FormHelperText>{pwcErMsg}</FormHelperText>
+        <FormHelperText>
+          {(isPwError || isPwcError) && "비밀번호가 맞지 않습니다"}
+        </FormHelperText>
       </FormControl>
       <Button
         onClick={handleSignUp}
@@ -162,6 +183,7 @@ export default function SignUpForm() {
         fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
+        disabled={isIdError || isPwError || isPwcError}
       >
         회원가입
       </Button>
