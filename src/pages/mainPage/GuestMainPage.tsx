@@ -65,7 +65,7 @@ const GuestMainPage = () => {
       </>
       <>
         {/* {isLogined && <GetLetter token={token} />} */}
-        {/* <WritingLetterButton isLogin={isLogined} /> */}
+        <WritingLetterButton isLogin={isLogined} />
       </>
       {letters.length && (
         <LetterCarousel isGuest={true} letters={letters}></LetterCarousel>

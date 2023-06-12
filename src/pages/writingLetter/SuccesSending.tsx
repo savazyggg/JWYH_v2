@@ -2,6 +2,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { uniqueIdState } from "../../recoilStore";
 
 interface SuccesSendingProps {
   open: boolean;
@@ -9,6 +11,7 @@ interface SuccesSendingProps {
 }
 
 const SuccesSending = ({ open, onClose }: SuccesSendingProps) => {
+  const _userId = useRecoilValue(uniqueIdState);
   return (
     <>
       <Modal
@@ -22,7 +25,7 @@ const SuccesSending = ({ open, onClose }: SuccesSendingProps) => {
             편지보내기 성공
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Link to="/main">
+            <Link to={`/main/${_userId}`}>
               <button>확인하기</button>
             </Link>
           </Typography>
