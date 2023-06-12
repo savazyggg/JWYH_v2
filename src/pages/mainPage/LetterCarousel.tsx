@@ -35,17 +35,17 @@ const OkButton = muiStyled(Button)({
 interface LetterCarouselProps {
   isGuest: boolean;
   letters: LetterInterface;
-  setLetters: any;
+  handleLetterData: any;
 }
 function LetterCarousel(props: LetterCarouselProps) {
-  const { isGuest, letters, setLetters } = props;
+  const { isGuest, letters, handleLetterData } = props;
   // console.log(token.token);
   // const [letters, setLetters] = useState<LetterInterface[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
-  const [userId, setUserId] = useRecoilValue(userIdState);
-  // console.log(userId);
+  const [userId, setUserId] = useRecoilState(userIdState);
+  console.log(userId);
   // const fetchdata = async () => {
   //   await fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
   //     .then((response) => response.json())
@@ -63,30 +63,50 @@ function LetterCarousel(props: LetterCarouselProps) {
    * 슬라이드 클릭 이벤트 핸들러
    * @param {Letter} letter - 클릭한 편지 객체
    */
-  const handleSlideClick = (letter: LetterInterface) => {
-    fetch(`http://34.64.195.153:5000/api/main/${userId}/${letter.index}`)
-      .then((response) => response.json())
+  const handleSlideClick = async (letter: LetterInterface) => {
+    await fetch(`http://34.64.195.153:5000/api/main/${userId}/${letter.index}`)
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("unreadable letter");
+        }
+        return response.json();
+      })
       .then((data) => {
         setLetterContent(data);
-        console.log(letter);
+        setModalContent({
+          unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
+          sender: letter.sender,
+          content: data.content,
+          color: letter.style,
+        });
+      })
+      .catch((error) => {
+        setModalContent({
+          unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
+          sender: `from : ${letter.sender}`,
+          content: "You can't read this letter yet~~~!",
+          color: "#93BA7B",
+        });
       });
-    if (isDatePassed(letter)) {
-      setModalContent({
-        unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
-        sender: `from : ${letter.sender} `,
-        content: "아직 이 편지를 읽을 수 없습니다",
-        color: "#93BA7B",
-      });
-    } else {
-      setModalContent({
-        unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
-        sender: letter.sender,
-        content: letterContents.content,
-        color: letter.style,
-      });
-    }
     setModalVisible(true);
   };
+
+  // if (isDatePassed(letter)) {
+  //   setModalContent({
+  //     unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
+  //     sender: `from : ${letter.sender} `,
+  //     content: "아직 이 편지를 읽을 수 없습니다",
+  //     color: "#93BA7B",
+  //   });
+  // } else {
+  //   setModalContent({
+  //     unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
+  //     sender: letter.sender,
+  //     content: letterContents.content,
+  //     color: letter.style,
+  //   });
+  // }
 
   /**
    * 특정 편지의 날짜가 현재 날짜를 지났는지 확인합니다.
@@ -107,7 +127,8 @@ function LetterCarousel(props: LetterCarouselProps) {
    * 모달을 닫습니다.
    */
   const closeModal = () => {
-    // setLetters([]);
+    setModalVisible(false);
+    handleLetterData(userId);
   };
 
   return (

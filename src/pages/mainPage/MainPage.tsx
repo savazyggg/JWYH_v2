@@ -47,12 +47,11 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
-    handleLetterData(userId);
-  }, [userId]);
-
-  useEffect(() => {
     loginCheck();
   }, [isLogined]);
+  useEffect(() => {
+    handleLetterData(userId);
+  }, [userId]);
 
   return (
     <Container>
@@ -66,9 +65,9 @@ const MainPage = () => {
       </>
       {letters.length && (
         <LetterCarousel
-          isGuest={false}
           letters={letters}
-          setLetters={setLetters}
+          isGuest={false}
+          handleLetterData={handleLetterData}
         ></LetterCarousel>
       )}
     </Container>
