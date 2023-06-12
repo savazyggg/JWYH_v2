@@ -40,7 +40,7 @@ const Header = () => {
 
   const onGuestIn = async () => {
     const guestId = location.pathname.split("/").pop();
-    if (guestId !== undefined) {
+    if (guestId !== undefined && guestId !== "writingletter") {
       //리코일에 난수 아이디 등록
       setUniqueId(() => {
         return guestId;
