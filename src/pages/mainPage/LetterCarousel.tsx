@@ -45,7 +45,6 @@ function LetterCarousel(props: LetterCarouselProps) {
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
   const [userId, setUserId] = useRecoilState(userIdState);
-  console.log(userId);
   // const fetchdata = async () => {
   //   await fetch(`http://34.64.195.153:5000/api/main/${token.token}`)
   //     .then((response) => response.json())

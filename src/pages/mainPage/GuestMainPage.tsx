@@ -50,7 +50,7 @@ const GuestMainPage = () => {
 
   useEffect(() => {
     handleLetterData(_userId);
-  }, [letters, _userId]);
+  }, [_userId]);
 
   useEffect(() => {
     const guestId = location.pathname.split("/").pop();

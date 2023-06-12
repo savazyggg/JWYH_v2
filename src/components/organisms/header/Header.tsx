@@ -63,7 +63,7 @@ const Header = () => {
   useEffect(() => {
     if (isLogined === true) onLogIn();
     if (isLogined === false) onGuestIn();
-  }, [isLogined]);
+  }, []);
 
   return (
     <SHeader>
