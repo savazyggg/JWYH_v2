@@ -77,7 +77,7 @@ const Header = () => {
             <>
               <LoginContainer>
                 <ul>
-                  <Link to="/">
+                  <Link to="/mypage">
                     <li>마이페이지</li>
                   </Link>
                   <Link to="/">
