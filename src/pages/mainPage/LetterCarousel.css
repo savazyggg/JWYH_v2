@@ -183,17 +183,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: auto;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
   .modal-content {
     width: 500px;
-    height: 500px;
+    max-height: 550px;
     background-color: #fff;
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 10px;
     text-align: initial;
-    overflow: auto;
+    overflow-y: auto;
   }
   
   .modal button {
@@ -203,4 +204,23 @@
   .modal-content-div,
   .modal-sender{
     margin-top: 20px;
+  }
+
+  .modal-content::-webkit-scrollbar {
+    content: "";
+    width: 8px;
+  }
+  
+  .modal-content::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 0 20px 20px 0px;
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: #93BA7B;
+    border-radius: 20px;
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: #76ac56;
   }

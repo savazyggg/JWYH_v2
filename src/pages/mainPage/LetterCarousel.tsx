@@ -19,9 +19,9 @@ interface LetterInterface {
   style: string;
 }
 const OkButton = muiStyled(Button)({
-  backgroundColor: "#7B6F93",
+  backgroundColor: "#93BA7B",
   "&:hover": {
-    backgroundColor: "#A695BA",
+    backgroundColor: "#76ac56",
   },
 });
 
@@ -67,8 +67,8 @@ function LetterCarousel(props: LetterCarouselProps) {
         setModalContent({
           unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
           sender: `from : ${letter.sender}`,
-          content: "You can't read this letter yet~~~!",
-          color: "#93BA7B",
+          content: "아직 읽으실수 없어요",
+          color: "#fff",
         });
       });
     setModalVisible(true);

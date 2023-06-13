@@ -17,7 +17,7 @@ const theme = createTheme({
           color: "#fff",
           backgroundColor: "#93BA7B",
           "&:hover": {
-            backgroundColor: "#A695BA",
+            backgroundColor: "#76ac56",
           },
         },
       },
