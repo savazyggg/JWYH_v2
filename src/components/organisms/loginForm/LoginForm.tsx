@@ -15,7 +15,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 
 //리코일
 import { useRecoilState } from "recoil";
-import { isLoginedState } from "../../../recoilStore";
+import { isLoginedState, jwtState } from "../../../recoilStore";
 //리코일
 
 export default function LoginForm() {
@@ -29,6 +29,8 @@ export default function LoginForm() {
 
   //리코일
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  const [jwtString, setJwtString] = useRecoilState(jwtState);
+
   //리코일
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -48,10 +50,12 @@ export default function LoginForm() {
       password: pwValue,
     };
     const jwt = JSON.stringify(await login(url, data));
+    const jwtParsed = JSON.parse(jwt);
     localStorage.setItem("jwt", jwt);
 
     //리코일
     setIsLogined(!isLogined);
+    setJwtString(jwtParsed.token);
     //리코일
 
     navigate("/main");

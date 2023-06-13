@@ -10,4 +10,9 @@ const uniqueIdState = atom({
   default: "",
 });
 
-export { isLoginedState, uniqueIdState };
+const jwtState = atom({
+  key: "jwtState",
+  default: "",
+});
+
+export { isLoginedState, uniqueIdState, jwtState };
