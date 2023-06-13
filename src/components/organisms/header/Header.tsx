@@ -71,7 +71,7 @@ const Header = () => {
       await getNickName(URL, guestId).then(
         (value) => {
           //response 가 제대로 오면 이름 설정
-          setNickName(JSON.stringify(value));
+          setNickName(value);
         },
         (reason) => {
           //respone 가 제대로 안오면
