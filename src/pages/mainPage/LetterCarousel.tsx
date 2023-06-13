@@ -48,14 +48,12 @@ function LetterCarousel(props: LetterCarouselProps) {
     await fetch(`http://34.64.195.153:5000/api/main/${userId}/${letter.index}`)
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("unreadable letter");
         }
         return response.json();
       })
       .then((data) => {
         setLetterContent(data);
-        console.log(data);
         setModalContent({
           unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
           sender: letter.sender,
@@ -66,7 +64,7 @@ function LetterCarousel(props: LetterCarouselProps) {
       .catch((error) => {
         setModalContent({
           unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
-          sender: `from : ${letter.sender}`,
+          sender: letter.sender,
           content: "아직 읽으실수 없어요",
           color: "#fff",
         });
