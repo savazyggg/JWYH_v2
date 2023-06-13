@@ -1,11 +1,29 @@
 import styled from "@emotion/styled";
+import Button from "@mui/material/Button";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isLoginedState, uniqueIdState } from "../../../recoilStore";
 import { useEffect, useState } from "react";
 import { getNickName } from "../../../apis/getNickName";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          height: "24px",
+          color: "#fff",
+          backgroundColor: "#93BA7B",
+          "&:hover": {
+            backgroundColor: "#A695BA",
+          },
+        },
+      },
+    },
+  },
+});
 const Header = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   const [uniqueId, setUniqueId] = useRecoilState(uniqueIdState);
@@ -66,41 +84,34 @@ const Header = () => {
   }, []);
 
   return (
-    <SHeader>
-      <Container>
-        <LeftContainer>
-          <div>{nickName} 님의 레터스페이스 입니다</div>
-          {/* <div>{!isLogined && `${userNick}님의 레터스페이스 입니다`}</div> */}
-        </LeftContainer>
-        <>
-          {isLogined ? (
-            <>
-              <LoginContainer>
-                <ul>
-                  <Link to="/">
-                    <li>마이페이지</li>
-                  </Link>
-                  <Link to="/">
-                    <li>보관함</li>
-                  </Link>
-                </ul>
-                <Button onClick={onLogOut}>Log out</Button>
-              </LoginContainer>
-            </>
-          ) : (
-            <></>
-            // <div>
-            //   <Link to="/login">
-            //     <Button>Log in</Button>
-            //   </Link>
-            //   <Link to="/signup">
-            //     <Button>Sign up</Button>
-            //   </Link>
-            // </div>
-          )}
-        </>
-      </Container>
-    </SHeader>
+    <ThemeProvider theme={theme}>
+      <SHeader>
+        <Container>
+          <LeftContainer>
+            <div>{nickName} 님의 레터스페이스 입니다</div>
+          </LeftContainer>
+          <>
+            {isLogined && (
+              <>
+                <LoginContainer>
+                  <ul>
+                    <Link to="/">
+                      <li>마이페이지</li>
+                    </Link>
+                    <Link to="/">
+                      <li>보관함</li>
+                    </Link>
+                  </ul>
+                  <Button variant="contained" onClick={onLogOut}>
+                    Log out
+                  </Button>
+                </LoginContainer>
+              </>
+            )}
+          </>
+        </Container>
+      </SHeader>
+    </ThemeProvider>
   );
 };
 
@@ -118,6 +129,7 @@ const SHeader = styled.header`
 `;
 
 const Container = styled.div`
+  padding-top: 12px;
   display: flex;
   justify-content: space-between;
   height: 50px;
@@ -144,10 +156,4 @@ const LoginContainer = styled.div`
     cursor: pointer;
     color: white;
   }
-`;
-
-const Button = styled.button`
-  margin-top: 12px;
-  height: 30px;
-  margin-left: 12px;
 `;

@@ -61,5 +61,6 @@ export default GuestMainPage;
 
 const Container = muiStyled(Box)({
   height: "100%",
-  gridTemplateRows: "100px 250px 100px 1fr",
+  display: "grid",
+  gridTemplateRows: "250px  1fr",
 });

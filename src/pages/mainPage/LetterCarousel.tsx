@@ -18,7 +18,6 @@ interface LetterInterface {
   sender: string;
   style: string;
 }
-
 const OkButton = muiStyled(Button)({
   backgroundColor: "#7B6F93",
   "&:hover": {
@@ -110,7 +109,7 @@ function LetterCarousel(props: LetterCarouselProps) {
             <SwiperSlide
               key={letter.id}
               onClick={!isGuest ? () => handleSlideClick(letter) : undefined}
-              className={!isDatePassed(letter) ? "glowing" : "locked-on"}
+              className={!isDatePassed(letter) ? "" : "locked-on"}
             >
               <div className="date-div">
                 {`Unlock: ${letter.unlockYear}년 ${letter.unlockMonth}월 ${letter.unlockDate}일`}

@@ -17,7 +17,7 @@ const WritingLetterButton = ({ isLogin }) => {
 export default WritingLetterButton;
 
 const Button = styled.button`
-  margin-top: 10px;
+  margin-top: 140px;
   border-radius: 13px;
   background-color: #93ba7b;
   width: 150px;
@@ -27,4 +27,7 @@ const Button = styled.button`
   border: 0px;
   cursor: pointer;
   border: 0px;
+  &:hover {
+    background-color: #bed7a9;
+  }
 `;

@@ -57,10 +57,7 @@ const MainPage = () => {
         <Header></Header>
         {/* <UserInputText isLogin={isLogin} /> */}
       </>
-      <>
-        {/* {isLogined && <GetLetter token={token} />}
-        <WritingLetterButton isLogin={isLogined} /> */}
-      </>
+      <>{isLogined && <GetLetter letters={letters} />}</>
       {letters.length && (
         <LetterCarousel
           letters={letters}
@@ -76,5 +73,6 @@ export default MainPage;
 
 const Container = muiStyled(Box)({
   height: "100%",
-  gridTemplateRows: "100px 250px 100px 1fr",
+  display: "grid",
+  gridTemplateRows: "250px  1fr",
 });
