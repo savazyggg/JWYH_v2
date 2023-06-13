@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { isLoginedState } from "../../recoilStore";
 import { LetterInterface } from "./LetterCarousel";
 
 interface LetterListProps {
