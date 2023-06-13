@@ -1,14 +1,20 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { uniqueIdState } from "../../recoilStore";
 
 const WritingLetterButton = ({ isLogin }) => {
-  //console.log("writing letter button islogin:" + isLogin);
+  const nav = useNavigate();
+  const _userId = useRecoilState(uniqueIdState)[0];
+  console.log(_userId);
+  const moveWriting = () => {
+    console.log(`/writingletter/${_userId}`);
+    nav(`/writingletter/${_userId}`);
+  };
   return (
     isLogin || (
       <div>
-        <Link to="/writingletter">
-          <Button>편지쓰러가기!</Button>
-        </Link>
+        <Button onClick={moveWriting}>편지쓰러가기!</Button>
       </div>
     )
   );

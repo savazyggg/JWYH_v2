@@ -1,7 +1,5 @@
 import GetLetter from "./GetLetter";
 import Header from "../../components/organisms/header/Header";
-import UserInputText from "./UserInputText";
-import WritingLetterButton from "./WritingLetterButton";
 import { styled as muiStyled } from "@mui/system";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
@@ -10,10 +8,8 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Snackbar from "@mui/material/Snackbar";
 import jwt_decode from "jwt-decode";
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getLetters } from "../../apis/getLetters";
-
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState } from "react";
 
 // recoil
 import { useRecoilState } from "recoil";
@@ -26,8 +22,9 @@ interface JwtDecoded {
   nickName: string;
   objectId: string;
 }
+
 const MainPage = () => {
-  const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  const [isLogined] = useRecoilState(isLoginedState);
   const [userId, setUserId] = useRecoilState(userIdState);
   const [letters, setLetters] = useState<LetterInterface[]>([]);
   const [showAlert, setShowAlert] = useState(false);
@@ -44,15 +41,14 @@ const MainPage = () => {
   const handleLetterData = async (userId = "") => {
     const url = "http://34.64.195.153:5000";
     if (userId.length !== 0) {
-      await getLetters(url, userId).then((value) => {
-        setLetters(value);
-      });
+      const value = await getLetters(url, userId);
+      setLetters(value);
     }
   };
 
   const MyAlert = () => {
     const handleClose = (
-      event: React.SyntheticEvent | Event,
+      _: React.SyntheticEvent<any> | Event,
       reason?: string
     ) => {
       if (reason === "clickaway") {
@@ -83,13 +79,12 @@ const MainPage = () => {
 
   const handleShare = () => {
     const tokenStr = localStorage.getItem("jwt");
-    const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
+    const JwtDecoded: JwtDecoded = jwt_decode(tokenStr || "");
     const domain = "http://34.64.195.153:5000"; // 도메인
     const url = `${domain}/main/${JwtDecoded.objectId}`;
     navigator.clipboard
       .writeText(url)
       .then(() => {
-        console.log("알람온");
         setShowAlert(true);
       })
       .catch((error) => {
@@ -107,12 +102,11 @@ const MainPage = () => {
     <Container>
       <>
         <Header></Header>
-        {/* <UserInputText isLogin={isLogin} /> */}
       </>
       <>
         {isLogined && (
           <>
-            <GetLetter letters={letters} />{" "}
+            <GetLetter letters={letters} />
             <ShareButton onClick={handleShare}>
               친구에게 편지 써 달라하기
             </ShareButton>
@@ -120,7 +114,7 @@ const MainPage = () => {
           </>
         )}
       </>
-      {letters.length && (
+      {letters.length > 0 && (
         <LetterCarousel
           letters={letters}
           isGuest={false}
@@ -136,16 +130,19 @@ export default MainPage;
 const Container = muiStyled(Box)({
   height: "100%",
   display: "grid",
-  gridTemplateRows: "250px  1fr",
+  gridTemplateRows: "250px 90px 1fr",
 });
 
 const ShareButton = muiStyled(Button)({
-  // position: "fixed",
-  bottom: "20px",
-  right: "20px",
-  padding: "10px 20px",
-  backgroundColor: "#ccc",
-  borderRadius: "8px",
-  fontWeight: "bold",
-  cursor: "pointer",
+  width: "fit-content",
+  height: "fit-content",
+  margin: "15px auto",
+  position: "initial",
+  backgroundColor: "#93BA7B",
+  borderRadius: "10px",
+  fontWeight: "700",
+  color: "#fff",
+  "&:hover": {
+    backgroundColor: "#76ac56",
+  },
 });

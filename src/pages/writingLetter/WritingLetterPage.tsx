@@ -5,8 +5,7 @@ import { useState } from "react";
 import SendButton from "./SendButton";
 import Input from "./InputBox";
 import Header from "../../components/organisms/header/Header";
-import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { uniqueIdState } from "../../recoilStore";
 
 interface SendData {
@@ -26,7 +25,7 @@ const WritingLetterPage: React.FC = () => {
   const [unlockDate, setUnlockDate] = useState<string>("");
   const [successSendingStatus, setSuccessSendingStatus] =
     useState<boolean>(false);
-  const _userId = useRecoilValue(uniqueIdState);
+  const _userId = useRecoilState(uniqueIdState);
   // console.log(_userId);
   // const { userID } = useParams(); //api에 userID로 바꿀것 지금은 test로 6479a10af202ae0a7070c8aa로 지정
 
