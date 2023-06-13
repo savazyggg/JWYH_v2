@@ -38,7 +38,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/writingletter" element={<WritingLetterPage />} />
+        <Route path="/writingletter/:_id" element={<WritingLetterPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/main/:_id" element={<GuestMainPage />} />
         <Route path="/storage" element={<Storage />} />
