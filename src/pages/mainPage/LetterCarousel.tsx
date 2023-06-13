@@ -55,6 +55,7 @@ function LetterCarousel(props: LetterCarouselProps) {
       })
       .then((data) => {
         setLetterContent(data);
+        console.log(data);
         setModalContent({
           unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
           sender: letter.sender,
@@ -107,7 +108,7 @@ function LetterCarousel(props: LetterCarouselProps) {
         {letters.length &&
           letters.map((letter) => (
             <SwiperSlide
-              key={letter.id}
+              key={letter.index}
               onClick={!isGuest ? () => handleSlideClick(letter) : undefined}
               className={!isDatePassed(letter) ? "" : "locked-on"}
             >
@@ -127,7 +128,10 @@ function LetterCarousel(props: LetterCarouselProps) {
           >
             <div>{modalContent.unlockDate}</div>
             <div className="modal-sender">{modalContent.sender}</div>
-            <div className="modal-content-div">{modalContent.content}</div>
+            <div
+              className="modal-content-div"
+              dangerouslySetInnerHTML={{ __html: modalContent.content }}
+            ></div>
             <OkButton variant="contained" size="small" onClick={closeModal}>
               닫기
             </OkButton>

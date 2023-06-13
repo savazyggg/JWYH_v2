@@ -79,8 +79,15 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (isLogined === true) onLogIn();
-    if (isLogined === false) onGuestIn();
+    // 페이지 로드 시에 쿠키에서 로그인 정보 확인하여 isLogined 상태 설정
+    const jwt = localStorage.getItem("jwt");
+    if (jwt !== null) {
+      setIsLogined(true);
+      onLogIn();
+    } else {
+      setIsLogined(false);
+      onGuestIn();
+    }
   }, []);
 
   return (

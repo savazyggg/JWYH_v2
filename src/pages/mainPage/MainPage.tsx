@@ -32,7 +32,6 @@ const MainPage = () => {
       }
       const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
       setUserId(JwtDecoded.id);
-      console.log(userId);
       handleLetterData(JwtDecoded.id);
     }
   };

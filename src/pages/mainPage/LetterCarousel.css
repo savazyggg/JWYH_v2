@@ -183,6 +183,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: auto;
   }
   
   .modal-content {
@@ -192,6 +193,7 @@
     padding: 30px;
     border-radius: 20px;
     text-align: initial;
+    overflow: auto;
   }
   
   .modal button {
