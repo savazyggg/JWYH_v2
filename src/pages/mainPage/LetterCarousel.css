@@ -4,7 +4,7 @@
 }
 
 .swiper {
-  width: 790px;
+  width: 550px;
   height: 400px;
 }
 
@@ -117,17 +117,18 @@
 
 .swiper-button-prev:before {
     content: "<";
-    font-size: 40px;
-    color: #fff;
+    font-size: 45px;
+    color: #93BA7B;
 }
 
 .swiper-button-next:before{
     content: ">";
-    font-size: 40px;
-    color: #fff;
+    font-size: 45px;
+    color: #93BA7B;
 }
 .swiper-slide:nth-child(1n) {
   background-color: #93BA7B;
+
 }
 
 .swiper-slide:nth-child(2n) {
@@ -191,19 +192,23 @@
     width: 500px;
     max-height: 550px;
     background-color: #fff;
-    padding: 30px;
+    padding: 30px 30px 10px 30px;
     border-radius: 10px;
     text-align: initial;
     overflow-y: auto;
+    font-weight: 500;
   }
   
   .modal button {
-    margin-top: 300px;
+        position: sticky;
+        top: 94%;
+        left: 87%;
   }
 
   .modal-content-div,
   .modal-sender{
     margin-top: 20px;
+    max-height: 380px;
   }
 
   .modal-content::-webkit-scrollbar {

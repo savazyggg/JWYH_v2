@@ -127,7 +127,7 @@ function LetterCarousel(props: LetterCarouselProps) {
             style={{ backgroundColor: modalContent.color }}
           >
             <div>{modalContent.unlockDate}</div>
-            <div className="modal-sender">{modalContent.sender}</div>
+            <div className="modal-sender">{`From .. ${modalContent.sender}`}</div>
             <div
               className="modal-content-div"
               dangerouslySetInnerHTML={{ __html: modalContent.content }}

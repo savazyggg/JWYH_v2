@@ -45,6 +45,7 @@ const Container = styled.div`
   div {
     font-size: 24px;
     color: #fff;
+    font-weight: 700;
   }
 `;
 const ShakingText = styled.div`

@@ -15,6 +15,10 @@ const theme = createTheme({
         contained: {
           height: "24px",
           color: "#fff",
+          marginTop: "18px",
+          padding: "6px 8px",
+          fontWeight: "700",
+          marginLeft: "10px",
           backgroundColor: "#93BA7B",
           "&:hover": {
             backgroundColor: "#76ac56",
@@ -95,7 +99,9 @@ const Header = () => {
       <SHeader>
         <Container>
           <LeftContainer>
-            <div>{nickName} 님의 레터스페이스 입니다</div>
+            <div>
+              <NickNameText>{nickName} </NickNameText>님의 레터스페이스 입니다
+            </div>
           </LeftContainer>
           <>
             {isLogined && (
@@ -133,10 +139,10 @@ const SHeader = styled.header`
   justify-content: center;
   background-color: #242424;
   color: white;
+  font-weight: 700;
 `;
 
 const Container = styled.div`
-  padding-top: 12px;
   display: flex;
   justify-content: space-between;
   height: 50px;
@@ -149,6 +155,7 @@ const LeftContainer = styled.div`
 `;
 
 const LoginContainer = styled.div`
+  line-height: 3.9;
   display: flex;
   ul {
     display: flex;
@@ -156,11 +163,17 @@ const LoginContainer = styled.div`
   li {
     list-style: none;
     float: left;
-    padding: 0 15px;
     margin: 0 5px;
     justify-content: center;
     text-align: center;
     cursor: pointer;
     color: white;
   }
+`;
+
+const NickNameText = styled.div`
+  line-height: 1.8;
+  display: inline-block;
+  font-size: 32px !important;
+  color: #93ba7b !important;
 `;
