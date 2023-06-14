@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SuccesSending from "./SuccesSending";
+import { useRecoilValue } from "recoil";
+import { uniqueIdState } from "../../recoilStore";
 
 interface Props {
   type: "button";
@@ -16,8 +19,13 @@ const SendButton: React.FC<Props> = ({
   onSuccessSendingStatus,
 }) => {
   const [open, setOpen] = useState(false);
+  const nav = useNavigate();
   const onHandleOpen = () => onSuccessSendingStatus && setOpen(true);
-  const onHandleClose = () => setOpen(false);
+  const _userId = useRecoilValue(uniqueIdState);
+  const onHandleClose = () => {
+    setOpen(false);
+    nav(`/main/${_userId}`);
+  };
 
   const onClickHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -26,6 +34,9 @@ const SendButton: React.FC<Props> = ({
     onHandleOpen();
   };
 
+  useEffect(() => {
+    onHandleOpen();
+  }, [onSuccessSendingStatus]);
   return (
     <>
       <Button type={type} onClick={onClickHandler}>
@@ -47,7 +58,7 @@ const SendButton: React.FC<Props> = ({
         </svg>
       </Button>
 
-      <SuccesSending open={open} onClose={onHandleClose} />
+      <SuccesSending open={open} onClose={onHandleClose} userId={_userId} />
     </>
   );
 };

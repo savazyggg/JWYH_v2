@@ -8,10 +8,10 @@ import { uniqueIdState } from "../../recoilStore";
 interface SuccesSendingProps {
   open: boolean;
   onClose: () => void;
+  userId: string;
 }
 
-const SuccesSending = ({ open, onClose }: SuccesSendingProps) => {
-  const _userId = useRecoilValue(uniqueIdState);
+const SuccesSending = ({ open, onClose, userId }: SuccesSendingProps) => {
   return (
     <>
       <Modal
@@ -25,7 +25,7 @@ const SuccesSending = ({ open, onClose }: SuccesSendingProps) => {
             편지보내기 성공
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Link to={`/main/${_userId}`}>
+            <Link to={`/main/${userId}`}>
               <button>확인하기</button>
             </Link>
           </Typography>

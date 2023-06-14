@@ -26,7 +26,7 @@ const WritingLetterPage: React.FC = () => {
   const [successSendingStatus, setSuccessSendingStatus] =
     useState<boolean>(false);
   const _userId = useRecoilState(uniqueIdState);
-  // console.log(_userId);
+  //console.log(_userId);
   // const { userID } = useParams(); //api에 userID로 바꿀것 지금은 test로 6479a10af202ae0a7070c8aa로 지정
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -38,13 +38,13 @@ const WritingLetterPage: React.FC = () => {
     const letterStyle = window
       .getComputedStyle(e.currentTarget)
       .getPropertyValue("background-color");
-    console.log(letterStyle);
+    //console.log(letterStyle);
     setLetterStyle(letterStyle);
   };
 
   const onSubmit = async () => {
     // console.log(_userId);
-    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/${_userId}`;
+    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/${_userId[0]}`;
 
     const sendData: SendData = {
       content: letterWriting,
