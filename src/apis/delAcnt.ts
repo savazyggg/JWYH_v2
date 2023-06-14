@@ -5,8 +5,8 @@
  */
 async function delAcnt(
   url: string,
-  urlParam: string,
-  token: string
+  token: string,
+  urlParam: string
 ): Promise<JSON> {
   url = url + "/api/mypage/" + urlParam;
   const response = await fetch(url, {

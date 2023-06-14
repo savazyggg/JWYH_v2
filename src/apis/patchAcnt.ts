@@ -3,7 +3,7 @@ interface PatchAcntBody {
   password: string;
 }
 
-async function PatchAcnt(
+async function patchAcnt(
   url: string,
   token: string,
   urlParam: string,
@@ -26,5 +26,5 @@ async function PatchAcnt(
   return response.json();
 }
 
-export { PatchAcnt };
+export { patchAcnt };
 export type { PatchAcntBody };
