@@ -51,7 +51,6 @@ const MainPage = () => {
         } else {
           const value: any = data;
           setLetters(value);
-          console.log("entry normal");
         }
       } catch (error) {
         console.error("An error occurred:", error);

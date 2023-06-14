@@ -30,7 +30,7 @@ const theme = createTheme({
 });
 const Header = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
-  const [uniqueId, setUniqueId] = useRecoilState(uniqueIdState);
+  const [_uniqueId, setUniqueId] = useRecoilState(uniqueIdState);
   const [nickName, setNickName] = useState<string>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -45,7 +45,6 @@ const Header = () => {
   const onLogIn = () => {
     const jwt = localStorage.getItem("jwt");
     if (localStorage.getItem("jwt") === null) {
-      console.log("Header onLogin Error : JWT가 없습니다!!");
       navigate("/login");
     }
     if (jwt !== null) {
@@ -69,7 +68,7 @@ const Header = () => {
       });
       //닉네임 가져옴
       await getNickName(URL, guestId).then(
-        (value) => {
+        (value: any) => {
           //response 가 제대로 오면 이름 설정
           setNickName(value);
         },

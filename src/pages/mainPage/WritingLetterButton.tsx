@@ -11,9 +11,7 @@ const WritingLetterButton: React.FC<WritingLetterButtonProps> = ({
 }) => {
   const nav = useNavigate();
   const _userId = useRecoilState(uniqueIdState)[0];
-  console.log(_userId);
   const moveWriting = () => {
-    console.log(`/writingletter/${_userId}`);
     nav(`/writingletter/${_userId}`);
   };
   return !isLogin ? (
