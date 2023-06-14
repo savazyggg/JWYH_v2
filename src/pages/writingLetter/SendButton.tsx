@@ -27,7 +27,7 @@ const SendButton: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    onHandleOpen();
+    if (onSuccessSendingStatus) onHandleOpen();
   }, [onSuccessSendingStatus]);
   return (
     <>

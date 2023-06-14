@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { uniqueIdState } from "../../recoilStore";
 
-const WritingLetterButton = ({ isLogin }) => {
+interface WritingLetterButtonProps {
+  isLogin: boolean;
+}
+const WritingLetterButton: React.FC<WritingLetterButtonProps> = ({
+  isLogin,
+}) => {
   const nav = useNavigate();
   const _userId = useRecoilState(uniqueIdState)[0];
   console.log(_userId);
@@ -11,13 +16,11 @@ const WritingLetterButton = ({ isLogin }) => {
     console.log(`/writingletter/${_userId}`);
     nav(`/writingletter/${_userId}`);
   };
-  return (
-    isLogin || (
-      <div>
-        <Button onClick={moveWriting}>편지쓰러가기!</Button>
-      </div>
-    )
-  );
+  return !isLogin ? (
+    <div>
+      <Button onClick={moveWriting}>편지쓰러가기!</Button>
+    </div>
+  ) : null;
 };
 
 export default WritingLetterButton;

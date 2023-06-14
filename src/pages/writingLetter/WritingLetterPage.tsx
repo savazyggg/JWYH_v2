@@ -34,7 +34,9 @@ const WritingLetterPage: React.FC = () => {
   const onDateChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUnlockDate(e.target.value);
   const onLetterWritingChange = (value: string) => setLetterWriting(value);
-  const onLetterStyleChange = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onLetterStyleChange = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     const letterStyle = window
       .getComputedStyle(e.currentTarget)
       .getPropertyValue("background-color");
@@ -78,12 +80,11 @@ const WritingLetterPage: React.FC = () => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(sendData),
       });
-      console.log(response, "편지보냄");
-      console.log(successSendingStatus);
       setSuccessSendingStatus(true);
-      // return response.json();
+      return response.json();
     } catch (error) {
       console.error(error);
+      return "";
     }
   };
 

@@ -41,7 +41,8 @@ const MainPage = () => {
   const handleLetterData = async (userId = "") => {
     const url = "http://34.64.195.153:5000";
     if (userId.length !== 0) {
-      const value = await getLetters(url, userId);
+      const value: any = await getLetters(url, userId);
+      console.log(value);
       setLetters(value);
     }
   };
