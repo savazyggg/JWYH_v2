@@ -56,7 +56,6 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    console.log("logined");
     const url = "http://34.64.195.153:5000";
     const data: LoginData = {
       userId: idValue,

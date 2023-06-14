@@ -8,7 +8,6 @@ interface Props {
 }
 
 const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
-  //console.log("편지지컴포넌트에서 편지지색 :" + letterStyle);
   return (
     <Container>
       <Letter

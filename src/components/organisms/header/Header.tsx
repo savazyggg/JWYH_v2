@@ -3,8 +3,12 @@ import Button from "@mui/material/Button";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { isLoginedState, uniqueIdState } from "../../../recoilStore";
-import { useEffect, useState } from "react";
+import {
+  isLoginedState,
+  uniqueIdState,
+  nickNameState,
+} from "../../../recoilStore";
+import { useEffect } from "react";
 import { getNickName } from "../../../apis/getNickName";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -30,8 +34,8 @@ const theme = createTheme({
 });
 const Header = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
-  const [uniqueId, setUniqueId] = useRecoilState(uniqueIdState);
-  const [nickName, setNickName] = useState<string>();
+  const [_uniqueId, setUniqueId] = useRecoilState(uniqueIdState);
+  const [nickName, setNickName] = useRecoilState(nickNameState);
   const location = useLocation();
   const navigate = useNavigate();
   const URL = "http://34.64.195.153:5000";
@@ -45,7 +49,6 @@ const Header = () => {
   const onLogIn = () => {
     const jwt = localStorage.getItem("jwt");
     if (localStorage.getItem("jwt") === null) {
-      console.log("Header onLogin Error : JWT가 없습니다!!");
       navigate("/login");
     }
     if (jwt !== null) {
@@ -69,7 +72,7 @@ const Header = () => {
       });
       //닉네임 가져옴
       await getNickName(URL, guestId).then(
-        (value) => {
+        (value: any) => {
           //response 가 제대로 오면 이름 설정
           setNickName(value);
         },

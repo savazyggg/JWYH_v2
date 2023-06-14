@@ -33,7 +33,6 @@ const MainPage = () => {
     const tokenStr = localStorage.getItem("jwt");
     if (tokenStr !== null) {
       const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
-
       setUserId(JwtDecoded.id);
       handleLetterData(JwtDecoded.id);
     }
@@ -41,9 +40,21 @@ const MainPage = () => {
   const handleLetterData = async (userId = "") => {
     const url = "http://34.64.195.153:5000";
     if (userId.length !== 0) {
-      const value: any = await getLetters(url, userId);
-      console.log(value);
-      setLetters(value);
+      try {
+        const response = await getLetters(url, userId);
+        const data: any = response;
+        if (
+          data.result === "error" &&
+          data.reason === "편지를 찾을 수 없습니다."
+        ) {
+          setLetters([]);
+        } else {
+          const value: any = data;
+          setLetters(value);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
     }
   };
 
@@ -115,11 +126,19 @@ const MainPage = () => {
           </>
         )}
       </>
-      {letters.length > 0 && (
+      {letters.length ? (
         <LetterCarousel
           letters={letters}
           isGuest={false}
           handleLetterData={handleLetterData}
+          className=""
+        ></LetterCarousel>
+      ) : (
+        <LetterCarousel
+          letters={letters}
+          isGuest={false}
+          handleLetterData={handleLetterData}
+          className="empty-letter"
         ></LetterCarousel>
       )}
     </Container>

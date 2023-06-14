@@ -1,5 +1,5 @@
 .container {
-    width: 100%;    
+  width: 100%;
 }
 
 .swiper {
@@ -8,11 +8,11 @@
 }
 
 .locked-on {
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.0%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22800px%22%20height%3D%22800px%22%20viewBox%3D%220%200%2064%2064%22%20enable-background%3D%22new%200%200%2064%2064%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cpath%20fill%3D%22%23231F20%22%20d%3D%22M52%2C24h-4v-8c0-8.836-7.164-16-16-16S16%2C7.164%2C16%2C16v8h-4c-2.211%2C0-4%2C1.789-4%2C4v32c0%2C2.211%2C1.789%2C4%2C4%2C4h40%0A%09c2.211%2C0%2C4-1.789%2C4-4V28C56%2C25.789%2C54.211%2C24%2C52%2C24z%20M32%2C48c-2.211%2C0-4-1.789-4-4s1.789-4%2C4-4s4%2C1.789%2C4%2C4S34.211%2C48%2C32%2C48z%20M40%2C24%0A%09H24v-8c0-4.418%2C3.582-8%2C8-8s8%2C3.582%2C8%2C8V24z%22%2F%3E%0A%3C%2Fsvg%3E");
-    background-size: 100px;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.0%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22800px%22%20height%3D%22800px%22%20viewBox%3D%220%200%2064%2064%22%20enable-background%3D%22new%200%200%2064%2064%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cpath%20fill%3D%22%23231F20%22%20d%3D%22M52%2C24h-4v-8c0-8.836-7.164-16-16-16S16%2C7.164%2C16%2C16v8h-4c-2.211%2C0-4%2C1.789-4%2C4v32c0%2C2.211%2C1.789%2C4%2C4%2C4h40%0A%09c2.211%2C0%2C4-1.789%2C4-4V28C56%2C25.789%2C54.211%2C24%2C52%2C24z%20M32%2C48c-2.211%2C0-4-1.789-4-4s1.789-4%2C4-4s4%2C1.789%2C4%2C4S34.211%2C48%2C32%2C48z%20M40%2C24%0A%09H24v-8c0-4.418%2C3.582-8%2C8-8s8%2C3.582%2C8%2C8V24z%22%2F%3E%0A%3C%2Fsvg%3E");
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 
 .swiper-slide {
   display: flex;
@@ -24,207 +24,221 @@
   position: relative;
 }
 .glowing {
-    border: none;
-    outline: none;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
-  }
-  
-  .glowing:before {
-    content: "hello";
-    background: linear-gradient(
-      45deg,
-      #ff0000,
-      #ff7300,
-      #fffb00,
-      #48ff00,
-      #00ffd5,
-      #002bff,
-      #7a00ff,
-      #ff00c8,
-      #ff0000
-    );
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    z-index: -1;
-    filter: blur(10px);
-    background-size: 200%;
-    -webkit-filter: blur(5px);
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    animation: glowing 10s linear infinite;
-    transition: opactiy 0.3s ease-in-out;
-    /* border-radius: 10px; */
-  }
-  
-  @keyframes glowing {
-    0% {
-      background-position: 0 0;
-    }
-    50% {
-      background-position: 400% 0;
-    }
-    100% {
-      background-position: 0 0;
-    }
-  }
-  
-  .glowing:after {
-    z-index: -1;
-    content: "";
-    position: absolute;
-    width: 99.7%;
-    height: 99%;
-    background:rgba(30, 30, 31, 0.991);
-    left: 1px;
-    top: 1px;
-    border-radius: 10px;
-    opacity: 1;
-  }
-.sender-div{
-    margin-top: 25%;
-    font-size: 36px;
-}
-.date-div{
-    font-size: 22px;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
 }
 
-.swiper-button-prev{
-    position: absolute;
-    top: 50%;
-    left: -100px;
-    width: 50px;
-    height: 50px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.glowing:before {
+  content: "hello";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  z-index: -1;
+  filter: blur(10px);
+  background-size: 200%;
+  -webkit-filter: blur(5px);
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  animation: glowing 10s linear infinite;
+  transition: opactiy 0.3s ease-in-out;
+  /* border-radius: 10px; */
 }
 
-.swiper-button-next{
-    position: absolute;
-    top: 50%;
-    right: -100px;
-    width: 50px;
-    height: 50px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
+.glowing:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 99.7%;
+  height: 99%;
+  background: rgba(30, 30, 31, 0.991);
+  left: 1px;
+  top: 1px;
+  border-radius: 10px;
+  opacity: 1;
+}
+.sender-div {
+  margin-top: 25%;
+  font-size: 36px;
+}
+.date-div {
+  font-size: 22px;
+}
+
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  left: -100px;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
 .swiper-button-prev:before {
-    content: "<";
-    font-size: 45px;
-    color: #93BA7B;
+  content: "<";
+  font-size: 45px;
+  color: #93ba7b;
 }
 
-.swiper-button-next:before{
-    content: ">";
-    font-size: 45px;
-    color: #93BA7B;
+.swiper-button-next:before {
+  content: ">";
+  font-size: 45px;
+  color: #93ba7b;
 }
 .swiper-slide:nth-child(1n) {
-  background-color: #93BA7B;
-
+  background-color: #93ba7b;
 }
 
 .swiper-slide:nth-child(2n) {
-  background-color: #BED7A9
+  background-color: #bed7a9;
 }
 
 .swiper-slide:nth-child(3n) {
-  background-color:#A6C08A;
+  background-color: #a6c08a;
 }
 
 .swiper-slide:nth-child(4n) {
-  background-color: #C5E6BF
+  background-color: #c5e6bf;
 }
 
 .swiper-slide:nth-child(5n) {
-  background-color: #A7D8A6
+  background-color: #a7d8a6;
 }
 
 .swiper-slide:nth-child(6n) {
-  background-color: #8CC38A
+  background-color: #8cc38a;
 }
 
 .swiper-slide:nth-child(7n) {
-  background-color: #DFD1E6
+  background-color: #dfd1e6;
 }
 
 .swiper-slide:nth-child(8n) {
-  background-color: #C4B0D6
+  background-color: #c4b0d6;
 }
 
 .swiper-slide:nth-child(9n) {
-  background-color: #A78DC5
+  background-color: #a78dc5;
 }
 
 .swiper-slide:nth-child(10n) {
-  background-color: #D0E9C6
+  background-color: #d0e9c6;
 }
 
-
-
-
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .modal.visible {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    width: 500px;
-    max-height: 550px;
-    background-color: #fff;
-    padding: 30px 30px 10px 30px;
-    border-radius: 10px;
-    text-align: initial;
-    overflow-y: auto;
-    font-weight: 500;
-  }
-  
-  .modal button {
-        position: sticky;
-        top: 94%;
-        left: 87%;
-  }
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
 
-  .modal-content-div,
-  .modal-sender{
-    margin-top: 20px;
-    max-height: 380px;
-  }
+.modal.visible {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-  .modal-content::-webkit-scrollbar {
-    content: "";
-    width: 8px;
-  }
-  
-  .modal-content::-webkit-scrollbar-track {
-    background-color: #fff;
-    border-radius: 0 20px 20px 0px;
-  }
-  
-  .modal-content::-webkit-scrollbar-thumb {
-    background-color: #93BA7B;
-    border-radius: 20px;
-  }
-  
-  .modal-content::-webkit-scrollbar-thumb:hover {
-    background-color: #76ac56;
-  }
+.modal-content {
+  width: 500px;
+  max-height: 550px;
+  background-color: #fff;
+  padding: 30px 30px 10px 30px;
+  border-radius: 10px;
+  text-align: initial;
+  overflow-y: auto;
+  font-weight: 500;
+}
+
+.modal button {
+  position: sticky;
+  top: 94%;
+  left: 87%;
+}
+
+.modal-content-div,
+.modal-sender {
+  margin-top: 20px;
+  max-height: 380px;
+}
+
+.modal-content::-webkit-scrollbar {
+  content: "";
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 0 20px 20px 0px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #93ba7b;
+  border-radius: 20px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #76ac56;
+}
+
+.empty-letter {
+  position: relative;
+}
+.empty-letter:before {
+  background-color: #000000bf;
+  height: 35%;
+  content: "편지를 받고, 상대 방이 지정한 날짜에 읽어 보세요!";
+  display: inline-grid;
+  width: 75%;
+  top: 33%;
+  left: 12%;
+  position: absolute;
+  z-index: 999;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  align-content: flex-end;
+}
