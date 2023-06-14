@@ -10,7 +10,7 @@ interface LoginData {
  * @param {string} url - 서버 주소,
  * @param {LoginData},
  */
-async function login(url: string, data: LoginData): Promise<JSON> {
+async function login(url: string, data: LoginData) {
   url = url + "/api/login";
   const response = await fetch(url, {
     method: "POST",
@@ -24,7 +24,7 @@ async function login(url: string, data: LoginData): Promise<JSON> {
     referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json();
+  return response;
 }
 
 export { login };

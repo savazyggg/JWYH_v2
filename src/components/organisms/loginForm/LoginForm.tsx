@@ -28,11 +28,11 @@ import {
 
 export default function LoginForm() {
   const [idValue, setIdValue] = useState<string>("");
-  const [isIdError, setIdIsError] = useState(true);
+  const [isIdError, setIdIsError] = useState(false);
   const [idErMsg, setIdErMsg] = useState("id Error");
   const [pwValue, setPwValue] = useState<string>("");
-  const [isPwError, setPwIsError] = useState(true);
-  const [pwErMsg, setPwErMsg] = useState("pw Error");
+  const [isPwError, setPwIsError] = useState(false);
+  const [pwErMsg, setPwErMsg] = useState("로그인 실패!!");
   const [showPassword, setShowPassword] = useState(false);
 
   //리코일
@@ -62,30 +62,37 @@ export default function LoginForm() {
       password: pwValue,
     };
 
-    //레거시
-    const jwt = JSON.stringify(await login(url, data));
-    const jwtParsed = JSON.parse(jwt);
-    localStorage.setItem("jwt", jwt);
-    //레거시 todo 리코일에서 jwtString 사용으로  바꿔야함
+    await login(url, data).then((res) => {
+      if (res.ok) {
+        //레거시
+        const jwt = JSON.stringify(res.json());
+        const jwtParsed = JSON.parse(jwt);
+        localStorage.setItem("jwt", jwt);
+        //레거시 todo 리코일에서 jwtString 사용으로  바꿔야함
 
-    //리코일
-    setRecoilIsLogined(!recoilIsLogined);
-    setRecoilJwtString(jwtParsed.token);
-    interface JwtDecoded {
-      id: string;
-      nickName: string;
-      objectId: string;
-      iat: number;
-    }
-    const decoded: JwtDecoded = jwt_decode(jwtParsed.token);
-    const { id, nickName, objectId } = decoded;
-    setRecoilUniqueId(objectId);
-    setRecoilUserId(id);
-    setRecoilNickName(nickName);
-    setRecoilProvider("");
-    //리코일
+        //리코일
+        setRecoilIsLogined(!recoilIsLogined);
+        setRecoilJwtString(jwtParsed.token);
+        interface JwtDecoded {
+          id: string;
+          nickName: string;
+          objectId: string;
+          iat: number;
+        }
+        const decoded: JwtDecoded = jwt_decode(jwtParsed.token);
+        const { id, nickName, objectId } = decoded;
+        setRecoilUniqueId(objectId);
+        setRecoilUserId(id);
+        setRecoilNickName(nickName);
+        setRecoilProvider("");
+        //리코일
 
-    navigate("/main");
+        navigate("/main");
+      } else {
+        setIdIsError(true);
+        setPwIsError(true);
+      }
+    });
   };
 
   return (
@@ -98,11 +105,12 @@ export default function LoginForm() {
           value={idValue}
           aria-describedby="id-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setIdIsError(false);
             setIdValue(e.target.value);
           }}
           label="아이디"
         />
-        <FormHelperText>{idErMsg}</FormHelperText>
+        <FormHelperText></FormHelperText>
       </FormControl>
       <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="password">비밀번호</InputLabel>
@@ -112,6 +120,7 @@ export default function LoginForm() {
           value={pwValue}
           aria-describedby="password-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setPwIsError(false);
             setPwValue(e.target.value);
           }}
           endAdornment={
@@ -128,7 +137,7 @@ export default function LoginForm() {
           }
           label="비밀번호"
         />
-        <FormHelperText>{pwErMsg}</FormHelperText>
+        <FormHelperText>{isPwError && pwErMsg}</FormHelperText>
       </FormControl>
       <Button
         sx={{ width: "100%" }}
