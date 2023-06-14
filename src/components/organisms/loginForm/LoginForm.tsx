@@ -62,10 +62,18 @@ export default function LoginForm() {
       password: pwValue,
     };
 
-    await login(url, data).then((res) => {
-      if (res.ok) {
+    await login(url, data)
+      .then((res) => {
+        if (res.ok === false) {
+          setIdIsError(true);
+          setPwIsError(true);
+          throw new Error("로그인 실패");
+        }
+        return res.json();
+      })
+      .then((data) => {
         //레거시
-        const jwt = JSON.stringify(res.json());
+        const jwt = JSON.stringify(data);
         const jwtParsed = JSON.parse(jwt);
         localStorage.setItem("jwt", jwt);
         //레거시 todo 리코일에서 jwtString 사용으로  바꿔야함
@@ -88,11 +96,10 @@ export default function LoginForm() {
         //리코일
 
         navigate("/main");
-      } else {
-        setIdIsError(true);
-        setPwIsError(true);
-      }
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
