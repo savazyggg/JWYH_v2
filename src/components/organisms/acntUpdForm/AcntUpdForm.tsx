@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 // import Link from "@mui/material/Link";
 import { register, SingUpData } from "../../../apis/registerApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -18,8 +18,16 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AcntAlertModal from "../acntAlertModal/AcntAlertModal";
 import { func, string } from "prop-types";
-import { PatchAcnt, PatchAcntBody } from "../../../apis/patchAcnt";
-
+import { patchAcnt, PatchAcntBody } from "../../../apis/patchAcnt";
+import { useRecoilState } from "recoil";
+import {
+  isLoginedState,
+  nickNameState,
+  providerState,
+  userIdState,
+  jwtStringState,
+} from "../../../recoilStore";
+import { delAcnt } from "../../../apis/delAcnt";
 const style = {
   position: "absolute" as const,
   top: "50%",
@@ -36,13 +44,16 @@ interface JwtDecoded {
   nickName: string;
   objectId: string;
 }
-interface AcntUpdFormProps {
-  token: JwtDecoded;
-  jwt: string;
-}
-export default function AcntUpdForm(props: AcntUpdFormProps) {
-  const { token, jwt } = props;
-  const { id, nickName, objectId } = token;
+
+export default function AcntUpdForm() {
+  // const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  const [userId, setUserId] = useRecoilState(userIdState);
+  const [nickName, setNickName] = useRecoilState(nickNameState);
+  const [jwtString, setJwtString] = useRecoilState(jwtStringState);
+  const [provider, setProvider] = useRecoilState(providerState);
+
+  const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMsg, setModalMsg] = useState("");
   const [isDel, setIsDel] = useState(false);
@@ -69,8 +80,14 @@ export default function AcntUpdForm(props: AcntUpdFormProps) {
     event.preventDefault();
   };
   const url = "http://34.64.195.153:5000";
-  const handleAcntDel = () => {
-    console.log("del");
+  const handleAcntDel = async () => {
+    try {
+      await delAcnt(url, jwtString, userId);
+      navigate("/main");
+      console.log("del");
+    } catch (error) {
+      console.error(error);
+    }
   };
   const handleAcntUpd = async () => {
     const body: PatchAcntBody = {
@@ -78,7 +95,7 @@ export default function AcntUpdForm(props: AcntUpdFormProps) {
       password: pwValue,
     };
     try {
-      await PatchAcnt(url, jwt, id, body);
+      await patchAcnt(url, jwtString, userId, body);
       console.log("upd");
     } catch (error) {
       console.log(error);
