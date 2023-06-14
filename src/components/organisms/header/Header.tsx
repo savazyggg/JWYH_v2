@@ -52,14 +52,7 @@ const Header = () => {
       navigate("/login");
     }
     if (jwt !== null) {
-      interface JwtDecoded {
-        iat: number;
-        id: string;
-        nickName: string;
-        objectId: string;
-      }
-      const decoded: JwtDecoded = jwt_decode(jwt);
-      setNickName(decoded.nickName);
+      setNickName(nickName);
     }
   };
 

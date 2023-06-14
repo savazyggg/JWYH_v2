@@ -96,6 +96,8 @@ export default function AcntUpdForm() {
     };
     try {
       await patchAcnt(url, jwtString, userId, body);
+      setNickName(nickValue);
+      navigate("/main");
       console.log("upd");
     } catch (error) {
       console.log(error);
