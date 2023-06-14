@@ -87,7 +87,7 @@ const Storage = (): JSX.Element => {
         console.log(error);
       });
 
-    // setLoading(false);
+    setLoading(false);
 
     const tokenStr = localStorage.getItem("jwt");
     interface JwtDecoded {
@@ -156,6 +156,7 @@ const Storage = (): JSX.Element => {
               <StorageCard
                 key={index}
                 id={id}
+                year={2023}
                 imgSrc={monthImgUrl[index]}
                 month={index + 1}
                 letterNum={data}
@@ -172,6 +173,7 @@ const Storage = (): JSX.Element => {
                 id={id}
                 imgSrc={monthImgUrl[index]}
                 month={index + 1}
+                year={2022}
                 letterNum={data}
               />
             );
