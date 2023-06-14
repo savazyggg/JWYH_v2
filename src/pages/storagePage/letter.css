@@ -1,28 +1,146 @@
-.letter-box {
-  width: 400px;
+@import url("https://fonts.googleapis.com/css2?family=Poor+Story&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* html {
+  font-size: 62.5%;
+} */
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  font-family: "Poppins", sans-serif;
+}
+
+.letter_box {
+  justify-content: center;
+  max-width: 1200px;
+  padding: 1em 2em 0 2em;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
-.letter-container {
-  margin-top: 20px;
+.container_grid {
+  position: relative;
+  display: grid;
+  width: 1200px;
+  border-top: 1px solid #686868;
+  grid-template-columns: repeat(6, 1fr);
+  margin-bottom: 3em;
 }
 
-.letter {
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+@media (min-width: 481px) and (max-width: 767px) {
+  .container_grid {
+    width: 600px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2px;
+  }
 }
 
-.letter h2 {
-  margin-top: 0;
+@media (max-width: 480px) {
+  .container_grid {
+    width: 320px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2px;
+  }
 }
 
-.letter p {
-  margin-bottom: 0;
+.storage_year {
+  font-size: 2rem;
+  padding-top: 2em;
+  padding-bottom: 2rem;
+  width: 13em;
+  border-bottom: 0.5rem solid;
+}
+
+.box {
+  position: relative;
+  cursor: pointer;
+  width: 10rem;
+  height: 15rem;
+  margin: 4rem;
+}
+
+.container_grid .box:hover .imgBox {
+  transform: translate(-3.5rem, -3.5rem);
+}
+
+.container_grid .box:hover .content {
+  transform: translate(3.5rem, 3.5rem);
+}
+
+.imgBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transition: all 0.3s ease-in-out;
+}
+
+.imgBox img {
+  width: 10rem;
+  height: 15rem;
+  object-fit: cover;
+  resize: both;
+  border-radius: 20px;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  z-index: 1;
+  box-shadow: 0 5px 20px rgba(197, 197, 197, 0.5);
+  border-radius: 20px;
+  align-items: flex-end;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+.content h2 {
+  display: block;
+  font-size: 2rem;
+  color: #111;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: 1px;
+}
+
+.content span {
+  color: #555;
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+#storage {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .container_grid .box:hover .content {
+    transform: translate(0, 2.5rem);
+  }
+  .container_grid .box:hover .imgBox {
+    transform: translate(0, -2.5rem);
+  }
+}
+
+@font-face {
+  font-family: "AppleSD";
+  src: url("../fonts/AppleSDGothicNeoM.ttf");
 }

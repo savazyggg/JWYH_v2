@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./storage.css";
 import StorageCard from "./StorageCard";
-import jwt_decode from "jwt-decode";
 import monthImgUrl from "./ImgUrls";
 //리코일
 import { useRecoilState } from "recoil";

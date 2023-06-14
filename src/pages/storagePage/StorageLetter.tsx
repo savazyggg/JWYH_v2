@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./letter.css";
+import LetterCard from "./Letter";
 import moment from "moment";
 import { useRecoilState } from "recoil";
 import Header from "../../components/organisms/header/Header";
@@ -29,6 +30,12 @@ const StorageLetter: React.FC = () => {
   const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
   const [myNickName, setMyNickName] = useRecoilState(nickNameState);
   const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
+
+  //편지 ui 정리
+  // const [pageSize,setPageSize]=useState(3); //한 페이지에 들어가는 글 갯수
+  //   const [totalCount,setTotalCount]=useState(5); //전체 글 갯수
+  //   const [currentPage,setCurrentPage]=useState(1);//현재 페이지
+  //   const [Letters, setLetters] = useState([]); //편지 담기
   const { id, year, month } = useParams<{
     id: string;
     year: string;
@@ -38,6 +45,7 @@ const StorageLetter: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    console.log(year, month);
     const getLettersFromDB = async () => {
       try {
         const response = await axios.get(
@@ -72,28 +80,15 @@ const StorageLetter: React.FC = () => {
         <Header></Header>
       </>
 
-      <div>
-        <h1>{`${year}년 ${month}월 편지 보관함`}</h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className="letter-container">
-            <div className="letter-box">
-              {letterSavedInfo.map((letter) => (
-                <div className="letter" style={{ background: letter.style }}>
-                  <div key={letter.unlockDate}>
-                    <h2>{letter.sender}</h2>
-                    <p>{`열람일: ${moment(letter.unlockDate).format(
-                      "YYYY-MM-DD"
-                    )}`}</p>
-                    <p>{letter.content}</p>
-                    <p>{`효과 종류: ${letter.style}`}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+      <div className="letter_box">
+        <div className="storage_year">
+          {year}년 {month}월 받은 편지
+        </div>
+        <div className="container_grid">
+          {letterSavedInfo.map((data, index) => {
+            return <LetterCard id={index} content={data.content} />;
+          })}
+        </div>
       </div>
     </>
   );
