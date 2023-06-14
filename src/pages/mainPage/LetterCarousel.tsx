@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import _, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { styled as muiStyled } from "@mui/system";
 import { Button } from "@mui/material";
@@ -6,17 +6,17 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import "./LetterCarousel.css";
 import { EffectCards, Navigation } from "swiper";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { userIdState } from "../../recoilStore";
 
 interface LetterInterface {
-  id: number;
-  index: string;
-  unlockYear: number;
-  unlockMonth: number;
-  unlockDate: number;
-  sender: string;
-  style: string;
+  id?: number;
+  index?: string;
+  unlockYear?: number;
+  unlockMonth?: number;
+  unlockDate?: number;
+  sender?: string;
+  style?: string;
 }
 const OkButton = muiStyled(Button)({
   backgroundColor: "#93BA7B",
@@ -29,22 +29,21 @@ const OkButton = muiStyled(Button)({
  * 편지 캐러셀 컴포넌트
  */
 interface LetterCarouselProps {
+  letters: LetterInterface[];
   isGuest: boolean;
-  letters: LetterInterface;
   handleLetterData: any;
+  className: any;
 }
 
 function LetterCarousel(props: LetterCarouselProps) {
-  console.log("캐러셀 렌더링 진입");
   const { isGuest, handleLetterData } = props;
-  console.log(props);
   const letters: LetterInterface[] = Array.isArray(props.letters)
     ? props.letters
     : [];
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
-  const [letterContents, setLetterContent] = useState<any>();
-  const [userId, setUserId] = useRecoilState(userIdState);
+  const [_letterContent, setLetterContent] = useState<any>();
+  const [userId, _setUserID] = useRecoilState(userIdState);
   /**
    * 슬라이드 클릭 이벤트 핸들러
    * @param {Letter} letter - 클릭한 편지 객체
@@ -66,7 +65,7 @@ function LetterCarousel(props: LetterCarouselProps) {
           color: letter.style,
         });
       })
-      .catch((error) => {
+      .catch((_) => {
         setModalContent({
           unlockDate: `unlocked : ${letter.unlockYear}/${letter.unlockMonth}/${letter.unlockDate}`,
           sender: letter.sender,
@@ -82,11 +81,9 @@ function LetterCarousel(props: LetterCarouselProps) {
    * @returns {boolean} - 날짜가 지났을 경우 true, 그렇지 않을 경우 false
    */
   const isDatePassed = (letter: LetterInterface) => {
-    const unlockDate = new Date(
-      letter.unlockYear,
-      letter.unlockMonth - 1,
-      letter.unlockDate
-    );
+    const unlockYear = letter.unlockYear ?? 0;
+    const unlockMonth = letter.unlockMonth ?? 0;
+    const unlockDate = new Date(unlockYear, unlockMonth - 1, letter.unlockDate);
     const currentDate = new Date();
     return unlockDate > currentDate;
   };

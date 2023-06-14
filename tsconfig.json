@@ -15,7 +15,6 @@
     //Mac 에러 해결
 
     "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

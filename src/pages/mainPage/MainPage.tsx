@@ -42,16 +42,14 @@ const MainPage = () => {
     if (userId.length !== 0) {
       try {
         const response = await getLetters(url, userId);
-        const data = response;
+        const data: any = response;
         if (
           data.result === "error" &&
           data.reason === "편지를 찾을 수 없습니다."
         ) {
-          console.log("진입");
           setLetters([]);
         } else {
           const value: any = data;
-          console.log(value);
           setLetters(value);
           console.log("entry normal");
         }
@@ -134,6 +132,7 @@ const MainPage = () => {
           letters={letters}
           isGuest={false}
           handleLetterData={handleLetterData}
+          className=""
         ></LetterCarousel>
       ) : (
         <LetterCarousel
