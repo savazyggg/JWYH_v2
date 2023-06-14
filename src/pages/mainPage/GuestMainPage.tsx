@@ -47,10 +47,10 @@ const GuestMainPage = () => {
       <>
         <Info>
           <ShakingText>{userId}</ShakingText> 님에게 편지를 보내보세요! <br />
-          생일🥳, 기념일🎂, 연인의 날🥰 등 <ShakingText>특별한 </ShakingText>
+          생일🥳, 기념일🎂, 연인의 날🥰 등 <ShakingText> 특별한 </ShakingText>
           날짜에 편지를 받는다면
           <br />
-          <ShakingText>감동 </ShakingText>은 배가 될거에요
+          <ShakingText>감동 </ShakingText> 은 배가 될거에요
         </Info>
         <WritingLetterButton isLogin={isLogined} />
       </>
@@ -77,7 +77,6 @@ const Container = muiStyled(Box)({
 const Info = muiStyled(Box)({
   alignContent: "center",
   lineHeight: "1.8",
-  display: "inline-grid",
   fontSize: "24px",
   color: "#fff",
   fontWeight: "600",
@@ -87,8 +86,9 @@ const Info = muiStyled(Box)({
 const ShakingText = styled.div`
   font-size: 32px !important;
   color: #93ba7b !important;
-  display: contents;
-  animation: shake 0.4s ease-in-out infinite;
+  display: inline-block !important;
+  whitespace: pre;
+  animation: shake 0.6s ease-in-out infinite;
 
   @keyframes shake {
     from {
