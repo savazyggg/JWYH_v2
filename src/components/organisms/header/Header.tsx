@@ -107,7 +107,7 @@ const Header = () => {
                     <Link to="/mypage">
                       <li>마이페이지</li>
                     </Link>
-                    <Link to="/">
+                    <Link to="/storage">
                       <li>보관함</li>
                     </Link>
                   </ul>
