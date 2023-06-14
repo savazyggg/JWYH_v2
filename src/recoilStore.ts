@@ -33,13 +33,13 @@ const nickNameState = atom({
 
 //jwt
 const jwtStringState = atom({
-  key: "jwtStringState",
+  key: "jwtString",
   default: "",
   effects_UNSTABLE: [persistAtom],
 });
 //소셜 로그인
 const providerState = atom({
-  key: "providerState",
+  key: "provider",
   default: "",
   effects_UNSTABLE: [persistAtom],
 });

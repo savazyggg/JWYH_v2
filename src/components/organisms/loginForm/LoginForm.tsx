@@ -61,27 +61,28 @@ export default function LoginForm() {
       userId: idValue,
       password: pwValue,
     };
+
+    //레거시
     const jwt = JSON.stringify(await login(url, data));
     const jwtParsed = JSON.parse(jwt);
     localStorage.setItem("jwt", jwt);
+    //레거시 todo 리코일에서 jwtString 사용으로  바꿔야함
 
     //리코일
-    setRecoilIsLogined(!isLogined);
-    setRecoilJwtString(() => {
-      interface JwtDecoded {
-        id: string;
-        nickName: string;
-        objectId: string;
-        iat: number;
-      }
-      const decoded: JwtDecoded = jwt_decode(jwtParsed.token);
-      const { id, nickName, objectId } = decoded;
-      setRecoilUniqueId(objectId);
-      setRecoilUserId(id);
-      setRecoilNickName(nickName);
-      setRecoilProvider("");
-      return jwtParsed.token;
-    });
+    setRecoilIsLogined(!recoilIsLogined);
+    setRecoilJwtString(jwtParsed.token);
+    interface JwtDecoded {
+      id: string;
+      nickName: string;
+      objectId: string;
+      iat: number;
+    }
+    const decoded: JwtDecoded = jwt_decode(jwtParsed.token);
+    const { id, nickName, objectId } = decoded;
+    setRecoilUniqueId(objectId);
+    setRecoilUserId(id);
+    setRecoilNickName(nickName);
+    setRecoilProvider("");
     //리코일
 
     navigate("/main");

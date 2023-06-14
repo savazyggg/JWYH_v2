@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 import { useRecoilState } from "recoil";
-import { jwtState } from "../../recoilStore";
+import { jwtStringState } from "../../recoilStore";
 
 interface JwtDecoded {
   id: string;
@@ -17,7 +17,7 @@ interface JwtDecoded {
   objectId: string;
 }
 function AcntUpdPage() {
-  const [jwtString, setJwtString] = useRecoilState(jwtState);
+  const [jwtString, setJwtString] = useRecoilState(jwtStringState);
   const token: JwtDecoded = jwt_decode(jwtString);
 
   return (
