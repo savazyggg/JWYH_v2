@@ -13,14 +13,44 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import Stack from "@mui/material/Stack";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import AcntAlertModal from "../acntAlertModal/AcntAlertModal";
+import { func, string } from "prop-types";
+import { PatchAcnt, PatchAcntBody } from "../../../apis/patchAcnt";
 
-export default function SignUpForm() {
-  const [isIdError, setIsIdError] = useState(false);
+const style = {
+  position: "absolute" as const,
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+interface JwtDecoded {
+  id: string;
+  nickName: string;
+  objectId: string;
+}
+interface AcntUpdFormProps {
+  token: JwtDecoded;
+  jwt: string;
+}
+export default function AcntUpdForm(props: AcntUpdFormProps) {
+  const { token, jwt } = props;
+  const { id, nickName, objectId } = token;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState("");
+  const [isDel, setIsDel] = useState(false);
+
   const [isPwError, setIsPwError] = useState(false);
   const [isPwcError, setIsPwcError] = useState(false);
 
-  const [idValue, setIdValue] = useState<string>("");
-  const [nickValue, setNickValue] = useState<string>("");
+  const [nickValue, setNickValue] = useState<string>(nickName);
   const [pwValue, setPwValue] = useState<string>("");
   const [pwcValue, setPwcValue] = useState<string>("");
 
@@ -38,44 +68,24 @@ export default function SignUpForm() {
   ) => {
     event.preventDefault();
   };
-  const handleSignUp = async (e: any) => {
-    e.preventDefault();
-    console.log("SignUp Clicked");
-    const data: SingUpData = {
-      userId: idValue,
+  const url = "http://34.64.195.153:5000";
+  const handleAcntDel = () => {
+    console.log("del");
+  };
+  const handleAcntUpd = async () => {
+    const body: PatchAcntBody = {
       nickName: nickValue,
       password: pwValue,
     };
-    const url = "http://34.64.195.153:5000";
-    await register(url, data);
+    try {
+      await PatchAcnt(url, jwt, id, body);
+      console.log("upd");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   return (
     <Stack spacing={2}>
-      <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
-        <InputLabel htmlFor="identification">아이디</InputLabel>
-        <OutlinedInput
-          id="identification"
-          type="text"
-          value={idValue}
-          aria-describedby="id-input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setIdValue(() => {
-              const eventValue = e.target.value;
-              const regxId = new RegExp(/^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/);
-              const isValidId = regxId.test(eventValue);
-              if (isValidId) {
-                setIsIdError(false);
-              } else {
-                setIsIdError(true);
-              }
-              return eventValue;
-            });
-          }}
-          label="아이디"
-        />
-        <FormHelperText>영문 소문자, 숫자 6~12 입력 해주세요</FormHelperText>
-      </FormControl>
       <FormControl sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="nickname">닉네임</InputLabel>
         <OutlinedInput
@@ -178,18 +188,41 @@ export default function SignUpForm() {
         </FormHelperText>
       </FormControl>
       <Button
-        onClick={handleSignUp}
+        onClick={() => {
+          setIsDel(false);
+          setIsModalOpen(true);
+          setModalMsg("수정 하시겠습니까?");
+        }}
         type="button"
         fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
-        disabled={isIdError || isPwError || isPwcError}
+        disabled={isPwError || isPwcError}
       >
-        회원가입
+        수정
       </Button>
-      <Link style={{ color: "white", width: "100%" }} to="/login">
-        로그인 하러 가기
-      </Link>
+      <Button
+        onClick={() => {
+          setIsDel(true);
+          setIsModalOpen(true);
+          setModalMsg("삭제 하시겠습니까?");
+        }}
+        type="button"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        disabled={isPwError || isPwcError}
+        color="error"
+      >
+        계정 삭제
+      </Button>
+      <AcntAlertModal
+        modalMsg={modalMsg}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        handler={isDel ? handleAcntDel : handleAcntUpd}
+        // handler={handleAcntUpd}
+      ></AcntAlertModal>
     </Stack>
   );
 }

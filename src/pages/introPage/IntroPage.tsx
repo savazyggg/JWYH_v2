@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -6,6 +6,14 @@ import { Link } from "react-router-dom";
 import { Box, Stack } from "@mui/material";
 import Envelope from "../../components/organisms/envelope/Envelope";
 function IntroPage() {
+  useEffect(() => {
+    try {
+      localStorage.removeItem("jwt");
+    } catch (error) {
+      console.log(error);
+      console.log("jwt가 없습니다.");
+    }
+  }, []);
   return (
     <>
       <Container style={{ display: "flex", justifyContent: "center" }}>

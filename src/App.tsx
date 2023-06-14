@@ -19,6 +19,7 @@ import LoginPage from "./pages/loginPage/LoginPage";
 // import { ThemeContext } from "@emotion/react";
 import StorageLetter from "./pages/storagePage/StorageLetter";
 import GuestMainPage from "./pages/mainPage/GuestMainPage";
+import AcntUpdPage from "./pages/acntUpdPage/AcntUpdPage";
 
 // const darkTheme = createTheme({
 //   palette: {
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/" element={<IntroPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/mypage" element={<AcntUpdPage />} />
         <Route path="/writingletter/:_id" element={<WritingLetterPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/main/:_id" element={<GuestMainPage />} />
