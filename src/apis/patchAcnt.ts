@@ -11,7 +11,7 @@ async function PatchAcnt(
 ): Promise<JSON> {
   url = url + "/api/mypage/" + urlParam;
   const response = await fetch(url, {
-    method: "Patch",
+    method: "PATCH",
     mode: "cors",
     cache: "no-cache",
     credentials: "same-origin",
