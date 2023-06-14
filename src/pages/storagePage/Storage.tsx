@@ -5,6 +5,18 @@ import "./storage.css";
 import StorageCard from "./StorageCard";
 import jwt_decode from "jwt-decode";
 import monthImgUrl from "./ImgUrls";
+//리코일
+import { useRecoilState } from "recoil";
+import {
+  isLoginedState,
+  jwtStringState,
+  uniqueIdState,
+  userIdState,
+  nickNameState,
+  providerState,
+} from "../../recoilStore";
+//리코일
+import Header from "../../components/organisms/header/Header";
 interface LetterCount {
   [year: string]: {
     [month: string]: number;
@@ -12,6 +24,15 @@ interface LetterCount {
 }
 
 const Storage = (): JSX.Element => {
+  //리코일
+  const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
+  const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
+  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
+  const [myNickName, setMyNickName] = useRecoilState(nickNameState);
+  const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
+  const [recoilProvider, setRecoilProvider] = useRecoilState(providerState);
+  //리코일
+
   const { id } = useParams<{ id: string }>(); // url의 파라미터로 넘겨져 온 것.
   const curr_user = sessionStorage.getItem("user_id");
   const [loading, setLoading] = useState(true);
@@ -88,7 +109,11 @@ const Storage = (): JSX.Element => {
       });
 
     setLoading(false);
-
+    console.log(recoilIsLogined);
+    console.log(recoilJwtString);
+    console.log(myNickName);
+    console.log(recoilUniqueId);
+    console.log(recoilUserId);
     const tokenStr = localStorage.getItem("jwt");
     interface JwtDecoded {
       iat: number;
@@ -112,7 +137,10 @@ const Storage = (): JSX.Element => {
 
   return (
     <>
-      <div className="title-bar">
+      <>
+        <Header></Header>
+      </>
+      {/* <div className="title-bar">
         <div className="title-holder">
           <span className="title">
             <span id="name">{nickname}</span> 님의 보관함입니다.
@@ -146,7 +174,7 @@ const Storage = (): JSX.Element => {
             내 보관함
           </span>
         </div>
-      </div>
+      </div> */}
 
       <div className="letter_box">
         <div className="storage_year">2023년의 추억들</div>
