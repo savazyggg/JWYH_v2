@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./storage.css";
 import StorageCard from "./StorageCard";
+import jwt_decode from "jwt-decode";
 import monthImgUrl from "./ImgUrls";
 interface LetterCount {
   [year: string]: {
@@ -87,6 +88,17 @@ const Storage = (): JSX.Element => {
       });
 
     setLoading(false);
+
+    const tokenStr = localStorage.getItem("jwt");
+    interface JwtDecoded {
+      iat: number;
+      id: string;
+      nickName: string;
+      objectId: string;
+    }
+    const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
+    console.log("여기에서 찍혀야함" + JwtDecoded + "JWTDecoded");
+    setNickname(JwtDecoded.nickName);
   }, []);
 
   //   axios
@@ -144,6 +156,7 @@ const Storage = (): JSX.Element => {
               <StorageCard
                 key={index}
                 id={id}
+                year={2023}
                 imgSrc={monthImgUrl[index]}
                 month={index + 1}
                 letterNum={data}
@@ -160,6 +173,7 @@ const Storage = (): JSX.Element => {
                 id={id}
                 imgSrc={monthImgUrl[index]}
                 month={index + 1}
+                year={2022}
                 letterNum={data}
               />
             );
