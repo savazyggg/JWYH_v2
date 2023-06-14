@@ -3,8 +3,12 @@ import Button from "@mui/material/Button";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { isLoginedState, uniqueIdState } from "../../../recoilStore";
-import { useEffect, useState } from "react";
+import {
+  isLoginedState,
+  uniqueIdState,
+  nickNameState,
+} from "../../../recoilStore";
+import { useEffect } from "react";
 import { getNickName } from "../../../apis/getNickName";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -31,7 +35,7 @@ const theme = createTheme({
 const Header = () => {
   const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
   const [_uniqueId, setUniqueId] = useRecoilState(uniqueIdState);
-  const [nickName, setNickName] = useState<string>();
+  const [nickName, setNickName] = useRecoilState(nickNameState);
   const location = useLocation();
   const navigate = useNavigate();
   const URL = "http://34.64.195.153:5000";

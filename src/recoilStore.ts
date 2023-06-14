@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 
 const isLoginedState = atom({
   key: "isLogined",
@@ -13,10 +13,14 @@ const userIdState = atom({
   key: "userId",
   default: "",
 });
+const nickNameState = atom({
+  key: "nickName",
+  default: "",
+});
 
 const jwtState = atom({
   key: "jwtState",
   default: "",
 });
 
-export { isLoginedState, uniqueIdState, jwtState, userIdState };
+export { isLoginedState, uniqueIdState, jwtState, userIdState, nickNameState };

@@ -11,10 +11,11 @@ const GetLetter = (props: LetterListProps) => {
   useEffect(() => {
     const currentDate = new Date();
     const filteredLetters = letters.filter((letter) => {
-      // 편지를 읽을 수 있는 조건
+      const unlockYear = letter.unlockYear ?? 0;
+      const unlockMonth = letter.unlockMonth ?? 0;
       const unlockDate = new Date(
-        letter.unlockYear,
-        letter.unlockMonth - 1,
+        unlockYear,
+        unlockMonth - 1,
         letter.unlockDate
       );
       return unlockDate <= currentDate;

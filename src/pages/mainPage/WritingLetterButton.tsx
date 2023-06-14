@@ -24,7 +24,7 @@ const WritingLetterButton: React.FC<WritingLetterButtonProps> = ({
 export default WritingLetterButton;
 
 const Button = styled.button`
-  margin-top: 140px;
+  margin-top: 12px;
   border-radius: 13px;
   background-color: #93ba7b;
   width: 150px;

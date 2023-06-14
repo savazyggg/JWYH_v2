@@ -95,7 +95,6 @@ function LetterCarousel(props: LetterCarouselProps) {
     setModalVisible(false);
     handleLetterData(userId);
   };
-
   return (
     <div className="container">
       <Swiper
