@@ -33,10 +33,6 @@ const Storage = (): JSX.Element => {
   const [recoilProvider, setRecoilProvider] = useRecoilState(providerState);
   //리코일
 
-  const { id } = useParams<{ id: string }>(); // url의 파라미터로 넘겨져 온 것.
-  const curr_user = sessionStorage.getItem("user_id");
-  const [loading, setLoading] = useState(true);
-  const [nickname, setNickname] = useState<string>("");
   const [letterCount, setLetterCount] = useState<LetterCount>({});
   const MONTH_NUM = 12;
 
@@ -63,7 +59,7 @@ const Storage = (): JSX.Element => {
   const yearArray = [""];
   useEffect(() => {
     axios
-      .get(`http://34.64.195.153:5000/api/box/choi`)
+      .get(`http://34.64.195.153:5000/api/box/${recoilUserId}`)
       .then((response) => {
         console.log("찍힌 데이터" + response.data);
         if (response.data === "편지가 없어요") {
@@ -108,22 +104,21 @@ const Storage = (): JSX.Element => {
         console.log(error);
       });
 
-    setLoading(false);
     console.log(recoilIsLogined);
     console.log(recoilJwtString);
     console.log(myNickName);
     console.log(recoilUniqueId);
     console.log(recoilUserId);
-    const tokenStr = localStorage.getItem("jwt");
-    interface JwtDecoded {
-      iat: number;
-      id: string;
-      nickName: string;
-      objectId: string;
-    }
-    const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
-    console.log("여기에서 찍혀야함" + JwtDecoded + "JWTDecoded");
-    setNickname(JwtDecoded.nickName);
+    // const tokenStr = localStorage.getItem("jwt");
+    // interface JwtDecoded {
+    //   iat: number;
+    //   id: string;
+    //   nickName: string;
+    //   objectId: string;
+    // }
+    // const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
+    // console.log("여기에서 찍혀야함" + JwtDecoded + "JWTDecoded");
+    // setNickname(JwtDecoded.nickName);
   }, []);
 
   //   axios
@@ -140,41 +135,6 @@ const Storage = (): JSX.Element => {
       <>
         <Header></Header>
       </>
-      {/* <div className="title-bar">
-        <div className="title-holder">
-          <span className="title">
-            <span id="name">{nickname}</span> 님의 보관함입니다.
-          </span>
-        </div>
-
-        <div className="title_menu">
-          {id === curr_user ? (
-            <span id="welcome">{nickname}님</span>
-          ) : (
-            <span
-              id="welcome"
-              onClick={() => {
-                document.location.href = `/login`; //로그인 여부에 따라 다르게
-              }}
-            >
-              로그인/회원가입
-            </span>
-          )}
-
-          <span
-            id="storage"
-            onClick={() => {
-              if (curr_user == id) {
-                document.location.href = `/mypage/${id}`; // 유저의 레터스페이스로 이동 (로그인 유저와 같아야 함)
-              } else {
-                alert("자신의 보관함만 열람 가능합니다.");
-              }
-            }}
-          >
-            내 보관함
-          </span>
-        </div>
-      </div> */}
 
       <div className="letter_box">
         <div className="storage_year">2023년의 추억들</div>
@@ -183,7 +143,7 @@ const Storage = (): JSX.Element => {
             return (
               <StorageCard
                 key={index}
-                id={id}
+                id={recoilUserId}
                 year={2023}
                 imgSrc={monthImgUrl[index]}
                 month={index + 1}
@@ -198,7 +158,7 @@ const Storage = (): JSX.Element => {
             return (
               <StorageCard
                 key={index}
-                id={id}
+                id={recoilUserId}
                 imgSrc={monthImgUrl[index]}
                 month={index + 1}
                 year={2022}
