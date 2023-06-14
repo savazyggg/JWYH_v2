@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 // import Link from "@mui/material/Link";
 import { register, SingUpData } from "../../../apis/registerApi";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -15,9 +15,14 @@ import Visibility from "@mui/icons-material/Visibility";
 import Stack from "@mui/material/Stack";
 
 export default function SignUpForm() {
+  const navigate = useNavigate();
+  const defaultErMsg = "영문 소문자, 숫자 6~12 입력 해주세요";
+  const exsistErMsg = "이미 존재하는 아이디 입니다.";
   const [isIdError, setIsIdError] = useState(false);
+  const [idErrorMsg, setIdErrorMsg] = useState(defaultErMsg);
   const [isPwError, setIsPwError] = useState(false);
   const [isPwcError, setIsPwcError] = useState(false);
+  const [isExsistError, setIsExsistError] = useState(false);
 
   const [idValue, setIdValue] = useState<string>("");
   const [nickValue, setNickValue] = useState<string>("");
@@ -47,12 +52,23 @@ export default function SignUpForm() {
       password: pwValue,
     };
     const url = "http://34.64.195.153:5000";
-    await register(url, data);
+    await register(url, data).then((res) => {
+      if (res.ok) {
+        navigate("/login");
+      } else {
+        setIsExsistError(true);
+        setIdErrorMsg(exsistErMsg);
+      }
+    });
   };
 
   return (
     <Stack spacing={2}>
-      <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
+      <FormControl
+        error={isIdError || isExsistError}
+        sx={{ width: "100%" }}
+        variant="outlined"
+      >
         <InputLabel htmlFor="identification">아이디</InputLabel>
         <OutlinedInput
           id="identification"
@@ -64,6 +80,7 @@ export default function SignUpForm() {
               const eventValue = e.target.value;
               const regxId = new RegExp(/^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/);
               const isValidId = regxId.test(eventValue);
+              setIdErrorMsg(defaultErMsg);
               if (isValidId) {
                 setIsIdError(false);
               } else {
@@ -74,7 +91,7 @@ export default function SignUpForm() {
           }}
           label="아이디"
         />
-        <FormHelperText>영문 소문자, 숫자 6~12 입력 해주세요</FormHelperText>
+        <FormHelperText>{idErrorMsg}</FormHelperText>
       </FormControl>
       <FormControl sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="nickname">닉네임</InputLabel>
@@ -85,6 +102,7 @@ export default function SignUpForm() {
           aria-describedby="Nick-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNickValue(e.target.value);
+            setIsExsistError(false);
           }}
           label="닉네임"
         />

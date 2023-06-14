@@ -27,7 +27,7 @@ async function register(url = "", data: SingUpData) {
     referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json();
+  return response;
 }
 export { register };
 export type { SingUpData };
