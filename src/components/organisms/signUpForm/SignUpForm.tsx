@@ -76,6 +76,7 @@ export default function SignUpForm() {
           value={idValue}
           aria-describedby="id-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setIsExsistError(false);
             setIdValue(() => {
               const eventValue = e.target.value;
               const regxId = new RegExp(/^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/);
