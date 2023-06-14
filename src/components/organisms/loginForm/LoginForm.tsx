@@ -12,10 +12,18 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormHelperText from "@mui/material/FormHelperText";
+import jwt_decode from "jwt-decode";
 
 //리코일
 import { useRecoilState } from "recoil";
-import { isLoginedState, jwtState } from "../../../recoilStore";
+import {
+  isLoginedState,
+  jwtStringState,
+  uniqueIdState,
+  userIdState,
+  nickNameState,
+  providerState,
+} from "../../../recoilStore";
 //리코일
 
 export default function LoginForm() {
@@ -28,8 +36,12 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   //리코일
-  const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
-  const [jwtString, setJwtString] = useRecoilState(jwtState);
+  const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
+  const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
+  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
+  const [recoilNickName, setRecoilNickName] = useRecoilState(nickNameState);
+  const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
+  const [recoilProvider, setRecoilProvider] = useRecoilState(providerState);
 
   //리코일
 
@@ -54,8 +66,22 @@ export default function LoginForm() {
     localStorage.setItem("jwt", jwt);
 
     //리코일
-    setIsLogined(!isLogined);
-    setJwtString(jwtParsed.token);
+    setRecoilIsLogined(!isLogined);
+    setRecoilJwtString(() => {
+      interface JwtDecoded {
+        id: string;
+        nickName: string;
+        objectId: string;
+        iat: number;
+      }
+      const decoded: JwtDecoded = jwt_decode(jwtParsed.token);
+      const { id, nickName, objectId } = decoded;
+      setRecoilUniqueId(objectId);
+      setRecoilUserId(id);
+      setRecoilNickName(nickName);
+      setRecoilProvider("");
+      return jwtParsed.token;
+    });
     //리코일
 
     navigate("/main");
