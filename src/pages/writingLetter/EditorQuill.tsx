@@ -67,7 +67,7 @@ const Quill = styled(ReactQuill)`
 
   border: none;
   .ql-container {
-    border: 1px solid black;
+    border: none;
   }
   .ql-toolbar {
     border: none;
