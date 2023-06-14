@@ -228,3 +228,22 @@
   .modal-content::-webkit-scrollbar-thumb:hover {
     background-color: #76ac56;
   }
+
+  .empty-letter{
+  position: relative;
+  }
+  .empty-letter:before{
+    background-color: #000000bf;
+    height: 35%;
+    content: "편지를 받고, 상대 방이 지정한 날짜에 읽어 보세요!";
+    display: inline-grid;
+    width: 75%;
+    top: 33%;
+    left: 12%;
+    position: absolute;
+    z-index: 999;
+    text-align: center;
+    font-weight: 900;
+    color: #fff;
+    align-content: flex-end;
+  }

@@ -33,9 +33,14 @@ interface LetterCarouselProps {
   letters: LetterInterface;
   handleLetterData: any;
 }
-function LetterCarousel(props: LetterCarouselProps) {
-  const { isGuest, letters, handleLetterData } = props;
 
+function LetterCarousel(props: LetterCarouselProps) {
+  console.log("캐러셀 렌더링 진입");
+  const { isGuest, handleLetterData } = props;
+  console.log(props);
+  const letters: LetterInterface[] = Array.isArray(props.letters)
+    ? props.letters
+    : [];
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<any>({});
   const [letterContents, setLetterContent] = useState<any>();
@@ -100,10 +105,10 @@ function LetterCarousel(props: LetterCarouselProps) {
         effect={"cards"}
         grabCursor={true}
         modules={[EffectCards, Navigation]}
-        className="mySwiper"
+        className={`${letters.length ? "" : "empty-letter"}`}
         navigation={true}
       >
-        {letters.length &&
+        {letters.length ? (
           letters.map((letter) => (
             <SwiperSlide
               key={letter.index}
@@ -115,7 +120,27 @@ function LetterCarousel(props: LetterCarouselProps) {
               </div>
               <div className="sender-div">{`From .. ${letter.sender}`}</div>
             </SwiperSlide>
-          ))}
+          ))
+        ) : (
+          <div className="empty-letter">
+            <SwiperSlide className={"locked-on"}>
+              <div className="date-div">{`Unlock: 2024년 1월 2일`}</div>
+              <div className="sender-div">{`From .. 전여친`}</div>
+            </SwiperSlide>
+            <SwiperSlide className={"locked-on"}>
+              <div className="date-div">{`Unlock: 2024년 12월 25일`}</div>
+              <div className="sender-div">{`From .. 산타할아버지`}</div>
+            </SwiperSlide>
+            <SwiperSlide className={"locked-on"}>
+              <div className="date-div">{`Unlock: 2024년 7월 2일`}</div>
+              <div className="sender-div">{`From .. 엄마`}</div>
+            </SwiperSlide>
+            <SwiperSlide className={"locked-on"}>
+              <div className="date-div">{`Unlock: 2024년 1월 1일`}</div>
+              <div className="sender-div">{`From .. 신년인사`}</div>
+            </SwiperSlide>
+          </div>
+        )}
       </Swiper>
 
       {modalVisible && (
