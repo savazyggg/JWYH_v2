@@ -12,6 +12,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
 import jwt_decode from "jwt-decode";
 
 //리코일
@@ -139,22 +140,72 @@ export default function LoginForm() {
         />
         <FormHelperText>{isPwError && pwErMsg}</FormHelperText>
       </FormControl>
-      <Button
-        sx={{ width: "100%" }}
-        type="button"
-        variant="contained"
-        onClick={handleLogin}
-      >
-        로그인
-      </Button>
-      <Link
-        style={{ width: "100%" }}
-        to={googleUrl + "/login/federated/google"}
-      >
-        <Button sx={{ width: "100%" }} type="button" variant="contained">
-          구글 로그인
-        </Button>
-      </Link>
+      <Grid container spacing={1}>
+        <Grid item xs={6}>
+          <Button
+            sx={{ width: "100%" }}
+            type="button"
+            variant="contained"
+            onClick={handleLogin}
+          >
+            로그인
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Link
+            style={{ width: "100%" }}
+            to={googleUrl + "/login/federated/google"}
+          >
+            <Button sx={{ width: "100%" }} type="button" variant="contained">
+              구글 로그인
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={12}>
+          <Stack sx={{}}>
+            {/* <Button
+            sx={{ width: "100%" }}
+            type="button"
+            variant="contained"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            회원 가입
+          </Button> */}
+            <Link
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                color: "white",
+                width: "100%",
+              }}
+              to="/signup"
+            >
+              비밀번호 찾기
+            </Link>
+            {/* <Button
+            sx={{ width: "100%" }}
+            type="button"
+            variant="contained"
+            onClick={handleLogin}
+          >
+            비밀 번호 찾기
+          </Button> */}
+            <Link
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                color: "white",
+                width: "100%",
+              }}
+              to="/signup"
+            >
+              회원 가입 하러 가기
+            </Link>
+          </Stack>
+        </Grid>
+      </Grid>
     </Stack>
   );
 }
