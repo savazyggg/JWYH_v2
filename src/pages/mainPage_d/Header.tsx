@@ -22,7 +22,7 @@ const Header = ({ token, path }: HeaderProps) => {
 
   useEffect(() => {
     if (!token) {
-      let userId = path[path.length - 1];
+      const userId = path[path.length - 1];
       fetch(`http://34.64.195.153:5000/api/nickName/${userId}`)
         .then((res) => res.json())
         .then((res) => {
