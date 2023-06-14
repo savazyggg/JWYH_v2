@@ -97,7 +97,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} sx={{ minWidth: "440px" }}>
       <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="identification">아이디</InputLabel>
         <OutlinedInput
