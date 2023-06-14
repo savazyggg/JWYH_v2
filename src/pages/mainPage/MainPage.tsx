@@ -80,7 +80,7 @@ const MainPage = () => {
   const handleShare = () => {
     const tokenStr = localStorage.getItem("jwt");
     const JwtDecoded: JwtDecoded = jwt_decode(tokenStr || "");
-    const domain = "http://34.64.195.153:5000"; // 도메인
+    const domain = "kdt-sw-4-team14.elicecoding.com"; // 도메인
     const url = `${domain}/main/${JwtDecoded.objectId}`;
     navigator.clipboard
       .writeText(url)

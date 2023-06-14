@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SuccesSending from "./SuccesSending";
 
 interface Props {
@@ -26,6 +26,9 @@ const SendButton: React.FC<Props> = ({
     onHandleOpen();
   };
 
+  useEffect(() => {
+    onHandleOpen();
+  }, [onSuccessSendingStatus]);
   return (
     <>
       <Button type={type} onClick={onClickHandler}>

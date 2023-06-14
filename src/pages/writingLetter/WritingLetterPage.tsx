@@ -43,8 +43,9 @@ const WritingLetterPage: React.FC = () => {
   };
 
   const onSubmit = async () => {
-    // console.log(_userId);
-    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/${_userId}`;
+    console.log(_userId[0]);
+    console.log("버튼 클릭");
+    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/${_userId[0]}`;
 
     const sendData: SendData = {
       content: letterWriting,
@@ -77,9 +78,10 @@ const WritingLetterPage: React.FC = () => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(sendData),
       });
-      // console.log(response.json());
+      console.log(response, "편지보냄");
+      console.log(successSendingStatus);
       setSuccessSendingStatus(true);
-      return response.json();
+      // return response.json();
     } catch (error) {
       console.error(error);
     }
