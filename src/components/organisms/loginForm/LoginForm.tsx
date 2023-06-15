@@ -14,7 +14,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
 import jwt_decode from "jwt-decode";
-
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 //리코일
 import { useRecoilState } from "recoil";
 import {
@@ -53,7 +54,25 @@ export default function LoginForm() {
   ) => {
     event.preventDefault();
   };
-  const googleUrl = "http://localhost:3000";
+  const googleSocialLogin = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/auth/google/callback",
+          { code: codeResponse.code }
+        );
+        console.log(response.data);
+        // Handle the response from the backend
+      } catch (error) {
+        console.log(error);
+        // Handle the error
+      }
+    },
+    onError: (errorResponse) => {
+      console.log(errorResponse);
+    },
+    flow: "auth-code",
+  });
   const navigate = useNavigate();
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -169,14 +188,14 @@ export default function LoginForm() {
           </Button>
         </Grid>
         <Grid padding={"8px"} item xs={6}>
-          <Link
-            style={{ width: "100%" }}
-            to={googleUrl + "/login/federated/google"}
+          <Button
+            sx={{ width: "100%" }}
+            type="button"
+            variant="contained"
+            onClick={googleSocialLogin}
           >
-            <Button sx={{ width: "100%" }} type="button" variant="contained">
-              구글 로그인
-            </Button>
-          </Link>
+            구글 로그인
+          </Button>
         </Grid>
         <Grid item xs={12}>
           <Link
@@ -191,19 +210,6 @@ export default function LoginForm() {
           >
             회원 가입 하러 가기
           </Link>
-          <Stack sx={{}}>
-            {/* <Link
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                color: "white",
-                width: "100%",
-              }}
-              to="/findpwpage"
-            >
-              비밀번호 찾기
-            </Link> */}
-          </Stack>
         </Grid>
       </Grid>
       {/* // </Stack> */}

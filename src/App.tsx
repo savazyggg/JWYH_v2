@@ -20,7 +20,8 @@ import LoginPage from "./pages/loginPage/LoginPage";
 import StorageLetter from "./pages/storagePage/StorageLetter";
 import GuestMainPage from "./pages/mainPage/GuestMainPage";
 import AcntUpdPage from "./pages/acntUpdPage/AcntUpdPage";
-import FindPwPage from "./pages/findPwPage/findPwPage";
+// import FindPwPage from "./pages/findPwPage/findPwPage";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // const darkTheme = createTheme({
 //   palette: {
@@ -36,20 +37,22 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     {/* <ThemeProvider theme={darkTheme}> */}
     <CssBaseline />
     <RecoilRoot>
-      <Routes>
-        <Route path="/" element={<IntroPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/mypage" element={<AcntUpdPage />} />
-        <Route path="/findpwpage" element={<FindPwPage />} />
-        <Route path="/writingletter/:_id" element={<WritingLetterPage />} />
-        <Route path="/main" element={<MainPage />} />
-        <Route path="/main/:_id" element={<GuestMainPage />} />
-        <Route path="/storage" element={<Storage />} />
-        <Route path="/:id/:year/:month" element={<StorageLetter />} />
-        {/* 위 주소를 제외한 모든 주소는 error 페이지로 */}
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <GoogleOAuthProvider clientId="221947933367-6qlcs81lju9hsahq4gi97q9vsatpq394.apps.googleusercontent.com">
+        <Routes>
+          <Route path="/" element={<IntroPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/mypage" element={<AcntUpdPage />} />
+          {/* <Route path="/findpwpage" element={<FindPwPage />} /> */}
+          <Route path="/writingletter/:_id" element={<WritingLetterPage />} />
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/main/:_id" element={<GuestMainPage />} />
+          <Route path="/storage" element={<Storage />} />
+          <Route path="/:id/:year/:month" element={<StorageLetter />} />
+          {/* 위 주소를 제외한 모든 주소는 error 페이지로 */}
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </GoogleOAuthProvider>
     </RecoilRoot>
     {/* </ThemeProvider> */}
   </BrowserRouter>
