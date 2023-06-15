@@ -12,6 +12,7 @@ import {
   nickNameState,
   providerState,
 } from "../../recoilStore";
+import { forceReRender } from "@storybook/react";
 //리코일
 interface LetterCardProps {
   id: number;
@@ -45,14 +46,16 @@ const Letter: React.FC<LetterCardProps> = ({
   };
 
   return (
-    <div className="box" onClick={() => setModalVisible(true)}>
-      <div className="imgBox">
-        <div style={{ backgroundColor: color }} />
-        <h2>{id}</h2>
-      </div>
-      <div className="content">
-        <span>{sender}</span>
-      </div>
+    <div
+      className="mybox"
+      style={{ backgroundColor: color }}
+      onClick={() => setModalVisible(true)}
+    >
+      <span>{sender}</span>
+      <br />
+      <span>
+        {unlockYear}-{unlockMonth}-{unlockDate}
+      </span>
       {modalVisible && (
         <div className={`modal ${modalVisible ? "visible" : ""}`}>
           <div className="modal-content" style={{ backgroundColor: color }}>

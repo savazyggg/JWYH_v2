@@ -29,7 +29,7 @@ body {
 .container_grid {
   position: relative;
   display: grid;
-  width: 1200px;
+  width: 1000px;
   border-top: 1px solid #686868;
   grid-template-columns: repeat(6, 1fr);
   margin-bottom: 3em;
@@ -38,7 +38,7 @@ body {
 @media (min-width: 481px) and (max-width: 767px) {
   .container_grid {
     width: 600px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 2px;
   }
 }
@@ -59,21 +59,22 @@ body {
   border-bottom: 0.5rem solid;
 }
 
-.box {
+.mybox {
   position: relative;
   cursor: pointer;
-  width: 10rem;
-  height: 15rem;
+  width: 15rem;
+  height: 10rem;
   margin: 4rem;
+  border-radius: 20px;
 }
-
+/* 
 .container_grid .box:hover .imgBox {
   transform: translate(-3.5rem, -3.5rem);
 }
 
 .container_grid .box:hover .content {
   transform: translate(3.5rem, 3.5rem);
-}
+} */
 
 .imgBox {
   position: absolute;
@@ -92,8 +93,8 @@ body {
   resize: both;
   border-radius: 20px;
 }
-
-.content {
+/* 
+/* .content {
   position: absolute;
   top: 0;
   left: 0;
@@ -102,14 +103,14 @@ body {
   padding: 1.5rem;
   display: flex;
   justify-content: center;
-  background-color: #fff;
+  background-color: #fff; 
   z-index: 1;
   box-shadow: 0 5px 20px rgba(197, 197, 197, 0.5);
   border-radius: 20px;
   align-items: flex-end;
   text-align: center;
   transition: 0.3s ease-in-out;
-}
+} */
 
 .content h2 {
   display: block;
