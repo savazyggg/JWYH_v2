@@ -16,14 +16,10 @@ import Stack from "@mui/material/Stack";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
-  const defaultErMsg = "영문 소문자, 숫자 6~12 입력 해주세요";
+  const defaultIdErMsg = "영문 소문자, 숫자 6~12 입력 해주세요";
   const exsistErMsg = "이미 존재하는 아이디 입니다.";
-  const [isIdError, setIsIdError] = useState(false);
-  const [idErrorMsg, setIdErrorMsg] = useState(defaultErMsg);
-  const [isPwError, setIsPwError] = useState(false);
-  const [isPwcError, setIsPwcError] = useState(false);
-  const [isExsistError, setIsExsistError] = useState(false);
-
+  const [isError, setIsError] = useState(false);
+  const [erMsg, setErMsg] = useState("");
   const [idValue, setIdValue] = useState<string>("");
   const [nickValue, setNickValue] = useState<string>("");
   const [pwValue, setPwValue] = useState<string>("");
@@ -46,6 +42,27 @@ export default function SignUpForm() {
   const handleSignUp = async (e: any) => {
     e.preventDefault();
     console.log("SignUp Clicked");
+    console.log(idValue.length);
+    if (idValue.length === 0) {
+      setErMsg("아이디 값이 존재 하지 않습니다.");
+      setIsError(true);
+      return;
+    }
+    if (nickValue.length === 0) {
+      setErMsg("닉네임 값이 존재 하지 않습니다.");
+      setIsError(true);
+      return;
+    }
+    if (pwValue.length === 0) {
+      setErMsg("비밀번호 값이 존재 하지 않습니다.");
+      setIsError(true);
+      return;
+    }
+    if (pwcValue.length === 0) {
+      setErMsg("비밀번호 확인 값이 존재 하지 않습니다.");
+      setIsError(true);
+      return;
+    }
     const data: SingUpData = {
       userId: idValue,
       nickName: nickValue,
@@ -56,19 +73,15 @@ export default function SignUpForm() {
       if (res.ok) {
         navigate("/login");
       } else {
-        setIsExsistError(true);
-        setIdErrorMsg(exsistErMsg);
+        setIsError(true);
+        setErMsg(exsistErMsg);
       }
     });
   };
 
   return (
     <Stack spacing={2}>
-      <FormControl
-        error={isIdError || isExsistError}
-        sx={{ width: "100%" }}
-        variant="outlined"
-      >
+      <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="identification">아이디</InputLabel>
         <OutlinedInput
           id="identification"
@@ -76,25 +89,26 @@ export default function SignUpForm() {
           value={idValue}
           aria-describedby="id-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setIsExsistError(false);
+            setIsError(false);
             setIdValue(() => {
               const eventValue = e.target.value;
               const regxId = new RegExp(/^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/);
               const isValidId = regxId.test(eventValue);
-              setIdErrorMsg(defaultErMsg);
+              setErMsg(defaultIdErMsg);
               if (isValidId) {
-                setIsIdError(false);
+                setIsError(false);
+                setErMsg("");
               } else {
-                setIsIdError(true);
+                setIsError(true);
               }
               return eventValue;
             });
           }}
           label="아이디"
         />
-        <FormHelperText>{idErrorMsg}</FormHelperText>
+        <FormHelperText>{}</FormHelperText>
       </FormControl>
-      <FormControl sx={{ width: "100%" }} variant="outlined">
+      <FormControl sx={{ width: "100%" }} variant="outlined" error={isError}>
         <InputLabel htmlFor="nickname">닉네임</InputLabel>
         <OutlinedInput
           id="nickname"
@@ -103,12 +117,13 @@ export default function SignUpForm() {
           aria-describedby="Nick-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNickValue(e.target.value);
-            setIsExsistError(false);
+            setIsError(false);
+            setErMsg("");
           }}
           label="닉네임"
         />
       </FormControl>
-      <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
+      <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="password">비밀번호</InputLabel>
         <OutlinedInput
           id="password"
@@ -125,10 +140,14 @@ export default function SignUpForm() {
               console.log(isValidPw);
               console.log(eventValue);
               if (isValidPw) {
-                setIsPwError(false);
+                setIsError(false);
+                setErMsg("");
                 return eventValue;
               } else {
-                setIsPwError(true);
+                setErMsg(
+                  "*()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력해주세요"
+                );
+                setIsError(true);
               }
               return eventValue;
             });
@@ -147,16 +166,9 @@ export default function SignUpForm() {
           }
           label="비밀번호"
         />
-        <FormHelperText>
-          *()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력
-          해주세요
-        </FormHelperText>
+        <FormHelperText>{}</FormHelperText>
       </FormControl>
-      <FormControl
-        error={isPwError || isPwcError}
-        sx={{ width: "100%" }}
-        variant="outlined"
-      >
+      <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="passwordChk">비밀번호 확인</InputLabel>
         <OutlinedInput
           id="passwordChk"
@@ -171,9 +183,11 @@ export default function SignUpForm() {
               console.log(isValidPwc);
               console.log(eventValue);
               if (isValidPwc) {
-                setIsPwcError(false);
+                setIsError(false);
+                setErMsg("");
               } else {
-                setIsPwcError(true);
+                setErMsg("비밀번호가 다릅니다");
+                setIsError(true);
               }
               return eventValue;
             });
@@ -192,9 +206,7 @@ export default function SignUpForm() {
           }
           label="비밀번호"
         />
-        <FormHelperText>
-          {(isPwError || isPwcError) && "비밀번호가 맞지 않습니다"}
-        </FormHelperText>
+        <FormHelperText>{erMsg}</FormHelperText>
       </FormControl>
       <Button
         onClick={handleSignUp}
@@ -202,7 +214,7 @@ export default function SignUpForm() {
         fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
-        disabled={isIdError || isPwError || isPwcError}
+        disabled={isError}
       >
         회원가입
       </Button>
