@@ -17,6 +17,8 @@ const LetterStyle: React.FC<Props> = ({ onClick }) => {
     "#BA8A7B",
     "#607851",
     "#757851",
+    "#95A5A6",
+    "#5A6F6A",
   ];
 
   return (
@@ -45,4 +47,11 @@ export default LetterStyle;
 const Container = styled(Stack)`
   margin-left: 11px;
   margin-top: 10px;
+  img {
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 7px;
+    align-itme: center;
+    cursor: pointer;
+  }
 `;

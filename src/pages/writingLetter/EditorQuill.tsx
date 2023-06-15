@@ -5,9 +5,10 @@ import styled from "@emotion/styled";
 interface Props {
   value: string;
   onChange: (value: string) => void;
+  letterStyle: string;
 }
 
-const EditorQill: React.FC<Props> = ({ value, onChange }) => {
+const EditorQill: React.FC<Props> = ({ value, onChange, letterStyle }) => {
   const modules = {
     toolbar: [
       //[{ 'font': [] }],
@@ -60,7 +61,7 @@ const EditorQill: React.FC<Props> = ({ value, onChange }) => {
 
 export default EditorQill;
 
-const Quill = styled(ReactQuill)`
+const Quill = styled(ReactQuill)<{ letterStyle: string }>`
   margin-left: 10px;
   width: 750px;
   height: 550px;
@@ -71,5 +72,16 @@ const Quill = styled(ReactQuill)`
   }
   .ql-toolbar {
     border: none;
+  }
+
+  .ql-editor {
+    ::-webkit-scrollbar {
+      width: 10px;
+      background-color: #242424;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: ${letterStyle};
+    }
   }
 `;

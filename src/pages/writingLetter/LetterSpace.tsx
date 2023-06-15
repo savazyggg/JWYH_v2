@@ -4,7 +4,7 @@ import EditorQill from "./EditorQuill";
 interface Props {
   value: string;
   onChange: (value: string) => void;
-  letterStyle?: string;
+  letterStyle: string;
 }
 
 const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
@@ -15,7 +15,11 @@ const LetterSpace: React.FC<Props> = ({ value, onChange, letterStyle }) => {
           backgroundColor: letterStyle,
         }}
       >
-        <EditorQill value={value} onChange={onChange} />
+        <EditorQill
+          value={value}
+          onChange={onChange}
+          letterStyle={letterStyle}
+        />
       </Letter>
     </Container>
   );
@@ -28,5 +32,4 @@ const Letter = styled.div`
   width: 800px;
   height: 80vh;
   border-radius: 15px;
-  overflow: auto;
 `;

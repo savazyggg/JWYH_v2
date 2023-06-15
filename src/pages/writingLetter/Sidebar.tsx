@@ -9,14 +9,14 @@ interface Props {
 
 const Sidebar: React.FC<Props> = ({ onClick }) => {
   const [sidebarShow, setSidebarShow] = useState<boolean>(false);
-  const [letterStyleShow, setLetterStyleShow] = useState<boolean>(true);
+  const [letterStyleShow, setLetterStyleShow] = useState<boolean>(false);
 
   return sidebarShow ? (
     <SidebarNav show={sidebarShow}>
       <CloseWrapper>
         <ul>
+          <li onClick={() => setLetterStyleShow(false)}>안내사항</li>
           <li onClick={() => setLetterStyleShow(true)}>편지지</li>
-          <li onClick={() => setLetterStyleShow(false)}>편집</li>
         </ul>
         <CustomClose onClick={() => setSidebarShow(false)}>X</CustomClose>
       </CloseWrapper>
@@ -35,12 +35,20 @@ const SidebarNav = styled.div<{ show: boolean }>`
   top: 0;
   bottom: 0;
   left: 0;
-  background: #343434;
+  background-color: #242424;
   width: 260px;
   z-index: 16;
   transform: ${(show) => (show ? "translateX(0)" : "translateX(-100%)")};
-  transition: transform 0.2s; //애니메이션이 안먹음 ..ㅠ
   overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    background-color: #343434;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #242424;
+  }
 
   padding: 15px 20px;
   display: flex;
