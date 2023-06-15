@@ -11,20 +11,22 @@
   border-left: 200px solid transparent;
   border-right: 200px solid transparent;
   border-bottom: 150px solid transparent;
-  border-top: 150px solid #ff8789;
+  border-top: 150px solid #d3cfaa;
   transform-origin: top;
 }
 .cover.bottom.right {
   border-left: 200px solid transparent;
-  border-right: 200px solid #ff393c;
-  border-bottom: 150px solid #ff393c;
+  /* border-right: 200px solid #ff393c;
+  border-bottom: 150px solid #ff393c; */
+  border-right: 200px solid #67845a;
+  border-bottom: 150px solid #67845a;
   border-top: 150px solid transparent;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 3;
 }
 .cover.left {
-  border-left: 200px solid #ff5355;
+  border-left: 200px solid #51665f;
   border-right: 200px solid transparent;
   border-bottom: 150px solid transparent;
   border-top: 150px solid transparent;

@@ -20,6 +20,7 @@ import LoginPage from "./pages/loginPage/LoginPage";
 import StorageLetter from "./pages/storagePage/StorageLetter";
 import GuestMainPage from "./pages/mainPage/GuestMainPage";
 import AcntUpdPage from "./pages/acntUpdPage/AcntUpdPage";
+import FindPwPage from "./pages/findPwPage/findPwPage";
 
 // const darkTheme = createTheme({
 //   palette: {
@@ -40,6 +41,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mypage" element={<AcntUpdPage />} />
+        <Route path="/findpwpage" element={<FindPwPage />} />
         <Route path="/writingletter/:_id" element={<WritingLetterPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/main/:_id" element={<GuestMainPage />} />

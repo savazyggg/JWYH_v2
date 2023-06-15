@@ -169,35 +169,6 @@ export default function LoginForm() {
         </Grid>
         <Grid item xs={12}>
           <Stack sx={{}}>
-            {/* <Button
-            sx={{ width: "100%" }}
-            type="button"
-            variant="contained"
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            회원 가입
-          </Button> */}
-            <Link
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                color: "white",
-                width: "100%",
-              }}
-              to="/signup"
-            >
-              비밀번호 찾기
-            </Link>
-            {/* <Button
-            sx={{ width: "100%" }}
-            type="button"
-            variant="contained"
-            onClick={handleLogin}
-          >
-            비밀 번호 찾기
-          </Button> */}
             <Link
               style={{
                 display: "flex",
@@ -208,6 +179,17 @@ export default function LoginForm() {
               to="/signup"
             >
               회원 가입 하러 가기
+            </Link>
+            <Link
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                color: "white",
+                width: "100%",
+              }}
+              to="/findpwpage"
+            >
+              비밀번호 찾기
             </Link>
           </Stack>
         </Grid>

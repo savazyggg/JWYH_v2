@@ -206,7 +206,15 @@ export default function SignUpForm() {
       >
         회원가입
       </Button>
-      <Link style={{ color: "white", width: "100%" }} to="/login">
+      <Link
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          color: "white",
+          width: "100%",
+        }}
+        to="/login"
+      >
         로그인 하러 가기
       </Link>
     </Stack>
