@@ -11,15 +11,15 @@
   border-left: 200px solid transparent;
   border-right: 200px solid transparent;
   border-bottom: 150px solid transparent;
-  border-top: 150px solid #d3cfaa;
+  border-top: 150px solid #8cc393;
   transform-origin: top;
 }
 .cover.bottom.right {
   border-left: 200px solid transparent;
   /* border-right: 200px solid #ff393c;
   border-bottom: 150px solid #ff393c; */
-  border-right: 200px solid #67845a;
-  border-bottom: 150px solid #67845a;
+  border-right: 200px solid #65765a;
+  border-bottom: 150px solid #65765a;
   border-top: 150px solid transparent;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -43,11 +43,11 @@
   margin-left: auto;
   margin-right: auto;
   top: 200px;
-  background-color: #ff8789;
+  background-color: #65765a;
 }
-.letter {
+.introLetter {
+  background-color: #ffffe1;
   position: absolute;
-  background: #dedede;
   width: inherit;
   margin-left: auto;
   margin-right: auto;

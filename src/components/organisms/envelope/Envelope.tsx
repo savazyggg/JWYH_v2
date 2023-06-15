@@ -45,7 +45,7 @@ const Envelope = () => {
         <div ref={envelopeTopRef} className="cover top close"></div>
         <div className="cover bottom right"></div>
         <div className="cover left"></div>
-        <div ref={letterRef} className="letter"></div>
+        <div ref={letterRef} className="introLetter"></div>
       </div>
     </>
   );
