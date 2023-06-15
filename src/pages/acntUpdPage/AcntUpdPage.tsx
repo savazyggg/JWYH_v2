@@ -65,7 +65,7 @@ function AcntUpdPage() {
           maxWidth="sm"
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <Stack direction={"column"} spacing={2}>
+          <Stack sx={{ paddingTop: "50px" }} direction={"column"} spacing={2}>
             <Box sx={{ height: "50px" }}>
               <Header></Header>
             </Box>

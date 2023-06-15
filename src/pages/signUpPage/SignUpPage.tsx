@@ -50,14 +50,14 @@ function SignUpPage() {
           maxWidth="sm"
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <Stack direction={"column"} spacing={2}>
+          <Stack sx={{ paddingTop: "50px" }} direction={"column"} spacing={2}>
             <Typography
               sx={{ width: "100%" }}
               component="h1"
               variant="h4"
               style={{ color: "#93BA7B" }}
             >
-              회원가입!!"
+              회원가입
             </Typography>
             <SignUpForm />
           </Stack>

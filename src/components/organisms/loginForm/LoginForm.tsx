@@ -25,6 +25,7 @@ import {
   nickNameState,
   providerState,
 } from "../../../recoilStore";
+import { displayName } from "react-quill";
 //리코일
 
 export default function LoginForm() {
@@ -103,7 +104,16 @@ export default function LoginForm() {
   };
 
   return (
-    <Stack spacing={2} sx={{ minWidth: "440px" }}>
+    // <Stack spacing={2} sx={{ minWidth: "500px", minHeight:"500px" }}>
+    <div
+      style={{
+        display: "grid",
+        minWidth: "500px",
+        minHeight: "500px",
+        gridTemplateRows: "56px 56px 50px 40px",
+        gridGap: "10px",
+      }}
+    >
       <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="identification">아이디</InputLabel>
         <OutlinedInput
@@ -146,8 +156,9 @@ export default function LoginForm() {
         />
         <FormHelperText>{isPwError && pwErMsg}</FormHelperText>
       </FormControl>
-      <Grid container spacing={1}>
-        <Grid item xs={6}>
+      <div></div>
+      <Grid container rowSpacing={1} justifyContent={"center"}>
+        <Grid item xs={6} padding={"8px"}>
           <Button
             sx={{ width: "100%" }}
             type="button"
@@ -157,7 +168,7 @@ export default function LoginForm() {
             로그인
           </Button>
         </Grid>
-        <Grid item xs={6}>
+        <Grid padding={"8px"} item xs={6}>
           <Link
             style={{ width: "100%" }}
             to={googleUrl + "/login/federated/google"}
@@ -168,18 +179,19 @@ export default function LoginForm() {
           </Link>
         </Grid>
         <Grid item xs={12}>
+          <Link
+            style={{
+              padding: "8px",
+              display: "flex",
+              justifyContent: "flex-end",
+              color: "white",
+              width: "100%",
+            }}
+            to="/signup"
+          >
+            회원 가입 하러 가기
+          </Link>
           <Stack sx={{}}>
-            <Link
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                color: "white",
-                width: "100%",
-              }}
-              to="/signup"
-            >
-              회원 가입 하러 가기
-            </Link>
             {/* <Link
               style={{
                 display: "flex",
@@ -194,6 +206,7 @@ export default function LoginForm() {
           </Stack>
         </Grid>
       </Grid>
-    </Stack>
+      {/* // </Stack> */}
+    </div>
   );
 }

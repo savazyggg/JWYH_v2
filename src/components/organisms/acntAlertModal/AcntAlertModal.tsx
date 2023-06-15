@@ -45,30 +45,39 @@ export default function AlertModal(props: props) {
         >
           {modalMsg}
         </Typography>
-        <Button
-          onClick={() => {
-            handler();
-            setIsModalOpen(false);
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "100px 100px",
+            justifyContent: "center",
+            columnGap: "10px",
           }}
-          type="button"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          color="error"
         >
-          예
-        </Button>
-        <Button
-          onClick={() => {
-            setIsModalOpen(false);
-          }}
-          type="button"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          아니요
-        </Button>
+          <Button
+            onClick={() => {
+              handler();
+              setIsModalOpen(false);
+            }}
+            type="button"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            color="error"
+          >
+            예
+          </Button>
+          <Button
+            onClick={() => {
+              setIsModalOpen(false);
+            }}
+            type="button"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            아니요
+          </Button>
+        </div>
       </Box>
     </Modal>
   );

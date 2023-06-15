@@ -80,7 +80,16 @@ export default function SignUpForm() {
   };
 
   return (
-    <Stack spacing={2}>
+    // <Stack spacing={2}>
+    <div
+      style={{
+        display: "grid",
+        minWidth: "500px",
+        minHeight: "500px",
+        gridTemplateRows: "56px 56px 56px 56px 40px 40px",
+        gridGap: "10px",
+      }}
+    >
       <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="identification">아이디</InputLabel>
         <OutlinedInput
@@ -213,7 +222,6 @@ export default function SignUpForm() {
         type="button"
         fullWidth
         variant="contained"
-        sx={{ mt: 3, mb: 2 }}
         disabled={isError}
       >
         회원가입
@@ -229,6 +237,7 @@ export default function SignUpForm() {
       >
         로그인 하러 가기
       </Link>
-    </Stack>
+      {/* // </Stack> */}
+    </div>
   );
 }

@@ -57,7 +57,7 @@ function IntroPage() {
     <>
       <ThemeProvider theme={theme}>
         <Container style={{ display: "flex", justifyContent: "center" }}>
-          <Stack gap={3} direction={"column"}>
+          <Stack sx={{ paddingTop: "50px" }} gap={3} direction={"column"}>
             <Typography
               sx={{ width: "100%" }}
               component="h1"
@@ -71,7 +71,7 @@ function IntroPage() {
                 display: "flex",
                 alignItems: "end",
                 width: "100%",
-                height: "450px",
+                height: "420px",
               }}
             >
               <Envelope></Envelope>

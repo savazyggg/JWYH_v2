@@ -206,35 +206,43 @@ export default function AcntUpdForm() {
           {(isPwError || isPwcError) && "비밀번호가 맞지 않습니다"}
         </FormHelperText>
       </FormControl>
-      <Button
-        onClick={() => {
-          setIsDel(false);
-          setIsModalOpen(true);
-          setModalMsg("수정 하시겠습니까?");
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "210px 210px",
+          justifyContent: "center",
+          columnGap: "10px",
         }}
-        type="button"
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        disabled={isPwError || isPwcError}
       >
-        수정
-      </Button>
-      <Button
-        onClick={() => {
-          setIsDel(true);
-          setIsModalOpen(true);
-          setModalMsg("삭제 하시겠습니까?");
-        }}
-        type="button"
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        disabled={isPwError || isPwcError}
-        color="error"
-      >
-        계정 삭제
-      </Button>
+        <Button
+          onClick={() => {
+            setIsDel(false);
+            setIsModalOpen(true);
+            setModalMsg("수정 하시겠습니까?");
+          }}
+          type="button"
+          fullWidth
+          variant="contained"
+          disabled={isPwError || isPwcError}
+        >
+          수정
+        </Button>
+        <Button
+          onClick={() => {
+            setIsDel(true);
+            setIsModalOpen(true);
+            setModalMsg("삭제 하시겠습니까?");
+          }}
+          type="button"
+          fullWidth
+          variant="contained"
+          disabled={isPwError || isPwcError}
+          color="error"
+        >
+          계정 삭제
+        </Button>
+      </div>
+
       <AcntAlertModal
         modalMsg={modalMsg}
         isModalOpen={isModalOpen}

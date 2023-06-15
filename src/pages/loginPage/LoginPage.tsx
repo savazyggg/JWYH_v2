@@ -41,6 +41,15 @@ const theme = createTheme({
         },
       },
     },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          width: "100%",
+          display: "flex",
+          justifyContent: "flex-end",
+        },
+      },
+    },
   },
 });
 
@@ -52,14 +61,14 @@ function LoginPage() {
           maxWidth="sm"
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <Stack direction={"column"} spacing={2}>
+          <Stack sx={{ paddingTop: "50px" }} direction={"column"} spacing={2}>
             <Typography
               sx={{ width: "100%" }}
               component="h1"
               variant="h4"
               style={{ color: "#93BA7B" }}
             >
-              로그인 페이지!!"
+              로그인
             </Typography>
             <LoginForm />
           </Stack>
