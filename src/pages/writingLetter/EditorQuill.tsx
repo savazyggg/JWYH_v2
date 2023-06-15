@@ -62,8 +62,8 @@ export default EditorQill;
 
 const Quill = styled(ReactQuill)`
   margin-left: 10px;
-  width: 780px;
-  height: 700px;
+  width: 750px;
+  height: 550px;
 
   border: none;
   .ql-container {

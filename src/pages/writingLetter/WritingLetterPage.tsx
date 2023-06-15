@@ -49,7 +49,7 @@ const WritingLetterPage: React.FC = () => {
       style: lettrStyle,
       sender: senderName,
       unlockYear,
-      unlockMonth: unlockMonth,
+      unlockMonth,
       unlockDate: unlockDay,
     };
 
@@ -59,6 +59,7 @@ const WritingLetterPage: React.FC = () => {
         alert("편지 내용, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
         return;
       }
+      setSuccessSendingStatus(true);
     }
 
     try {
@@ -74,7 +75,6 @@ const WritingLetterPage: React.FC = () => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(sendData),
       });
-      setSuccessSendingStatus(true);
       return response.json();
     } catch (error) {
       console.error(error);

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
 import { useState } from "react";
-import ExtraStyle from "./ExtraStyle";
+import Notice from "./Notice";
 interface Props {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
@@ -20,7 +20,7 @@ const Sidebar: React.FC<Props> = ({ onClick }) => {
         </ul>
         <CustomClose onClick={() => setSidebarShow(false)}>X</CustomClose>
       </CloseWrapper>
-      {letterStyleShow ? <LetterStyle onClick={onClick} /> : <ExtraStyle />}
+      {letterStyleShow ? <LetterStyle onClick={onClick} /> : <Notice />}
     </SidebarNav>
   ) : (
     <Button onClick={() => setSidebarShow(true)}>사이드바</Button>
