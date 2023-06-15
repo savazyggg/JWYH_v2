@@ -71,7 +71,7 @@ function IntroPage() {
                 display: "flex",
                 alignItems: "end",
                 width: "100%",
-                height: "500px",
+                height: "450px",
               }}
             >
               <Envelope></Envelope>
