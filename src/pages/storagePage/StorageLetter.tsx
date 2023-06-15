@@ -6,6 +6,7 @@ import LetterCard from "./Letter";
 import moment from "moment";
 import { useRecoilState } from "recoil";
 import Header from "../../components/organisms/header/Header";
+import letterImgUrl from "./letterUrls";
 import {
   isLoginedState,
   jwtStringState,
@@ -97,6 +98,7 @@ const StorageLetter: React.FC = () => {
                 color={data.style}
                 unlockYear={data.unlockYear}
                 unlockMonth={data.unlockMonth}
+                imgSrc={letterImgUrl[index % 8]}
               />
             );
           })}

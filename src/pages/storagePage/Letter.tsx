@@ -39,6 +39,7 @@ const Letter: React.FC<LetterCardProps> = ({
   unlockDate,
   unlockYear,
   unlockMonth,
+  imgSrc,
 }) => {
   const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
   const [modalVisible, setModalVisible] = useState(false);
@@ -66,16 +67,17 @@ const Letter: React.FC<LetterCardProps> = ({
       style={{ backgroundColor: color }}
       onClick={() => setModalVisible(true)}
     >
-      <span>{sender}</span>
-      <br />
-      <h2>
+      <img src={imgSrc} alt="" />
+      <span>
         {unlockYear}-{unlockMonth}-{unlockDate}
-      </h2>
+      </span>
+      <br />
+      <h2>{sender}</h2>
       {modalVisible && (
         <div className={`modal ${modalVisible ? "visible" : ""}`}>
           <div className="modal-content" style={{ backgroundColor: color }}>
             <div>
-              열린날짜 :{unlockYear}-{unlockMonth}-{unlockDate}
+              {unlockYear}-{unlockMonth}-{unlockDate}
             </div>
             <div className="modal-sender">{sender}</div>
             <div
