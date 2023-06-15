@@ -24,18 +24,18 @@ interface LetterCardProps {
   unlockYear: string;
   unlockMonth: string;
 }
-const OkButton = muiStyled(Button)({
-  backgroundColor: "#93BA7B",
-  "&:hover": {
-    backgroundColor: "#76ac56",
-  },
-});
-const CancelButton = muiStyled(Button)({
-  backgroundColor: "#93BA7B",
-  "&:hover": {
-    backgroundColor: "#76ac56",
-  },
-});
+// const OkButton = muiStyled(Button)({
+//   backgroundColor: "#93BA7B",
+//   "&:hover": {
+//     backgroundColor: "#76ac56",
+//   },
+// });
+// const CancelButton = muiStyled(Button)({
+//   backgroundColor: "#93BA7B",
+//   "&:hover": {
+//     backgroundColor: "#76ac56",
+//   },
+// });
 
 const Letter: React.FC<LetterCardProps> = ({
   id,
@@ -61,6 +61,8 @@ const Letter: React.FC<LetterCardProps> = ({
       .then((response) => {
         console.log(response);
         console.log("삭제 성공" + response.message);
+        alert("삭제 성공했습니다!");
+        setModalVisible(false);
       });
   };
   return (
@@ -85,26 +87,28 @@ const Letter: React.FC<LetterCardProps> = ({
               className="modal-content-div"
               dangerouslySetInnerHTML={{ __html: content }}
             ></div>
-            <CancelButton
-              variant="contained"
+            <Button
+              variant="outlined"
               size="small"
+              style={{ marginRight: "80px" }}
               onClick={(e: any) => {
                 e.stopPropagation();
                 deleteLetter();
               }}
             >
-              여기는 삭제
-            </CancelButton>
-            <OkButton
+              삭제
+            </Button>
+            <Button
               variant="contained"
               size="small"
+              className="modal-button"
               onClick={(e: any) => {
                 e.stopPropagation();
                 closeModal();
               }}
             >
               닫기
-            </OkButton>
+            </Button>
           </div>
         </div>
       )}
