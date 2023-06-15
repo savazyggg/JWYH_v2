@@ -19,6 +19,8 @@ interface LetterCardProps {
   sender: string;
   unlockDate: string;
   color: string;
+  unlockYear: string;
+  unlockMonth: string;
 }
 const OkButton = muiStyled(Button)({
   backgroundColor: "#93BA7B",
@@ -33,15 +35,19 @@ const Letter: React.FC<LetterCardProps> = ({
   sender,
   color,
   unlockDate,
+  unlockYear,
+  unlockMonth,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
     setModalVisible(false);
+    console.log("여기 들어오긴 했음");
   };
 
   return (
     <div className="box" onClick={() => setModalVisible(true)}>
       <div className="imgBox">
+        <div style={{ backgroundColor: color }} />
         <h2>{id}</h2>
       </div>
       <div className="content">
@@ -50,7 +56,9 @@ const Letter: React.FC<LetterCardProps> = ({
       {modalVisible && (
         <div className={`modal ${modalVisible ? "visible" : ""}`}>
           <div className="modal-content" style={{ backgroundColor: color }}>
-            <div>{unlockDate}</div>
+            <div>
+              열린날짜 :{unlockYear}-{unlockMonth}-{unlockDate}
+            </div>
             <div className="modal-sender">{sender}</div>
             <div
               className="modal-content-div"

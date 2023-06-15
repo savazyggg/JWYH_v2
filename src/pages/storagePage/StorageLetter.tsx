@@ -93,6 +93,8 @@ const StorageLetter: React.FC = () => {
                 sender={data.sender}
                 unlockDate={data.unlockDate}
                 color={data.style}
+                unlockYear={data.unlockYear}
+                unlockMonth={data.unlockMonth}
               />
             );
           })}
