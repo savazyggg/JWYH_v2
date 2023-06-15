@@ -2,19 +2,19 @@
   margin: 0px;
   padding: 0px;
 }
-.cover {
+.coverIntro {
   position: absolute;
   height: 0px;
   width: 0px;
 }
-.cover.top {
+.coverIntro.topIntro {
   border-left: 200px solid transparent;
   border-right: 200px solid transparent;
   border-bottom: 150px solid transparent;
   border-top: 150px solid #8cc393;
   transform-origin: top;
 }
-.cover.bottom.right {
+.coverIntro.bottomIntro.rightIntro {
   border-left: 200px solid transparent;
   /* border-right: 200px solid #ff393c;
   border-bottom: 150px solid #ff393c; */
@@ -25,7 +25,7 @@
   border-bottom-right-radius: 10px;
   z-index: 3;
 }
-.cover.left {
+.coverIntro.leftIntro {
   border-left: 200px solid #51665f;
   border-right: 200px solid transparent;
   border-bottom: 150px solid transparent;
@@ -33,7 +33,7 @@
   border-bottom-left-radius: 10px;
   z-index: 3;
 }
-.envelope {
+.envelopeIntro {
   --envelopeHeight: 300px;
   position: inherit;
   width: 400px;
@@ -46,7 +46,7 @@
   background-color: #65765a;
 }
 
-.introLetter {
+.introLetterIntro {
   background-color: #ffffe1;
   position: absolute;
   width: inherit;
@@ -60,7 +60,7 @@
   text-align: center;
   font-family: "Kalam", cursive;
 }
-.introLetter.enlargeLetter {
+.introLetterIntro.enlargeLetterIntro {
   animation: smallToBig 0.1s 0.5s linear 1 forwards;
 }
 
@@ -75,7 +75,7 @@
   }
 }
 
-.loopLetterAnimation {
+.loopLetterAnimationIntro {
   animation: openNclose 0.5s linear 1 forwards;
 }
 @keyframes openNclose {
@@ -97,7 +97,7 @@
   }
 }
 
-.loopPartOutNInAnimation {
+.loopPartOutNInAnimationIntro {
   animation: partOutNIn 0.5s linear 1 forwards;
 }
 @keyframes partOutNIn {

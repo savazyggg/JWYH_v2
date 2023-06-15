@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Box, Stack, ThemeProvider, createTheme } from "@mui/material";
-import Envelope from "../../components/organisms/envelope/Envelope";
+import EnvelopeIntro from "../../components/organisms/envelopeIntro/EnvelopeIntro";
 const theme = createTheme({
   palette: {
     primary: {
@@ -65,10 +65,8 @@ function IntroPage() {
           }}
         >
           <Stack gap={3} direction={"column"}>
-            <Typography
+            <Box
               sx={{ width: "100%" }}
-              component="h4"
-              variant="h1"
               style={{
                 color: "#93BA7B",
                 fontWeight: "900",
@@ -78,10 +76,8 @@ function IntroPage() {
               }}
             >
               JWYH
-              <Typography
+              <Box
                 sx={{ width: "100%" }}
-                component="h1"
-                variant="h6"
                 style={{
                   color: "#fff",
                   fontWeight: "400",
@@ -90,8 +86,8 @@ function IntroPage() {
                 }}
               >
                 you will be Happy
-              </Typography>
-            </Typography>
+              </Box>
+            </Box>
             <Box
               sx={{
                 display: "flex",
@@ -100,7 +96,7 @@ function IntroPage() {
                 height: "100%",
               }}
             >
-              <Envelope></Envelope>
+              <EnvelopeIntro></EnvelopeIntro>
               {/* <img
               style={{ width: "100%" }}
               src="https://dummyimage.com/400x400/bababa/000000"

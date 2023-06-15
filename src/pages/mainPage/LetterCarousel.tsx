@@ -8,6 +8,7 @@ import "./LetterCarousel.css";
 import { EffectCards, Navigation } from "swiper";
 import { useRecoilState } from "recoil";
 import { userIdState } from "../../recoilStore";
+import Envelope from "../../components/organisms/envelope/Envelope";
 
 interface LetterInterface {
   id?: number;
@@ -141,11 +142,12 @@ function LetterCarousel(props: LetterCarouselProps) {
 
       {modalVisible && (
         <div className={`modal ${modalVisible ? "visible" : ""}`}>
-          <div
-            className="modal-content"
-            style={{ backgroundColor: modalContent.color }}
-          >
-            <div>{modalContent.unlockDate}</div>
+          <div className="modal-content">
+            <Envelope
+              modalContent={modalContent}
+              closeModal={closeModal}
+            ></Envelope>
+            {/* <div>{modalContent.unlockDate}</div>
             <div className="modal-sender">{`From .. ${modalContent.sender}`}</div>
             <div
               className="modal-content-div"
@@ -153,7 +155,7 @@ function LetterCarousel(props: LetterCarouselProps) {
             ></div>
             <OkButton variant="contained" size="small" onClick={closeModal}>
               닫기
-            </OkButton>
+            </OkButton> */}
           </div>
         </div>
       )}
