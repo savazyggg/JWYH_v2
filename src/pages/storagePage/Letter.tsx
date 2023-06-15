@@ -1,4 +1,7 @@
+import _, { useState } from "react";
 import "./letter.css";
+import { Button } from "@mui/material";
+import { styled as muiStyled } from "@mui/system";
 //리코일
 import { useRecoilState } from "recoil";
 import {
@@ -11,29 +14,54 @@ import {
 } from "../../recoilStore";
 //리코일
 interface LetterCardProps {
-  id: string;
-  content: number;
+  id: number;
+  content: string;
+  sender: string;
+  unlockDate: string;
+  color: string;
 }
+const OkButton = muiStyled(Button)({
+  backgroundColor: "#93BA7B",
+  "&:hover": {
+    backgroundColor: "#76ac56",
+  },
+});
 
-const Letter: React.FC<LetterCardProps> = ({ id, content }) => {
-  const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
-  const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
-  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
-  const [myNickName, setMyNickName] = useRecoilState(nickNameState);
-  const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
+const Letter: React.FC<LetterCardProps> = ({
+  id,
+  content,
+  sender,
+  color,
+  unlockDate,
+}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
-    <div
-      className="box"
-      onClick={() => {
-        // document.location.href = `${recoilUserId}/${year}/${month}`;
-      }}
-    >
+    <div className="box" onClick={() => setModalVisible(true)}>
       <div className="imgBox">
-        <h2>{id}월</h2>
+        <h2>{id}</h2>
       </div>
       <div className="content">
-        <span>{content}</span>
+        <span>{sender}</span>
       </div>
+      {modalVisible && (
+        <div className={`modal ${modalVisible ? "visible" : ""}`}>
+          <div className="modal-content" style={{ backgroundColor: color }}>
+            <div>{unlockDate}</div>
+            <div className="modal-sender">{sender}</div>
+            <div
+              className="modal-content-div"
+              dangerouslySetInnerHTML={{ __html: content }}
+            ></div>
+            <OkButton variant="contained" size="small" onClick={closeModal}>
+              닫기
+            </OkButton>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

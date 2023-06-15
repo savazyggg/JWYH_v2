@@ -86,7 +86,15 @@ const StorageLetter: React.FC = () => {
         </div>
         <div className="container_grid">
           {letterSavedInfo.map((data, index) => {
-            return <LetterCard id={index} content={data.content} />;
+            return (
+              <LetterCard
+                id={index}
+                content={data.content}
+                sender={data.sender}
+                unlockDate={data.unlockDate}
+                color={data.style}
+              />
+            );
           })}
         </div>
       </div>
