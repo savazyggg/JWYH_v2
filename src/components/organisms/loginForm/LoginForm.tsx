@@ -58,7 +58,7 @@ export default function LoginForm() {
     onSuccess: async (codeResponse) => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/google/callback",
+          "https://kdt-sw-4-team14.elicecoding.com/api/auth/google/callback",
           { code: codeResponse.code }
         );
         console.log(response.data);
