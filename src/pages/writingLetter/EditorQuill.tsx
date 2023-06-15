@@ -61,7 +61,7 @@ const EditorQill: React.FC<Props> = ({ value, onChange, letterStyle }) => {
 
 export default EditorQill;
 
-const Quill = styled(ReactQuill)<{ letterStyle: string }>`
+const Quill = styled(ReactQuill)`
   margin-left: 10px;
   width: 750px;
   height: 550px;
@@ -81,7 +81,7 @@ const Quill = styled(ReactQuill)<{ letterStyle: string }>`
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: ${letterStyle};
+      background-color: #242424;
     }
   }
 `;

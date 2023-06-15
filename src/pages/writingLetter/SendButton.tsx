@@ -33,11 +33,9 @@ const SendButton: React.FC<Props> = ({
     onClick(e);
     onHandleOpen();
   };
-  //console.log("1" + onSuccessSendingStatus);
+
   useEffect(() => {
-    //console.log("2" + onSuccessSendingStatus);
-    onHandleOpen();
-    //console.log("3" + onSuccessSendingStatus);
+    onSuccessSendingStatus && setOpen(true);
   }, [onSuccessSendingStatus]);
   return (
     <>
