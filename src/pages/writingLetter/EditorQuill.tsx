@@ -45,12 +45,13 @@ const EditorQill: React.FC<Props> = ({ value, onChange, letterStyle }) => {
   ];
 
   return (
-    <div>
+    <div style={{ width: "100%", height: "100%" }}>
       <Quill
         theme="snow"
         modules={modules}
         formats={formats}
         value={value || ""}
+        myLetterStyle={letterStyle}
         onChange={(_content, _delta, _source, editor) =>
           onChange(editor.getHTML())
         }
@@ -61,10 +62,10 @@ const EditorQill: React.FC<Props> = ({ value, onChange, letterStyle }) => {
 
 export default EditorQill;
 
-const Quill = styled(ReactQuill)`
-  margin-left: 10px;
-  width: 750px;
-  height: 550px;
+const Quill = styled(ReactQuill)<{ myLetterStyle: string }>`
+  margin-left: 25px;
+  width: 95%;
+  height: 90%;
 
   border: none;
   .ql-container {
@@ -77,7 +78,7 @@ const Quill = styled(ReactQuill)`
   .ql-editor {
     ::-webkit-scrollbar {
       width: 10px;
-      background-color: #242424;
+      background-color: ${(props) => props.myLetterStyle};
     }
 
     ::-webkit-scrollbar-thumb {

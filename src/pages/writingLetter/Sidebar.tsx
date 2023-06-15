@@ -23,7 +23,7 @@ const Sidebar: React.FC<Props> = ({ onClick }) => {
       {letterStyleShow ? <LetterStyle onClick={onClick} /> : <Notice />}
     </SidebarNav>
   ) : (
-    <Button onClick={() => setSidebarShow(true)}>사이드바</Button>
+    <Button onClick={() => setSidebarShow(true)}>◀︎ 편지지 고르러가기</Button>
   );
 };
 
@@ -85,6 +85,13 @@ const CloseWrapper = styled.div`
 `;
 
 const Button = styled.button`
+  margin-top: 60px;
   left: 0;
   position: fixed;
+  background-color: #93ba7b;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  padding: 5px;
+  border: 0;
 `;
