@@ -73,7 +73,11 @@ const Button = styled.button`
   height: 50px;
   color: white;
   font-size: 20px;
+  cursor: pointer;
   line-height: 50px;
+  &:hover {
+    background-color: #bed7a9;
+  }
   span {
     margin-right: 7px;
     vertical-align: top;

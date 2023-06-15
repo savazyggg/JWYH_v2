@@ -23,14 +23,14 @@ const Sidebar: React.FC<Props> = ({ onClick }) => {
       {letterStyleShow ? <LetterStyle onClick={onClick} /> : <Notice />}
     </SidebarNav>
   ) : (
-    <Button onClick={() => setSidebarShow(true)}>◀︎ 편지지 고르러가기</Button>
+    <Button onClick={() => setSidebarShow(true)}>◀︎ 편지지 고르기 💝</Button>
   );
 };
 
 export default Sidebar;
 
 const SidebarNav = styled.div<{ show: boolean }>`
-  margin-top: 50px; //헤더 높이만큼
+  margin-top: 50px;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -64,6 +64,7 @@ const SidebarNav = styled.div<{ show: boolean }>`
     margin: 0px;
   }
   li {
+    color: ;
     list-style: none;
     float: left;
     padding: 0 15px;
@@ -71,6 +72,9 @@ const SidebarNav = styled.div<{ show: boolean }>`
     justify-content: center;
     text-align: center;
     cursor: pointer;
+    &:hover {
+      color: #bed7a9;
+    }
   }
 `;
 
@@ -87,11 +91,17 @@ const CloseWrapper = styled.div`
 const Button = styled.button`
   margin-top: 60px;
   left: 0;
+  margin-left: -9px;
   position: fixed;
   background-color: #93ba7b;
   font-size: 15px;
   font-weight: 700;
   color: white;
-  padding: 5px;
+  padding: 12px;
   border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #bed7a9;
+  }
 `;

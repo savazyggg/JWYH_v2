@@ -28,7 +28,7 @@ const Notice = () => {
         </div>
         <div>
           <p className="title">💌 편지보내기 클릭</p>
-          <p>마음을 담은 편지를 편지보내기 버튼 클릭하여 보내기 완료!</p>
+          <p>마음을 담은 편지를 편지보내기 버튼을 클릭하여 보내기 완료!</p>
         </div>
       </div>
     </Container>
@@ -38,7 +38,7 @@ const Notice = () => {
 export default Notice;
 
 const Container = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
   h3 {
     margin-bottom: 10px;
     text-align: center;
@@ -51,6 +51,6 @@ const Container = styled.div`
   }
   .title {
     color: #93ba7b;
-    font-weight: 900;
+    font-weight: 900;ß
   }
 `;
