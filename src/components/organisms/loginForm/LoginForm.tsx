@@ -180,7 +180,7 @@ export default function LoginForm() {
             >
               회원 가입 하러 가기
             </Link>
-            <Link
+            {/* <Link
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
@@ -190,7 +190,7 @@ export default function LoginForm() {
               to="/findpwpage"
             >
               비밀번호 찾기
-            </Link>
+            </Link> */}
           </Stack>
         </Grid>
       </Grid>
