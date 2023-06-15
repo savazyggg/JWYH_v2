@@ -50,7 +50,7 @@ const EditorQill: React.FC<Props> = ({ value, onChange }) => {
         modules={modules}
         formats={formats}
         value={value || ""}
-        onChange={(content, delta, source, editor) =>
+        onChange={(_content, _delta, _source, editor) =>
           onChange(editor.getHTML())
         }
       />

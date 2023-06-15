@@ -21,7 +21,7 @@ const SendButton: React.FC<Props> = ({
   const [open, setOpen] = useState(false);
   const nav = useNavigate();
   const onHandleOpen = () => onSuccessSendingStatus && setOpen(true);
-  const _userId = useRecoilValue(uniqueIdState);
+  const _userId: string = useRecoilValue(uniqueIdState);
   const onHandleClose = () => {
     setOpen(false);
     nav(`/main/${_userId}`);
