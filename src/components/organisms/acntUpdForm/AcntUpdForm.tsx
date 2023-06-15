@@ -184,8 +184,6 @@ export default function AcntUpdForm() {
               const eventValue = e.target.value;
               const regxPw = new RegExp(pwValue);
               const isValidPwc = regxPw.test(eventValue);
-              console.log(pwcValue);
-              console.log(pwValue);
               if (eventValue.length === 0) {
                 setIsPwcError(false);
                 return eventValue;
@@ -231,9 +229,14 @@ export default function AcntUpdForm() {
       >
         <Button
           onClick={() => {
-            setIsDel(false);
-            setIsModalOpen(true);
-            setModalMsg("수정 하시겠습니까?");
+            if (pwValue.length === pwcValue.length) {
+              setIsDel(false);
+              setIsModalOpen(true);
+              setModalMsg("수정 하시겠습니까?");
+            } else {
+              setIsPwError(true);
+              setIsPwcError(true);
+            }
           }}
           type="button"
           fullWidth
