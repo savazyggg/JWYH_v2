@@ -56,22 +56,48 @@ function IntroPage() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Container style={{ display: "flex", justifyContent: "center" }}>
-          <Stack sx={{ paddingTop: "50px" }} gap={3} direction={"column"}>
+        <Container
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <Stack gap={3} direction={"column"}>
             <Typography
               sx={{ width: "100%" }}
-              component="h1"
-              variant="h4"
-              style={{ color: "#93BA7B" }}
+              component="h4"
+              variant="h1"
+              style={{
+                color: "#93BA7B",
+                fontWeight: "900",
+                letterSpacing: "-16px",
+                marginBottom: "160px",
+                lineHeight: "0.9",
+              }}
             >
-              만나서 반가워요!!
+              JWYH
+              <Typography
+                sx={{ width: "100%" }}
+                component="h1"
+                variant="h6"
+                style={{
+                  color: "#fff",
+                  fontWeight: "400",
+                  letterSpacing: "-1px",
+                  lineHeight: "0px",
+                }}
+              >
+                you will be Happy
+              </Typography>
             </Typography>
             <Box
               sx={{
                 display: "flex",
                 alignItems: "end",
                 width: "100%",
-                height: "420px",
+                height: "100%",
               }}
             >
               <Envelope></Envelope>

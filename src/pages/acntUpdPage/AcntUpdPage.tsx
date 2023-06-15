@@ -63,12 +63,15 @@ function AcntUpdPage() {
       <ThemeProvider theme={theme}>
         <Container
           maxWidth="sm"
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
         >
-          <Stack sx={{ paddingTop: "50px" }} direction={"column"} spacing={2}>
-            <Box sx={{ height: "50px" }}>
-              <Header></Header>
-            </Box>
+          <Stack spacing={2}>
+            <Header></Header>
             {isLogined && <AcntUpdForm />}
           </Stack>
         </Container>

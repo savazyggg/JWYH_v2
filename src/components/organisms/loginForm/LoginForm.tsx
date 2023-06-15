@@ -123,13 +123,12 @@ export default function LoginForm() {
   };
 
   return (
-    // <Stack spacing={2} sx={{ minWidth: "500px", minHeight:"500px" }}>
     <div
       style={{
         display: "grid",
         minWidth: "500px",
         minHeight: "500px",
-        gridTemplateRows: "56px 56px 50px 40px",
+        gridTemplateRows: "56px 56px 0px 40px",
         gridGap: "25px",
       }}
     >
