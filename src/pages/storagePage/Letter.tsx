@@ -24,17 +24,11 @@ interface LetterCardProps {
   unlockYear: string;
   unlockMonth: string;
 }
-// const OkButton = muiStyled(Button)({
-//   backgroundColor: "#93BA7B",
-//   "&:hover": {
-//     backgroundColor: "#76ac56",
-//   },
-// });
-// const CancelButton = muiStyled(Button)({
-//   backgroundColor: "#93BA7B",
-//   "&:hover": {
-//     backgroundColor: "#76ac56",
-//   },
+// const Button = muiStyled(Button)({
+// backgroundColor: "#93BA7B",
+// "&:hover": {
+// backgroundColor: "#76ac56",
+// },
 // });
 
 const Letter: React.FC<LetterCardProps> = ({
@@ -63,6 +57,7 @@ const Letter: React.FC<LetterCardProps> = ({
         console.log("삭제 성공" + response.message);
         alert("삭제 성공했습니다!");
         setModalVisible(false);
+        window.location.reload();
       });
   };
   return (
@@ -88,9 +83,9 @@ const Letter: React.FC<LetterCardProps> = ({
               dangerouslySetInnerHTML={{ __html: content }}
             ></div>
             <Button
-              variant="outlined"
+              variant="contained"
               size="small"
-              style={{ marginRight: "80px" }}
+              style={{ marginRight: "80px", backgroundColor: "#DE0044" }}
               onClick={(e: any) => {
                 e.stopPropagation();
                 deleteLetter();
@@ -101,10 +96,11 @@ const Letter: React.FC<LetterCardProps> = ({
             <Button
               variant="contained"
               size="small"
-              className="modal-button"
+              style={{ backgroundColor: "#93BA7B" }}
               onClick={(e: any) => {
                 e.stopPropagation();
                 closeModal();
+                forceReRender();
               }}
             >
               닫기
