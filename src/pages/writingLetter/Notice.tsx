@@ -51,6 +51,16 @@ const Container = styled.div`
   }
   .title {
     color: #93ba7b;
-    font-weight: 900;ß
+    font-weight: 900;
+    animation: shake 0.5s ease-in-out infinite;
+
+  @keyframes shake {
+    from {
+      transform: rotate(0.5deg);
+    }
+    to {
+      transform: rotate(0deg);
   }
+  
+}
 `;

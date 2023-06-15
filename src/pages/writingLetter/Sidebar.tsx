@@ -36,7 +36,7 @@ const SidebarNav = styled.div<{ show: boolean }>`
   bottom: 0;
   left: 0;
   background-color: #242424;
-  width: 260px;
+  width: 280px;
   z-index: 16;
   transform: ${(show) => (show ? "translateX(0)" : "translateX(-100%)")};
   overflow: auto;
@@ -64,16 +64,17 @@ const SidebarNav = styled.div<{ show: boolean }>`
     margin: 0px;
   }
   li {
-    color: ;
+    background-color: #93ba7b;
     list-style: none;
     float: left;
     padding: 0 15px;
-    margin: 0 5px;
+    margin: 0 7px;
     justify-content: center;
     text-align: center;
     cursor: pointer;
     &:hover {
-      color: #bed7a9;
+      color: #93ba7b;
+      background-color: white;
     }
   }
 `;
@@ -81,6 +82,7 @@ const SidebarNav = styled.div<{ show: boolean }>`
 const CustomClose = styled(CloseIcon)`
   cursor: pointer;
   font: black;
+  margin-left: 10px;
 `;
 
 const CloseWrapper = styled.div`
