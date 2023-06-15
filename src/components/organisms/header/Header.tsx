@@ -38,7 +38,7 @@ const Header = () => {
   const [nickName, setNickName] = useRecoilState(nickNameState);
   const location = useLocation();
   const navigate = useNavigate();
-  const URL = "http://34.64.195.153:5000";
+  const URL = "https://kdt-sw-4-team14.elicecoding.com";
 
   const onLogOut = () => {
     setIsLogined(false);

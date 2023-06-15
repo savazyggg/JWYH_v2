@@ -57,7 +57,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    const url = "http://34.64.195.153:5000";
+    const url = "https://kdt-sw-4-team14.elicecoding.com";
     const data: LoginData = {
       userId: idValue,
       password: pwValue,

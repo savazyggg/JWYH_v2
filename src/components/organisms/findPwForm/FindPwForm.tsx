@@ -21,7 +21,7 @@ export default function FindPwForm() {
     useState("닉네임이 존재 하지 않습니다");
   const [idValue, setIdValue] = useState<string>("");
   const [nickValue, setNickValue] = useState<string>("");
-  const url = "http://34.64.195.153:5000";
+  const url = "https://kdt-sw-4-team14.elicecoding.com";
   const handleFindPw = async () => {
     const data: FindPwData = {
       userId: idValue,
