@@ -22,6 +22,7 @@ interface LetterSavedInfo {
   content: string;
   sender: string;
   style: string;
+  id: number;
 }
 
 const StorageLetter: React.FC = () => {
@@ -61,6 +62,7 @@ const StorageLetter: React.FC = () => {
             content: item.content,
             style: item.style,
             sender: item.sender,
+            id: item.index,
           }));
           setLetterSavedInfo(letterData);
           console.log(letterData);
@@ -88,7 +90,7 @@ const StorageLetter: React.FC = () => {
           {letterSavedInfo.map((data, index) => {
             return (
               <LetterCard
-                id={index}
+                id={data.id}
                 content={data.content}
                 sender={data.sender}
                 unlockDate={data.unlockDate}

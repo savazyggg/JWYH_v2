@@ -2,6 +2,7 @@ import _, { useState } from "react";
 import "./letter.css";
 import { Button } from "@mui/material";
 import { styled as muiStyled } from "@mui/system";
+import axios from "axios";
 //리코일
 import { useRecoilState } from "recoil";
 import {
@@ -29,6 +30,12 @@ const OkButton = muiStyled(Button)({
     backgroundColor: "#76ac56",
   },
 });
+const CancelButton = muiStyled(Button)({
+  backgroundColor: "#93BA7B",
+  "&:hover": {
+    backgroundColor: "#76ac56",
+  },
+});
 
 const Letter: React.FC<LetterCardProps> = ({
   id,
@@ -39,12 +46,23 @@ const Letter: React.FC<LetterCardProps> = ({
   unlockYear,
   unlockMonth,
 }) => {
+  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
     setModalVisible(false);
     console.log("여기 들어오긴 했음");
   };
-
+  const deleteLetter = () => {
+    console.log(Letter);
+    axios
+      .delete(
+        `https://kdt-sw-4-team14.elicecoding.com/api/letter/${recoilUserId}/${id}`
+      )
+      .then((response) => {
+        console.log(response);
+        console.log("삭제 성공" + response.message);
+      });
+  };
   return (
     <div
       className="mybox"
@@ -53,9 +71,9 @@ const Letter: React.FC<LetterCardProps> = ({
     >
       <span>{sender}</span>
       <br />
-      <span>
+      <h2>
         {unlockYear}-{unlockMonth}-{unlockDate}
-      </span>
+      </h2>
       {modalVisible && (
         <div className={`modal ${modalVisible ? "visible" : ""}`}>
           <div className="modal-content" style={{ backgroundColor: color }}>
@@ -67,6 +85,16 @@ const Letter: React.FC<LetterCardProps> = ({
               className="modal-content-div"
               dangerouslySetInnerHTML={{ __html: content }}
             ></div>
+            <CancelButton
+              variant="contained"
+              size="small"
+              onClick={(e: any) => {
+                e.stopPropagation();
+                deleteLetter();
+              }}
+            >
+              여기는 삭제
+            </CancelButton>
             <OkButton
               variant="contained"
               size="small"

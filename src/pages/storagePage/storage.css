@@ -7,12 +7,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+/* 
 /* html {
   font-size: 62.5%;
 } */
-
-body {
+*/ body {
   width: 100vw;
   min-height: 100vh;
   background-color: #f0f0f0;
@@ -20,9 +19,7 @@ body {
 }
 
 .letter_box {
-  justify-content: center;
-  max-width: 1200px;
-  padding: 1em 2em 0 2em;
+  padding: 0 0 0 0;
   margin: 0 auto;
 }
 
