@@ -111,7 +111,7 @@ export default function LoginForm() {
         minWidth: "500px",
         minHeight: "500px",
         gridTemplateRows: "56px 56px 50px 40px",
-        gridGap: "10px",
+        gridGap: "25px",
       }}
     >
       <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">

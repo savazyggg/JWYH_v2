@@ -87,7 +87,7 @@ export default function SignUpForm() {
         minWidth: "500px",
         minHeight: "500px",
         gridTemplateRows: "56px 56px 56px 56px 40px 40px",
-        gridGap: "10px",
+        gridGap: "25px",
       }}
     >
       <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
