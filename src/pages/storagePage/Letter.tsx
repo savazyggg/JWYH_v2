@@ -67,7 +67,14 @@ const Letter: React.FC<LetterCardProps> = ({
               className="modal-content-div"
               dangerouslySetInnerHTML={{ __html: content }}
             ></div>
-            <OkButton variant="contained" size="small" onClick={closeModal}>
+            <OkButton
+              variant="contained"
+              size="small"
+              onClick={(e: any) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+            >
               닫기
             </OkButton>
           </div>

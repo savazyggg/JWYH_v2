@@ -67,9 +67,9 @@ body {
   margin: 4rem;
   border-radius: 20px;
 }
-.mybox:hover {
+/* .mybox:hover {
   transform: scale(1.3);
-}
+} */
 /* 
 .container_grid .box:hover .imgBox {
   transform: translate(-3.5rem, -3.5rem);
