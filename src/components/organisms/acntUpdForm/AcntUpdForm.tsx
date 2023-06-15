@@ -128,15 +128,21 @@ export default function AcntUpdForm() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPwValue(() => {
               const eventValue = e.target.value;
+              if (e.target.value.length === 0) {
+                setIsPwError(false);
+                return eventValue;
+              }
               const regxPw = new RegExp(
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
               );
               const isValidPw = regxPw.test(eventValue);
-              console.log(isValidPw);
-              console.log(eventValue);
               if (isValidPw) {
                 setIsPwError(false);
-                return eventValue;
+              } else {
+                setIsPwError(true);
+              }
+              if (eventValue === pwcValue) {
+                setIsPwcError(false);
               } else {
                 setIsPwError(true);
               }
@@ -178,14 +184,23 @@ export default function AcntUpdForm() {
               const eventValue = e.target.value;
               const regxPw = new RegExp(pwValue);
               const isValidPwc = regxPw.test(eventValue);
-              console.log(isValidPwc);
-              console.log(eventValue);
+              console.log(pwcValue);
+              console.log(pwValue);
+              if (eventValue.length === 0) {
+                setIsPwcError(false);
+                return eventValue;
+              }
+              if (pwValue.length !== eventValue.length) {
+                setIsPwcError(true);
+                return eventValue;
+              }
               if (isValidPwc) {
                 setIsPwcError(false);
+                return eventValue;
               } else {
                 setIsPwcError(true);
+                return eventValue;
               }
-              return eventValue;
             });
           }}
           endAdornment={
