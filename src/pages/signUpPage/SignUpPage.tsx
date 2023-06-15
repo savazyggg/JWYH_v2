@@ -48,14 +48,19 @@ function SignUpPage() {
       <ThemeProvider theme={theme}>
         <Container
           maxWidth="sm"
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
         >
           <Stack sx={{ paddingTop: "50px" }} direction={"column"} spacing={2}>
             <Typography
               sx={{ width: "100%" }}
               component="h1"
               variant="h4"
-              style={{ color: "#93BA7B" }}
+              style={{ color: "#93BA7B", fontWeight: "900" }}
             >
               회원가입
             </Typography>
