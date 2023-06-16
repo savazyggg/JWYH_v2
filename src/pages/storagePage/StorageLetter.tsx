@@ -8,9 +8,11 @@ import { useRecoilState } from "recoil";
 import Header from "../../components/organisms/header/Header";
 import letterImgUrl from "./letterUrls";
 import {
+  isLoginedState,
+  jwtStringState,
+  uniqueIdState,
   userIdState,
-
-  // providerState,
+  nickNameState,
 } from "../../recoilStore";
 //리코일
 interface LetterSavedInfo {
@@ -38,14 +40,21 @@ const StorageLetter: React.FC = () => {
   }>();
   const [letterSavedInfo, setLetterSavedInfo] = useState<LetterSavedInfo[]>([]);
   const [_loading, setLoading] = useState<boolean>(true);
-
+  const [recoilJwtString, _setRecoilJwtString] = useRecoilState(jwtStringState);
   useEffect(() => {
     console.log(year, month);
     const getLettersFromDB = async () => {
       try {
         const response = await axios.get(
-          `https://kdt-sw-4-team14.elicecoding.com/api/box/${recoilUserId}/${year}/${month}`
+          `https://kdt-sw-4-team14.elicecoding.com/api/box/${recoilUserId}/${year}/${month}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + recoilJwtString,
+            },
+          }
         );
+
         if (!response.data) {
           console.log("No letters");
         } else {
