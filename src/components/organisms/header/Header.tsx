@@ -11,7 +11,7 @@ import {
 import { useEffect } from "react";
 import { getNickName } from "../../../apis/getNickName";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import HomeIcon from "@mui/icons-material/Home";
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -95,6 +95,18 @@ const Header = () => {
       <SHeader>
         <Container>
           <LeftContainer>
+            {isLogined && (
+              <HomeIcon
+                sx={{
+                  fontSize: "3rem",
+                  marginRight: "20px",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigate("/main");
+                }}
+              ></HomeIcon>
+            )}
             <div>
               <NickNameText>{nickName} </NickNameText>님의 레터스페이스 입니다
             </div>
