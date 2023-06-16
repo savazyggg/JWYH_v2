@@ -51,6 +51,36 @@ export default function LoginForm() {
   ) => {
     event.preventDefault();
   };
+
+  const setRecoilInit = (data: any) => {
+    //레거시
+    const jwt = JSON.stringify(data);
+    const jwtParsed = JSON.parse(jwt);
+    localStorage.setItem("jwt", jwt);
+    //레거시 todo 리코일에서 jwtString 사용으로  바꿔야함
+
+    //리코일
+    setRecoilIsLogined(!recoilIsLogined);
+    setRecoilJwtString(jwtParsed.token);
+    interface JwtDecoded {
+      id: string;
+      nickName: string;
+      objectId: string;
+      iat: number;
+      provider: string;
+    }
+    const decoded: JwtDecoded = jwt_decode(jwtParsed.token);
+    const { id, nickName, objectId, provider } = decoded;
+    setRecoilUniqueId(objectId);
+    setRecoilUserId(id);
+    setRecoilNickName(nickName);
+    setRecoilProvider(provider);
+
+    //리코일
+
+    navigate("/main");
+  };
+
   const googleSocialLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
       try {
@@ -59,6 +89,7 @@ export default function LoginForm() {
           { code: codeResponse.code }
         );
         console.log(response.data);
+        setRecoilInit(response.data);
         // Handle the response from the backend
       } catch (error) {
         console.log(error);
@@ -89,30 +120,7 @@ export default function LoginForm() {
         return res.json();
       })
       .then((data) => {
-        //레거시
-        const jwt = JSON.stringify(data);
-        const jwtParsed = JSON.parse(jwt);
-        localStorage.setItem("jwt", jwt);
-        //레거시 todo 리코일에서 jwtString 사용으로  바꿔야함
-
-        //리코일
-        setRecoilIsLogined(!recoilIsLogined);
-        setRecoilJwtString(jwtParsed.token);
-        interface JwtDecoded {
-          id: string;
-          nickName: string;
-          objectId: string;
-          iat: number;
-        }
-        const decoded: JwtDecoded = jwt_decode(jwtParsed.token);
-        const { id, nickName, objectId } = decoded;
-        setRecoilUniqueId(objectId);
-        setRecoilUserId(id);
-        setRecoilNickName(nickName);
-        setRecoilProvider("");
-        //리코일
-
-        navigate("/main");
+        setRecoilInit(data);
       })
       .catch((error) => {
         console.log(error);

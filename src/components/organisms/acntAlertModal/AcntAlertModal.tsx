@@ -60,7 +60,6 @@ export default function AlertModal(props: props) {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            color="error"
           >
             예
           </Button>
@@ -72,6 +71,7 @@ export default function AlertModal(props: props) {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            color="error"
           >
             아니요
           </Button>

@@ -53,15 +53,12 @@ const WritingLetterPage: React.FC = () => {
       unlockDate: unlockDay,
     };
 
-    const keys = Object.keys(sendData);
-    for (const key of keys) {
-      if (!sendData[key]) {
-        alert("편지 내용, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
-        return;
-      }
-      setSuccessSendingStatus(true);
+    if (!senderName || !unlockYear || !senderName) {
+      alert("편지 내용, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
+      return;
     }
 
+    setSuccessSendingStatus(true);
     try {
       const response = await fetch(SEND_LETTER_API, {
         method: "POST",

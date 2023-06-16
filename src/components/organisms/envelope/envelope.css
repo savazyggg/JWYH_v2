@@ -57,8 +57,6 @@
   border-radius: 10px;
   box-sizing: border-box;
   padding: 10px;
-  text-align: center;
-  font-family: "Kalam", cursive;
 }
 .introLetter.enlargeLetter {
   animation: smallToBig 0.1s 0.5s linear 1 forwards;
