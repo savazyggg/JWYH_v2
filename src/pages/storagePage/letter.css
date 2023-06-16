@@ -29,12 +29,12 @@ body {
   margin: 0 auto;
 }
 
-.container_grid {
+.letter_container_grid {
   position: relative;
   display: grid;
   width: 1000px;
   border-top: 1px solid #686868;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin-bottom: 3em;
 }
 

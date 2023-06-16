@@ -87,7 +87,7 @@ const StorageLetter: React.FC = () => {
         <div className="storage_year">
           {year}년 {month}월 받은 편지
         </div>
-        <div className="container_grid">
+        <div className="letter_container_grid">
           {letterSavedInfo.map((data, index) => {
             return (
               <LetterCard
