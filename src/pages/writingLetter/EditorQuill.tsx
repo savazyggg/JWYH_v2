@@ -1,13 +1,14 @@
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill as QuillTest } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "@emotion/styled";
+import ImageResize from "quill-image-resize-module-react";
 
 interface Props {
   value: string;
   onChange: (value: string) => void;
   letterStyle: string;
 }
-
+QuillTest.register("modules/imageResize", ImageResize);
 const EditorQill: React.FC<Props> = ({ value, onChange, letterStyle }) => {
   const modules = {
     toolbar: [
@@ -24,6 +25,10 @@ const EditorQill: React.FC<Props> = ({ value, onChange, letterStyle }) => {
       [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
       ["clean"],
     ],
+    imageResize: {
+      parchment: QuillTest.import("parchment"),
+      modules: ["Resize", "DisplaySize"],
+    },
   };
 
   const formats = [
