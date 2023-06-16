@@ -42,14 +42,14 @@ const WritingLetterPage: React.FC = () => {
   };
 
   const onSubmit = async () => {
-    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/${_userId[0]}`;
+    const SEND_LETTER_API = `https://kdt-sw-4-team14.elicecoding.com/api/letters/send/${_userId[0]}`;
 
     const sendData: SendData = {
       content: letterWriting,
       style: lettrStyle,
       sender: senderName,
       unlockYear,
-      unlockMonth: unlockMonth,
+      unlockMonth,
       unlockDate: unlockDay,
     };
 
@@ -59,6 +59,7 @@ const WritingLetterPage: React.FC = () => {
         alert("편지 내용, 보내는 이, 편지가 열리는 날짜를 입력해주세요.");
         return;
       }
+      setSuccessSendingStatus(true);
     }
 
     try {
@@ -74,7 +75,6 @@ const WritingLetterPage: React.FC = () => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(sendData),
       });
-      setSuccessSendingStatus(true);
       return response.json();
     } catch (error) {
       console.error(error);
@@ -130,8 +130,8 @@ const WritingLetterPage: React.FC = () => {
 export default WritingLetterPage;
 
 const Container = styled.div`
-  width: 780px;
-  margin-left: 250px;
+  width: 60%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;

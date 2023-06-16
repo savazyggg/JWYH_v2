@@ -5,9 +5,10 @@ import styled from "@emotion/styled";
 interface Props {
   value: string;
   onChange: (value: string) => void;
+  letterStyle: string;
 }
 
-const EditorQill: React.FC<Props> = ({ value, onChange }) => {
+const EditorQill: React.FC<Props> = ({ value, onChange, letterStyle }) => {
   const modules = {
     toolbar: [
       //[{ 'font': [] }],
@@ -44,13 +45,14 @@ const EditorQill: React.FC<Props> = ({ value, onChange }) => {
   ];
 
   return (
-    <div>
+    <div style={{ width: "100%", height: "100%" }}>
       <Quill
         theme="snow"
         modules={modules}
         formats={formats}
         value={value || ""}
-        onChange={(content, delta, source, editor) =>
+        myLetterStyle={letterStyle}
+        onChange={(_content, _delta, _source, editor) =>
           onChange(editor.getHTML())
         }
       />
@@ -60,10 +62,10 @@ const EditorQill: React.FC<Props> = ({ value, onChange }) => {
 
 export default EditorQill;
 
-const Quill = styled(ReactQuill)`
-  margin-left: 10px;
-  width: 780px;
-  height: 700px;
+const Quill = styled(ReactQuill)<{ myLetterStyle: string }>`
+  margin-left: 25px;
+  width: 95%;
+  height: 90%;
 
   border: none;
   .ql-container {
@@ -71,5 +73,16 @@ const Quill = styled(ReactQuill)`
   }
   .ql-toolbar {
     border: none;
+  }
+
+  .ql-editor {
+    ::-webkit-scrollbar {
+      width: 10px;
+      background-color: ${(props) => props.myLetterStyle};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #242424;
+    }
   }
 `;

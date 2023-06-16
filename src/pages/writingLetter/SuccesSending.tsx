@@ -2,8 +2,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { uniqueIdState } from "../../recoilStore";
 
 interface SuccesSendingProps {
   open: boolean;
