@@ -54,12 +54,19 @@ const GuestMainPage = () => {
         </Info>
         <WritingLetterButton isLogin={isLogined} />
       </>
-      {letters.length && (
+      {letters.length ? (
         <LetterCarousel
-          isGuest={true}
           letters={letters}
-          handleLetterData={undefined}
-          className={""}
+          isGuest={false}
+          handleLetterData={handleLetterData}
+          className=""
+        ></LetterCarousel>
+      ) : (
+        <LetterCarousel
+          letters={letters}
+          isGuest={false}
+          handleLetterData={handleLetterData}
+          className="empty-letter"
         ></LetterCarousel>
       )}
     </Container>
