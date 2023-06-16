@@ -136,6 +136,7 @@ const SHeader = styled.header`
   background-color: #242424;
   color: white;
   font-weight: 700;
+  z-index: 3;
 `;
 
 const Container = styled.div`
