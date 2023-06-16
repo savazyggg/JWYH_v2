@@ -23,11 +23,8 @@ interface LetterCardProps {
 // },
 // });
 import {
-  isLoginedState,
   jwtStringState,
-  uniqueIdState,
   userIdState,
-  nickNameState,
 } from "../../recoilStore";
 const Letter: React.FC<LetterCardProps> = ({
   id,
