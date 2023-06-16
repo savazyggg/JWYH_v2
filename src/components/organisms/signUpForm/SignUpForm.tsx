@@ -16,7 +16,6 @@ import Visibility from "@mui/icons-material/Visibility";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
-  const defaultIdErMsg = "영문 소문자, 숫자 6~12 입력 해주세요";
   const exsistErMsg = "이미 존재하는 아이디 입니다.";
   const [isError, setIsError] = useState(false);
   const [erMsg, setErMsg] = useState("");
@@ -39,20 +38,20 @@ export default function SignUpForm() {
   ) => {
     event.preventDefault();
   };
+
+  const isPwGood = (pw: string): boolean => {
+    const regxPw = new RegExp(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
+    );
+    return regxPw.test(pw);
+  };
+  const isIdGood = (id: string): boolean => {
+    const regxId = new RegExp(/^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/);
+    return regxId.test(id);
+  };
   const handleSignUp = async (e: any) => {
     e.preventDefault();
-    console.log("SignUp Clicked");
-    console.log(idValue.length);
-    if (idValue.length === 0) {
-      setErMsg("아이디 값이 존재 하지 않습니다.");
-      setIsError(true);
-      return;
-    }
-    if (nickValue.length === 0) {
-      setErMsg("닉네임 값이 존재 하지 않습니다.");
-      setIsError(true);
-      return;
-    }
+    //값이 비어있는지 확인
     if (pwValue.length === 0) {
       setErMsg("비밀번호 값이 존재 하지 않습니다.");
       setIsError(true);
@@ -63,9 +62,28 @@ export default function SignUpForm() {
       setIsError(true);
       return;
     }
-    const regxPw = new RegExp(pwValue);
-    const isValidPwc = regxPw.test(pwcValue);
-    if (!isValidPwc) {
+
+    if (isPwGood(pwValue) === false) {
+      setErMsg(
+        "비밀 번호를 *()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력해주세요"
+      );
+      setIsError(true);
+      return;
+    }
+    if (isPwGood(pwcValue) === false) {
+      setErMsg(
+        "비밀 번호를 *()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력해주세요"
+      );
+      setIsError(true);
+      return;
+    }
+
+    if (isIdGood(idValue) === false) {
+      setErMsg("아이디는 영문 소문자, 숫자 6~12 입력 해주세요");
+      setIsError(true);
+      return;
+    }
+    if ((pwValue === pwcValue) === false) {
       setErMsg("비밀번호와 비밀번호 확인 값이 다릅니다");
       setIsError(true);
       return;
@@ -105,14 +123,10 @@ export default function SignUpForm() {
           value={idValue}
           aria-describedby="id-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setIsError(false);
             setIdValue(() => {
               const eventValue = e.target.value;
-              const regxId = new RegExp(/^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/);
-              const isValidId = regxId.test(eventValue);
-              setErMsg(defaultIdErMsg);
-              if (isValidId) {
-                setErMsg("");
+              if (isIdGood(eventValue)) {
+                setIsError(false);
               } else {
                 setIsError(true);
               }
@@ -121,7 +135,7 @@ export default function SignUpForm() {
           }}
           label="아이디"
         />
-        <FormHelperText>{}</FormHelperText>
+        <FormHelperText>영문 소문자, 숫자 6~12 입력 해주세요</FormHelperText>
       </FormControl>
       <FormControl sx={{ width: "100%" }} variant="outlined" error={isError}>
         <InputLabel htmlFor="nickname">닉네임</InputLabel>
@@ -131,9 +145,16 @@ export default function SignUpForm() {
           value={nickValue}
           aria-describedby="Nick-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNickValue(e.target.value);
-            setIsError(false);
-            setErMsg("");
+            setNickValue(() => {
+              const eventValue = e.target.value;
+              if (eventValue.length === 0) {
+                setErMsg("닉네임 값이 존재 하지 않습니다.");
+                setIsError(true);
+              } else {
+                setIsError(false);
+              }
+              return eventValue;
+            });
           }}
           label="닉네임"
         />
@@ -147,22 +168,13 @@ export default function SignUpForm() {
           aria-describedby="password-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPwValue(() => {
-              setIsError(false);
               const eventValue = e.target.value;
-              const regxPw = new RegExp(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
-              );
-              const isValidPw = regxPw.test(eventValue);
-              if (isValidPw) {
-                setErMsg("");
-                return eventValue;
+              if (isPwGood(eventValue)) {
+                setIsError(false);
               } else {
-                setErMsg(
-                  "*()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력해주세요"
-                );
                 setIsError(true);
-                return eventValue;
               }
+              return eventValue;
             });
           }}
           endAdornment={
@@ -179,7 +191,10 @@ export default function SignUpForm() {
           }
           label="비밀번호"
         />
-        <FormHelperText>{}</FormHelperText>
+        <FormHelperText>
+          *()!$을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상
+          입력해주세요
+        </FormHelperText>
       </FormControl>
       <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="passwordChk">비밀번호 확인</InputLabel>
@@ -190,18 +205,12 @@ export default function SignUpForm() {
           aria-describedby="passwordChk-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPwcValue(() => {
-              setIsError(false);
-              setErMsg("");
               const eventValue = e.target.value;
-              // const regxPw = new RegExp(pwValue);
-              // const isValidPwc = regxPw.test(eventValue);
-              // if (isValidPwc) {
-              //   setIsError(false);
-              //   setErMsg("");
-              // } else {
-              //   setErMsg("비밀번호가 다릅니다");
-              //   setIsError(true);
-              // }
+              if (isPwGood(eventValue)) {
+                setIsError(false);
+              } else {
+                setIsError(true);
+              }
               return eventValue;
             });
           }}

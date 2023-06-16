@@ -92,11 +92,13 @@ export default function LoginForm() {
         setRecoilInit(response.data);
         // Handle the response from the backend
       } catch (error) {
+        alert("로그인 실패!!!");
         console.log(error);
         // Handle the error
       }
     },
     onError: (errorResponse) => {
+      alert("로그인 실패!!!");
       console.log(errorResponse);
     },
     flow: "auth-code",
