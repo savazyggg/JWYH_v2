@@ -58,7 +58,7 @@ const Storage = (): JSX.Element => {
   const yearArray = [""];
   useEffect(() => {
     axios
-      .get(`http://34.64.195.153:5000/api/box/${recoilUserId}`)
+      .get(`https://kdt-sw-4-team14.elicecoding.com/api/box/${recoilUserId}`)
       .then((response) => {
         console.log("찍힌 데이터" + response.data);
         if (response.data === "편지가 없어요") {
@@ -121,7 +121,7 @@ const Storage = (): JSX.Element => {
   }, []);
 
   //   axios
-  //     .get(`http://34.64.195.153:5000/api/nickName/${id}`)
+  //     .get(`https://kdt-sw-4-team14.elicecoding.com/api/nickName/${id}`)
   //     .then((response) => {
   //       setNickname(response.data[0].nickname);
   //     })

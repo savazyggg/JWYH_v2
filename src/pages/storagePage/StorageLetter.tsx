@@ -51,7 +51,7 @@ const StorageLetter: React.FC = () => {
     const getLettersFromDB = async () => {
       try {
         const response = await axios.get(
-          `http://34.64.195.153:5000/api/box/${recoilUserId}/${year}/${month}`
+          `https://kdt-sw-4-team14.elicecoding.com/api/box/${recoilUserId}/${year}/${month}`
         );
         if (!response.data) {
           console.log("No letters");

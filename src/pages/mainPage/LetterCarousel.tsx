@@ -50,7 +50,9 @@ function LetterCarousel(props: LetterCarouselProps) {
    * @param {Letter} letter - 클릭한 편지 객체
    */
   const handleSlideClick = async (letter: LetterInterface) => {
-    await fetch(`http://34.64.195.153:5000/api/main/${userId}/${letter.index}`)
+    await fetch(
+      `https://kdt-sw-4-team14.elicecoding.com/api/main/${userId}/${letter.index}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("unreadable letter");
