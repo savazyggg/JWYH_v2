@@ -53,7 +53,7 @@ const StorageLetter: React.FC = () => {
         const response = await axios.get(
           `http://34.64.195.153:5000/api/box/${recoilUserId}/${year}/${month}`
         );
-        if (response.data === "편지가 없어요") {
+        if (!response.data) {
           console.log("No letters");
         } else {
           const letterData = response.data.map((item: any) => ({
@@ -98,7 +98,7 @@ const StorageLetter: React.FC = () => {
                 color={data.style}
                 unlockYear={data.unlockYear}
                 unlockMonth={data.unlockMonth}
-                imgSrc={letterImgUrl[index % 8]}
+                imgSrc={letterImgUrl[index % 3]}
               />
             );
           })}

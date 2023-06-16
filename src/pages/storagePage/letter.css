@@ -65,9 +65,9 @@ body {
 .mybox {
   /* position: relative; */
   cursor: pointer;
-  width: 20rem;
-  height: 15rem;
-  margin: 4rem;
+  width: 18rem;
+  height: 14rem;
+  margin: 2.5rem;
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(197, 197, 197, 0.5);
   text-align: center;
