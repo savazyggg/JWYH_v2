@@ -192,7 +192,7 @@ export default function SignUpForm() {
           label="비밀번호"
         />
         <FormHelperText>
-          *()!$을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상
+          *()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상
           입력해주세요
         </FormHelperText>
       </FormControl>
