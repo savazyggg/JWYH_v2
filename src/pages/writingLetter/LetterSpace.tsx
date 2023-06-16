@@ -29,7 +29,7 @@ export default LetterSpace;
 
 const Letter = styled.div`
   margin: 61px auto 10px;
-  width: 800px;
+  width: 70%;
   height: 80vh;
   border-radius: 15px;
 `;

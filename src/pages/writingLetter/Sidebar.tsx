@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Notice from "./Notice";
 interface Props {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -10,7 +10,16 @@ interface Props {
 const Sidebar: React.FC<Props> = ({ onClick }) => {
   const [sidebarShow, setSidebarShow] = useState<boolean>(false);
   const [letterStyleShow, setLetterStyleShow] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // 화면이 768px 미만인 경우 모바일로 간주
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return sidebarShow ? (
     <SidebarNav show={sidebarShow}>
       <CloseWrapper>
@@ -22,6 +31,8 @@ const Sidebar: React.FC<Props> = ({ onClick }) => {
       </CloseWrapper>
       {letterStyleShow ? <LetterStyle onClick={onClick} /> : <Notice />}
     </SidebarNav>
+  ) : isMobile ? (
+    <Button onClick={() => setSidebarShow(true)}>💝</Button>
   ) : (
     <Button onClick={() => setSidebarShow(true)}>◀︎ 편지지 고르기 💝</Button>
   );

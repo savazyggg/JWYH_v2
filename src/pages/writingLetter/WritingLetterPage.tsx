@@ -130,7 +130,7 @@ const WritingLetterPage: React.FC = () => {
 export default WritingLetterPage;
 
 const Container = styled.div`
-  width: 780px;
+  width: 60%;
   margin: 0 auto;
   display: flex;
   align-items: center;
