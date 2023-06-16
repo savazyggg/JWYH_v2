@@ -30,7 +30,13 @@
   z-index: 0;
   border-radius: 10px;
 }
-
+.modal-content img {
+  width: 60%;
+  height: 60%;
+  object-fit: cover;
+  resize: both;
+  border-radius: 10px;
+}
 .glowing:before {
   content: "hello";
   background: linear-gradient(
