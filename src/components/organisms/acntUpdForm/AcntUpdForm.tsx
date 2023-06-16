@@ -29,7 +29,7 @@ export default function AcntUpdForm() {
   const [userId, _setUserId] = useRecoilState(userIdState);
   const [nickName, setNickName] = useRecoilState(nickNameState);
   const [jwtString, _setJwtString] = useRecoilState(jwtStringState);
-  const [_provider, _setProvider] = useRecoilState(providerState);
+  const [provider, _setProvider] = useRecoilState(providerState);
 
   const navigate = useNavigate();
 
@@ -96,98 +96,110 @@ export default function AcntUpdForm() {
           label="닉네임"
         />
       </FormControl>
-      <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
-        <InputLabel htmlFor="password">비밀번호</InputLabel>
-        <OutlinedInput
-          id="password"
-          type={showPassword ? "text" : "password"}
-          value={pwValue}
-          aria-describedby="password-input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPwValue(() => {
-              const eventValue = e.target.value;
-              if (e.target.value.length === 0) {
-                setIsError(false);
-                return eventValue;
+      {provider === "local" && (
+        <>
+          <FormControl
+            error={isError}
+            sx={{ width: "100%" }}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="password">비밀번호</InputLabel>
+            <OutlinedInput
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={pwValue}
+              aria-describedby="password-input"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPwValue(() => {
+                  const eventValue = e.target.value;
+                  if (e.target.value.length === 0) {
+                    setIsError(false);
+                    return eventValue;
+                  }
+                  const regxPw = new RegExp(
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
+                  );
+                  const isValidPw = regxPw.test(eventValue);
+                  console.log(isValidPw);
+                  if (isValidPw) {
+                    setIsError(false);
+                  } else {
+                    setIsError(true);
+                  }
+                  return eventValue;
+                });
+              }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
               }
-              const regxPw = new RegExp(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
-              );
-              const isValidPw = regxPw.test(eventValue);
-              if (isValidPw) {
-                setIsError(false);
-              } else {
-                setIsError(true);
+              label="비밀번호"
+            />
+            <FormHelperText>
+              *()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력
+              해주세요
+            </FormHelperText>
+          </FormControl>
+          <FormControl
+            error={isError}
+            sx={{ width: "100%" }}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="passwordChk">비밀번호 확인</InputLabel>
+            <OutlinedInput
+              id="passwordChk"
+              type={showPasswordChk ? "text" : "password"}
+              value={pwcValue}
+              aria-describedby="passwordChk-input"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPwcValue(() => {
+                  const eventValue = e.target.value;
+                  setIsError(false);
+                  if (e.target.value.length === 0) {
+                    setIsError(false);
+                    return eventValue;
+                  }
+                  const regxPw = new RegExp(
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
+                  );
+                  const isValidPw = regxPw.test(eventValue);
+                  console.log(isValidPw);
+                  if (isValidPw) {
+                    setIsError(false);
+                  } else {
+                    setIsError(true);
+                  }
+                  return eventValue;
+                });
+              }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle passwordChk visibility"
+                    onClick={handleClickShowPasswordChk}
+                    onMouseDown={handleMouseDownPasswordChk}
+                    edge="end"
+                  >
+                    {showPasswordChk ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
               }
-              return eventValue;
-            });
-          }}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="비밀번호"
-        />
-        <FormHelperText>
-          *()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력
-          해주세요
-        </FormHelperText>
-      </FormControl>
-      <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
-        <InputLabel htmlFor="passwordChk">비밀번호 확인</InputLabel>
-        <OutlinedInput
-          id="passwordChk"
-          type={showPasswordChk ? "text" : "password"}
-          value={pwcValue}
-          aria-describedby="passwordChk-input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPwcValue(() => {
-              setIsError(false);
-              const eventValue = e.target.value;
-              // const regxPw = new RegExp(pwValue);
-              // const isValidPwc = regxPw.test(eventValue);
-              // if (eventValue.length === 0) {
-              //   setIsPwcError(false);
-              //   return eventValue;
-              // }
-              // if (pwValue.length !== eventValue.length) {
-              //   setIsPwcError(true);
-              //   return eventValue;
-              // }
-              // if (isValidPwc) {
-              //   setIsPwcError(false);
-              //   return eventValue;
-              // } else {
-              //   setIsPwcError(true);
-              //   return eventValue;
-              // }
-              return eventValue;
-            });
-          }}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle passwordChk visibility"
-                onClick={handleClickShowPasswordChk}
-                onMouseDown={handleMouseDownPasswordChk}
-                edge="end"
-              >
-                {showPasswordChk ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="비밀번호"
-        />
-        <FormHelperText>{isError && "비밀번호가 맞지 않습니다"}</FormHelperText>
-      </FormControl>
+              label="비밀번호"
+            />
+            <FormHelperText>
+              {isError && "비밀번호가 맞지 않습니다"}
+            </FormHelperText>
+          </FormControl>
+        </>
+      )}
       <div
         style={{
           display: "grid",

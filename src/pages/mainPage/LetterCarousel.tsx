@@ -9,6 +9,7 @@ import { EffectCards, Navigation } from "swiper";
 import { useRecoilState } from "recoil";
 import { userIdState } from "../../recoilStore";
 import Envelope from "../../components/organisms/envelope/Envelope";
+import { jwtStringState } from "../../recoilStore";
 
 interface LetterInterface {
   id?: number;
@@ -37,6 +38,8 @@ interface LetterCarouselProps {
 }
 
 function LetterCarousel(props: LetterCarouselProps) {
+  const [jwtString, _setJwtString] = useRecoilState(jwtStringState);
+
   const { isGuest, handleLetterData } = props;
   const letters: LetterInterface[] = Array.isArray(props.letters)
     ? props.letters
@@ -51,7 +54,14 @@ function LetterCarousel(props: LetterCarouselProps) {
    */
   const handleSlideClick = async (letter: LetterInterface) => {
     await fetch(
-      `https://kdt-sw-4-team14.elicecoding.com/api/main/${userId}/${letter.index}`
+      `https://kdt-sw-4-team14.elicecoding.com/api/main/${userId}/${letter.index}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          Authorization: "Bearer " + jwtString,
+        },
+      }
     )
       .then((response) => {
         if (!response.ok) {

@@ -57,7 +57,12 @@ const Storage = (): JSX.Element => {
   // const yearArray = [""];
   useEffect(() => {
     axios
-      .get(`https://kdt-sw-4-team14.elicecoding.com/api/box/${recoilUserId}`)
+      .get(`https://kdt-sw-4-team14.elicecoding.com/api/box/${recoilUserId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + recoilJwtString,
+        },
+      })
       .then((response) => {
         console.log("찍힌 데이터" + response.data);
         if (response.data === "편지가 없어요") {
