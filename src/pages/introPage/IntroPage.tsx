@@ -73,6 +73,7 @@ function IntroPage() {
                 letterSpacing: "-16px",
                 marginBottom: "160px",
                 lineHeight: "0.9",
+                fontSize: "6rem",
               }}
             >
               JWYH
@@ -83,6 +84,7 @@ function IntroPage() {
                   fontWeight: "400",
                   letterSpacing: "-1px",
                   lineHeight: "0px",
+                  fontSize: "1.25rem",
                 }}
               >
                 you will be Happy
