@@ -42,7 +42,7 @@ const WritingLetterPage: React.FC = () => {
   };
 
   const onSubmit = async () => {
-    const SEND_LETTER_API = `http://34.64.195.153:5000/api/letters/send/${_userId[0]}`;
+    const SEND_LETTER_API = `https://kdt-sw-4-team14.elicecoding.com/api/letters/send/${_userId[0]}`;
 
     const sendData: SendData = {
       content: letterWriting,
@@ -131,7 +131,7 @@ export default WritingLetterPage;
 
 const Container = styled.div`
   width: 780px;
-  margin-left: 250px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
