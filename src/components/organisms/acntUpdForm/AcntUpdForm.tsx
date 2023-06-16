@@ -51,6 +51,13 @@ export default function AcntUpdForm() {
   ) => {
     event.preventDefault();
   };
+
+  const isPwGood = (pw: string): boolean => {
+    const regxPw = new RegExp(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
+    );
+    return regxPw.test(pw);
+  };
   const handleClickShowPasswordChk = () => setShowPasswordChk((show) => !show);
   const handleMouseDownPasswordChk = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -91,6 +98,7 @@ export default function AcntUpdForm() {
           value={nickValue}
           aria-describedby="Nick-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setIsError(false);
             setNickValue(e.target.value);
           }}
           label="닉네임"
@@ -112,16 +120,7 @@ export default function AcntUpdForm() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPwValue(() => {
                   const eventValue = e.target.value;
-                  if (e.target.value.length === 0) {
-                    setIsError(false);
-                    return eventValue;
-                  }
-                  const regxPw = new RegExp(
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
-                  );
-                  const isValidPw = regxPw.test(eventValue);
-                  console.log(isValidPw);
-                  if (isValidPw) {
+                  if (isPwGood(eventValue)) {
                     setIsError(false);
                   } else {
                     setIsError(true);
@@ -162,17 +161,7 @@ export default function AcntUpdForm() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setPwcValue(() => {
                   const eventValue = e.target.value;
-                  setIsError(false);
-                  if (e.target.value.length === 0) {
-                    setIsError(false);
-                    return eventValue;
-                  }
-                  const regxPw = new RegExp(
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
-                  );
-                  const isValidPw = regxPw.test(eventValue);
-                  console.log(isValidPw);
-                  if (isValidPw) {
+                  if (isPwGood(eventValue)) {
                     setIsError(false);
                   } else {
                     setIsError(true);
@@ -212,21 +201,27 @@ export default function AcntUpdForm() {
           onClick={() => {
             console.log(pwcValue);
             console.log(pwValue);
-            if (pwValue.length === 0 && pwcValue.length !== 0) {
+            if (nickValue.length === 0 && pwValue.length === 0) {
               setIsError(true);
               return;
             }
-            const regxPw = new RegExp(pwValue);
-            const isValidPwc = regxPw.test(pwcValue);
-            console.log(regxPw.test(pwcValue));
-            if (isValidPwc) {
-              setIsDel(false);
-              setIsModalOpen(true);
-              setModalMsg("수정 하시겠습니까?");
-            } else {
-              setIsError(true);
-              return;
+            if (pwValue.length !== 0) {
+              if (isPwGood(pwValue) === false) {
+                setIsError(true);
+                return;
+              }
+              if (isPwGood(pwcValue) === false) {
+                setIsError(true);
+                return;
+              }
+              if (pwValue !== pwcValue) {
+                setIsError(true);
+                return;
+              }
             }
+            setIsDel(false);
+            setIsModalOpen(true);
+            setModalMsg("수정 하시겠습니까?");
           }}
           type="button"
           fullWidth
