@@ -63,6 +63,13 @@ export default function SignUpForm() {
       setIsError(true);
       return;
     }
+    const regxPw = new RegExp(pwValue);
+    const isValidPwc = regxPw.test(pwcValue);
+    if (!isValidPwc) {
+      setErMsg("비밀번호와 비밀번호 확인 값이 다릅니다");
+      setIsError(true);
+      return;
+    }
     const data: SingUpData = {
       userId: idValue,
       nickName: nickValue,
@@ -105,7 +112,6 @@ export default function SignUpForm() {
               const isValidId = regxId.test(eventValue);
               setErMsg(defaultIdErMsg);
               if (isValidId) {
-                setIsError(false);
                 setErMsg("");
               } else {
                 setIsError(true);
@@ -141,15 +147,13 @@ export default function SignUpForm() {
           aria-describedby="password-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPwValue(() => {
+              setIsError(false);
               const eventValue = e.target.value;
               const regxPw = new RegExp(
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[a-zA-Z\d@#$%^&+=]{8,}$/
               );
               const isValidPw = regxPw.test(eventValue);
-              console.log(isValidPw);
-              console.log(eventValue);
               if (isValidPw) {
-                setIsError(false);
                 setErMsg("");
                 return eventValue;
               } else {
@@ -157,8 +161,8 @@ export default function SignUpForm() {
                   "*()!을 제외한 영문 대소문자, 숫자, 특수문자 포함 8자리 이상 입력해주세요"
                 );
                 setIsError(true);
+                return eventValue;
               }
-              return eventValue;
             });
           }}
           endAdornment={
@@ -186,18 +190,18 @@ export default function SignUpForm() {
           aria-describedby="passwordChk-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPwcValue(() => {
+              setIsError(false);
+              setErMsg("");
               const eventValue = e.target.value;
-              const regxPw = new RegExp(pwValue);
-              const isValidPwc = regxPw.test(eventValue);
-              console.log(isValidPwc);
-              console.log(eventValue);
-              if (isValidPwc) {
-                setIsError(false);
-                setErMsg("");
-              } else {
-                setErMsg("비밀번호가 다릅니다");
-                setIsError(true);
-              }
+              // const regxPw = new RegExp(pwValue);
+              // const isValidPwc = regxPw.test(eventValue);
+              // if (isValidPwc) {
+              //   setIsError(false);
+              //   setErMsg("");
+              // } else {
+              //   setErMsg("비밀번호가 다릅니다");
+              //   setIsError(true);
+              // }
               return eventValue;
             });
           }}

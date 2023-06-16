@@ -37,8 +37,7 @@ export default function AcntUpdForm() {
   const [modalMsg, setModalMsg] = useState("");
   const [isDel, setIsDel] = useState(false);
 
-  const [isPwError, setIsPwError] = useState(false);
-  const [isPwcError, setIsPwcError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const [nickValue, setNickValue] = useState<string>(nickName);
   const [pwValue, setPwValue] = useState<string>("");
@@ -97,7 +96,7 @@ export default function AcntUpdForm() {
           label="닉네임"
         />
       </FormControl>
-      <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
+      <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="password">비밀번호</InputLabel>
         <OutlinedInput
           id="password"
@@ -108,7 +107,7 @@ export default function AcntUpdForm() {
             setPwValue(() => {
               const eventValue = e.target.value;
               if (e.target.value.length === 0) {
-                setIsPwError(false);
+                setIsError(false);
                 return eventValue;
               }
               const regxPw = new RegExp(
@@ -116,14 +115,9 @@ export default function AcntUpdForm() {
               );
               const isValidPw = regxPw.test(eventValue);
               if (isValidPw) {
-                setIsPwError(false);
+                setIsError(false);
               } else {
-                setIsPwError(true);
-              }
-              if (eventValue === pwcValue) {
-                setIsPwcError(false);
-              } else {
-                setIsPwError(true);
+                setIsError(true);
               }
               return eventValue;
             });
@@ -147,11 +141,7 @@ export default function AcntUpdForm() {
           해주세요
         </FormHelperText>
       </FormControl>
-      <FormControl
-        error={isPwError || isPwcError}
-        sx={{ width: "100%" }}
-        variant="outlined"
-      >
+      <FormControl error={isError} sx={{ width: "100%" }} variant="outlined">
         <InputLabel htmlFor="passwordChk">비밀번호 확인</InputLabel>
         <OutlinedInput
           id="passwordChk"
@@ -160,24 +150,26 @@ export default function AcntUpdForm() {
           aria-describedby="passwordChk-input"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setPwcValue(() => {
+              setIsError(false);
               const eventValue = e.target.value;
-              const regxPw = new RegExp(pwValue);
-              const isValidPwc = regxPw.test(eventValue);
-              if (eventValue.length === 0) {
-                setIsPwcError(false);
-                return eventValue;
-              }
-              if (pwValue.length !== eventValue.length) {
-                setIsPwcError(true);
-                return eventValue;
-              }
-              if (isValidPwc) {
-                setIsPwcError(false);
-                return eventValue;
-              } else {
-                setIsPwcError(true);
-                return eventValue;
-              }
+              // const regxPw = new RegExp(pwValue);
+              // const isValidPwc = regxPw.test(eventValue);
+              // if (eventValue.length === 0) {
+              //   setIsPwcError(false);
+              //   return eventValue;
+              // }
+              // if (pwValue.length !== eventValue.length) {
+              //   setIsPwcError(true);
+              //   return eventValue;
+              // }
+              // if (isValidPwc) {
+              //   setIsPwcError(false);
+              //   return eventValue;
+              // } else {
+              //   setIsPwcError(true);
+              //   return eventValue;
+              // }
+              return eventValue;
             });
           }}
           endAdornment={
@@ -194,9 +186,7 @@ export default function AcntUpdForm() {
           }
           label="비밀번호"
         />
-        <FormHelperText>
-          {(isPwError || isPwcError) && "비밀번호가 맞지 않습니다"}
-        </FormHelperText>
+        <FormHelperText>{isError && "비밀번호가 맞지 않습니다"}</FormHelperText>
       </FormControl>
       <div
         style={{
@@ -208,19 +198,28 @@ export default function AcntUpdForm() {
       >
         <Button
           onClick={() => {
-            if (pwValue.length === pwcValue.length) {
+            console.log(pwcValue);
+            console.log(pwValue);
+            if (pwValue.length === 0 && pwcValue.length !== 0) {
+              setIsError(true);
+              return;
+            }
+            const regxPw = new RegExp(pwValue);
+            const isValidPwc = regxPw.test(pwcValue);
+            console.log(regxPw.test(pwcValue));
+            if (isValidPwc) {
               setIsDel(false);
               setIsModalOpen(true);
               setModalMsg("수정 하시겠습니까?");
             } else {
-              setIsPwError(true);
-              setIsPwcError(true);
+              setIsError(true);
+              return;
             }
           }}
           type="button"
           fullWidth
           variant="contained"
-          disabled={isPwError || isPwcError}
+          disabled={isError}
         >
           수정
         </Button>
@@ -233,7 +232,7 @@ export default function AcntUpdForm() {
           type="button"
           fullWidth
           variant="contained"
-          disabled={isPwError || isPwcError}
+          disabled={isError}
           color="error"
         >
           계정 삭제
