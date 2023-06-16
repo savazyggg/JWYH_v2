@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 
-const LetterForm = ({ value, onChange }) => {
+interface LetterFormProps {
+  value: any;
+  onChange: any;
+}
+const LetterForm = (props: LetterFormProps) => {
+  const { value, onChange } = props;
   return <Textarea onChange={onChange} value={value}></Textarea>;
 };
 

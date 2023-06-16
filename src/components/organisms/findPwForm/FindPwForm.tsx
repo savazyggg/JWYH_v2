@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 // import Link from "@mui/material/Link";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -10,18 +10,19 @@ import FormControl from "@mui/material/FormControl";
 import Stack from "@mui/material/Stack";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import createTheme from "@mui/material/styles/createTheme";
-import { FindPwData, postPwReset } from "../../../apis/postPwReset";
+// import { FindPwData, postPwReset } from "../../../apis/postPwReset";
+import { FindPwData } from "../../../apis/postPwReset";
 
 export default function FindPwForm() {
-  const navigate = useNavigate();
-  const [isIdError, setIsIdError] = useState(false);
-  const [idErrorMsg, setIdErrorMsg] = useState("아이디가 존재 하지 않습니다");
-  const [isNickError, setIsNickError] = useState(false);
-  const [NickErrorMsg, setNickErrorMsg] =
-    useState("닉네임이 존재 하지 않습니다");
+  // const navigate = useNavigate();
+  const [isIdError, _setIsIdError] = useState(false);
+  const [idErrorMsg, _setIdErrorMsg] = useState("아이디가 존재 하지 않습니다");
+  // const [isNickError, setIsNickError] = useState(false);
+  // const [NickErrorMsg, setNickErrorMsg] =
+  //   useState("닉네임이 존재 하지 않습니다");
   const [idValue, setIdValue] = useState<string>("");
   const [nickValue, setNickValue] = useState<string>("");
-  const url = "https://kdt-sw-4-team14.elicecoding.com";
+  // const url = "https://kdt-sw-4-team14.elicecoding.com";
   const handleFindPw = async () => {
     const data: FindPwData = {
       userId: idValue,

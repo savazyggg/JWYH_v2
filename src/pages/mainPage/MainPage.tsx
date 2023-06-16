@@ -38,7 +38,7 @@ const MainPage = () => {
     }
   };
   const handleLetterData = async (userId = "") => {
-    const url = "http://34.64.195.153:5000";
+    const url = "https://kdt-sw-4-team14.elicecoding.com";
     if (userId.length !== 0) {
       try {
         const response = await getLetters(url, userId);
