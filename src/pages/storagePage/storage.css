@@ -7,22 +7,20 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+/* 
 /* html {
   font-size: 62.5%;
 } */
-
 body {
   width: 100vw;
   min-height: 100vh;
   background-color: #f0f0f0;
   font-family: "Poppins", sans-serif;
+  justify-items: start; /* 왼쪽 정렬 */
 }
 
 .letter_box {
-  justify-content: center;
-  max-width: 1200px;
-  padding: 1em 2em 0 2em;
+  padding: 0 0 0 0;
   margin: 0 auto;
 }
 
@@ -33,6 +31,7 @@ body {
   border-top: 1px solid #686868;
   grid-template-columns: repeat(6, 1fr);
   margin-bottom: 3em;
+  justify-items: start;
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -52,7 +51,7 @@ body {
 }
 
 .storage_year {
-  font-size: 2rem;
+  font-size: 80px;
   padding-top: 2em;
   padding-bottom: 2rem;
   width: 8em;
@@ -114,14 +113,12 @@ body {
 .content h2 {
   display: block;
   font-size: 2rem;
-  color: #111;
   font-weight: 500;
   line-height: 2rem;
   letter-spacing: 1px;
 }
 
 .content span {
-  color: #555;
   font-size: 1.4rem;
   font-weight: 300;
   letter-spacing: 2px;
