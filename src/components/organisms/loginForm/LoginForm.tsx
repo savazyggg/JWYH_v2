@@ -1,6 +1,5 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { LoginData, login } from "../../../apis/loginApi";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,25 +25,23 @@ import {
   nickNameState,
   providerState,
 } from "../../../recoilStore";
-import { displayName } from "react-quill";
 //리코일
 
 export default function LoginForm() {
   const [idValue, setIdValue] = useState<string>("");
   const [isIdError, setIdIsError] = useState(false);
-  const [idErMsg, setIdErMsg] = useState("id Error");
   const [pwValue, setPwValue] = useState<string>("");
   const [isPwError, setPwIsError] = useState(false);
-  const [pwErMsg, setPwErMsg] = useState("로그인 실패!!");
+  const [pwErMsg, _setPwErMsg] = useState("로그인 실패!!");
   const [showPassword, setShowPassword] = useState(false);
 
   //리코일
   const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
-  const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
-  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
-  const [recoilNickName, setRecoilNickName] = useRecoilState(nickNameState);
-  const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
-  const [recoilProvider, setRecoilProvider] = useRecoilState(providerState);
+  const [_recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
+  const [_recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
+  const [_recoilNickName, setRecoilNickName] = useRecoilState(nickNameState);
+  const [_recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
+  const [_recoilProvider, setRecoilProvider] = useRecoilState(providerState);
 
   //리코일
 

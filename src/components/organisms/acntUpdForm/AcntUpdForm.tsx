@@ -2,8 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 // import Link from "@mui/material/Link";
-import { register, SingUpData } from "../../../apis/registerApi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -13,44 +12,24 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import Stack from "@mui/material/Stack";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+
 import AcntAlertModal from "../acntAlertModal/AcntAlertModal";
-import { func, string } from "prop-types";
 import { patchAcnt, PatchAcntBody } from "../../../apis/patchAcnt";
 import { useRecoilState } from "recoil";
 import {
-  isLoginedState,
   nickNameState,
   providerState,
   userIdState,
   jwtStringState,
 } from "../../../recoilStore";
 import { delAcnt } from "../../../apis/delAcnt";
-const style = {
-  position: "absolute" as const,
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-interface JwtDecoded {
-  id: string;
-  nickName: string;
-  objectId: string;
-}
 
 export default function AcntUpdForm() {
   // const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
-  const [userId, setUserId] = useRecoilState(userIdState);
+  const [userId, _setUserId] = useRecoilState(userIdState);
   const [nickName, setNickName] = useRecoilState(nickNameState);
-  const [jwtString, setJwtString] = useRecoilState(jwtStringState);
-  const [provider, setProvider] = useRecoilState(providerState);
+  const [jwtString, _setJwtString] = useRecoilState(jwtStringState);
+  const [_provider, _setProvider] = useRecoilState(providerState);
 
   const navigate = useNavigate();
 

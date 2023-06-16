@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import Typography from "@mui/material/Typography";
+// import { useEffect, useState } from "react";
+// import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AcntUpdForm from "../../components/organisms/acntUpdForm/AcntUpdForm";
 import Stack from "@mui/material/Stack";
 import Header from "../../components/organisms/header/Header";
-import { Box, createTheme, ThemeProvider } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { Link } from "react-router-dom";
+// import jwt_decode from "jwt-decode";
 
 import { useRecoilState } from "recoil";
 import { isLoginedState } from "../../recoilStore";
 
-interface JwtDecoded {
-  id: string;
-  nickName: string;
-  objectId: string;
-}
+// interface JwtDecoded {
+//   id: string;
+//   nickName: string;
+//   objectId: string;
+// }
 function AcntUpdPage() {
   const theme = createTheme({
     palette: {
@@ -56,7 +56,7 @@ function AcntUpdPage() {
       },
     },
   });
-  const [isLogined, setIsLogined] = useRecoilState(isLoginedState);
+  const [isLogined, _setIsLogined] = useRecoilState(isLoginedState);
 
   return (
     <>

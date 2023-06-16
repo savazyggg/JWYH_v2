@@ -1,7 +1,7 @@
 import _, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { styled as muiStyled } from "@mui/system";
-import { Button } from "@mui/material";
+// import { styled as muiStyled } from "@mui/system";
+// import { Button } from "@mui/material";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "./LetterCarousel.css";
@@ -19,12 +19,12 @@ interface LetterInterface {
   sender?: string;
   style?: string;
 }
-const OkButton = muiStyled(Button)({
-  backgroundColor: "#93BA7B",
-  "&:hover": {
-    backgroundColor: "#76ac56",
-  },
-});
+// const OkButton = muiStyled(Button)({
+//   backgroundColor: "#93BA7B",
+//   "&:hover": {
+//     backgroundColor: "#76ac56",
+//   },
+// });
 
 /**
  * 편지 캐러셀 컴포넌트

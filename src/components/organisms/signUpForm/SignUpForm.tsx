@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 // import Link from "@mui/material/Link";
 import { register, SingUpData } from "../../../apis/registerApi";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -12,7 +12,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
