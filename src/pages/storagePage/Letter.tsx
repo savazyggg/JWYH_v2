@@ -4,7 +4,6 @@ import { Button } from "@mui/material";
 import axios from "axios";
 //리코일
 import { useRecoilState } from "recoil";
-import { userIdState } from "../../recoilStore";
 import { forceReRender } from "@storybook/react";
 //리코일
 interface LetterCardProps {
@@ -23,7 +22,13 @@ interface LetterCardProps {
 // backgroundColor: "#76ac56",
 // },
 // });
-
+import {
+  isLoginedState,
+  jwtStringState,
+  uniqueIdState,
+  userIdState,
+  nickNameState,
+} from "../../recoilStore";
 const Letter: React.FC<LetterCardProps> = ({
   id,
   content,
@@ -36,6 +41,7 @@ const Letter: React.FC<LetterCardProps> = ({
 }) => {
   const [recoilUserId, _setRecoilUserId] = useRecoilState(userIdState);
   const [modalVisible, setModalVisible] = useState(false);
+  const [recoilJwtString, _setRecoilJwtString] = useRecoilState(jwtStringState);
   const closeModal = () => {
     setModalVisible(false);
     console.log("여기 들어오긴 했음");
@@ -44,7 +50,13 @@ const Letter: React.FC<LetterCardProps> = ({
     console.log(Letter);
     axios
       .delete(
-        `https://kdt-sw-4-team14.elicecoding.com/api/letter/${recoilUserId}/${id}`
+        `https://kdt-sw-4-team14.elicecoding.com/api/letter/${recoilUserId}/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + recoilJwtString,
+          },
+        }
       )
       .then((response) => {
         console.log(response);
