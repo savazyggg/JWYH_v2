@@ -8,11 +8,8 @@ import { useRecoilState } from "recoil";
 import Header from "../../components/organisms/header/Header";
 import letterImgUrl from "./letterUrls";
 import {
-  isLoginedState,
   jwtStringState,
-  uniqueIdState,
   userIdState,
-  nickNameState,
 } from "../../recoilStore";
 //리코일
 interface LetterSavedInfo {
