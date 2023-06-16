@@ -3,17 +3,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./letter.css";
 import LetterCard from "./Letter";
-import moment from "moment";
+// import moment from "moment";
 import { useRecoilState } from "recoil";
 import Header from "../../components/organisms/header/Header";
 import letterImgUrl from "./letterUrls";
 import {
-  isLoginedState,
-  jwtStringState,
-  uniqueIdState,
   userIdState,
-  nickNameState,
-  providerState,
+
+  // providerState,
 } from "../../recoilStore";
 //리코일
 interface LetterSavedInfo {
@@ -27,24 +24,20 @@ interface LetterSavedInfo {
 }
 
 const StorageLetter: React.FC = () => {
-  const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
-  const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
-  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
-  const [myNickName, setMyNickName] = useRecoilState(nickNameState);
-  const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
+  const [recoilUserId, _setRecoilUserId] = useRecoilState(userIdState);
 
   //편지 ui 정리
   // const [pageSize,setPageSize]=useState(3); //한 페이지에 들어가는 글 갯수
   //   const [totalCount,setTotalCount]=useState(5); //전체 글 갯수
   //   const [currentPage,setCurrentPage]=useState(1);//현재 페이지
   //   const [Letters, setLetters] = useState([]); //편지 담기
-  const { id, year, month } = useParams<{
+  const { year, month } = useParams<{
     id: string;
     year: string;
     month: string;
   }>();
   const [letterSavedInfo, setLetterSavedInfo] = useState<LetterSavedInfo[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [_loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     console.log(year, month);

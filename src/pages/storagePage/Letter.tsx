@@ -1,18 +1,10 @@
-import _, { useState } from "react";
+import { useState } from "react";
 import "./letter.css";
 import { Button } from "@mui/material";
-import { styled as muiStyled } from "@mui/system";
 import axios from "axios";
 //리코일
 import { useRecoilState } from "recoil";
-import {
-  isLoginedState,
-  jwtStringState,
-  uniqueIdState,
-  userIdState,
-  nickNameState,
-  providerState,
-} from "../../recoilStore";
+import { userIdState } from "../../recoilStore";
 import { forceReRender } from "@storybook/react";
 //리코일
 interface LetterCardProps {
@@ -23,6 +15,7 @@ interface LetterCardProps {
   color: string;
   unlockYear: string;
   unlockMonth: string;
+  imgSrc: string;
 }
 // const Button = muiStyled(Button)({
 // backgroundColor: "#93BA7B",
@@ -41,7 +34,7 @@ const Letter: React.FC<LetterCardProps> = ({
   unlockMonth,
   imgSrc,
 }) => {
-  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
+  const [recoilUserId, _setRecoilUserId] = useRecoilState(userIdState);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
     setModalVisible(false);
@@ -55,7 +48,7 @@ const Letter: React.FC<LetterCardProps> = ({
       )
       .then((response) => {
         console.log(response);
-        console.log("삭제 성공" + response.message);
+        // console.log("삭제 성공" + response.message);
         alert("삭제 성공했습니다!");
         setModalVisible(false);
         window.location.reload();

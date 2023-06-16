@@ -23,7 +23,7 @@ const Envelope = (props: EnvelopeProps) => {
         <div className="cover left"></div>
         <div className="introLetter loopPartOutNInAnimation "></div>
         <div
-          className="introLetter enlargeLetter"
+          className="introLetter enlargeLetter modal-content"
           style={{ backgroundColor: modalContent.color }}
         >
           <div>{modalContent.unlockDate}</div>

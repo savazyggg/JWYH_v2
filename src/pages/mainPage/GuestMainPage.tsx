@@ -57,14 +57,14 @@ const GuestMainPage = () => {
       {letters.length ? (
         <LetterCarousel
           letters={letters}
-          isGuest={false}
+          isGuest={true}
           handleLetterData={handleLetterData}
           className=""
         ></LetterCarousel>
       ) : (
         <LetterCarousel
           letters={letters}
-          isGuest={false}
+          isGuest={true}
           handleLetterData={handleLetterData}
           className="empty-letter"
         ></LetterCarousel>

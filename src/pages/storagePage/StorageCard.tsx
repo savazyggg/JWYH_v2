@@ -2,12 +2,12 @@ import "./storage.css";
 //리코일
 import { useRecoilState } from "recoil";
 import {
-  isLoginedState,
-  jwtStringState,
-  uniqueIdState,
+  // isLoginedState,
+  // jwtStringState,
+  // uniqueIdState,
   userIdState,
-  nickNameState,
-  providerState,
+  // nickNameState,
+  // providerState,
 } from "../../recoilStore";
 //리코일
 interface StorageCardProps {
@@ -19,17 +19,17 @@ interface StorageCardProps {
 }
 
 const StorageCard: React.FC<StorageCardProps> = ({
-  id,
+  // id,
   year,
   month,
   imgSrc,
   letterNum,
 }) => {
-  const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
-  const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
-  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
-  const [myNickName, setMyNickName] = useRecoilState(nickNameState);
-  const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
+  // const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
+  // const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
+  const [recoilUserId, _setRecoilUserId] = useRecoilState(userIdState);
+  // const [myNickName, setMyNickName] = useRecoilState(nickNameState);
+  // const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
   return (
     <div
       className="box"

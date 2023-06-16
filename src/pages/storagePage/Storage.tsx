@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./storage.css";
 import StorageCard from "./StorageCard";
@@ -12,33 +12,32 @@ import {
   uniqueIdState,
   userIdState,
   nickNameState,
-  providerState,
 } from "../../recoilStore";
 //리코일
 import Header from "../../components/organisms/header/Header";
-interface LetterCount {
-  [year: string]: {
-    [month: string]: number;
-  };
-}
+// interface LetterCount {
+//   [year: string]: {
+//     [month: string]: number;
+//   };
+// }
 
 const Storage = (): JSX.Element => {
   //리코일
-  const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
-  const [recoilUniqueId, setRecoilUniqueId] = useRecoilState(uniqueIdState);
-  const [recoilUserId, setRecoilUserId] = useRecoilState(userIdState);
-  const [myNickName, setMyNickName] = useRecoilState(nickNameState);
-  const [recoilJwtString, setRecoilJwtString] = useRecoilState(jwtStringState);
-  const [recoilProvider, setRecoilProvider] = useRecoilState(providerState);
+  const [recoilIsLogined, _setRecoilIsLogined] = useRecoilState(isLoginedState);
+  const [recoilUniqueId, _setRecoilUniqueId] = useRecoilState(uniqueIdState);
+  const [recoilUserId, _setRecoilUserId] = useRecoilState(userIdState);
+  const [myNickName, _setMyNickName] = useRecoilState(nickNameState);
+  const [recoilJwtString, _setRecoilJwtString] = useRecoilState(jwtStringState);
+  // const [recoilProvider, setRecoilProvider] = useRecoilState(providerState);
   //리코일
 
-  const [letterCount, setLetterCount] = useState<LetterCount>({});
+  // const [letterCount, setLetterCount] = useState<LetterCount>({});
   const MONTH_NUM = 12;
 
   const arr_2023 = new Array<number>(MONTH_NUM).fill(0);
   const arr_2022 = new Array<number>(MONTH_NUM).fill(0);
 
-  const [data2022, setData2022] = useState<number[]>(arr_2022);
+  const [data2022, _setData2022] = useState<number[]>(arr_2022);
   const [data2023, setData2023] = useState<number[]>(arr_2023);
 
   const monthArray = [
@@ -55,7 +54,7 @@ const Storage = (): JSX.Element => {
     "11",
     "12",
   ];
-  const yearArray = [""];
+  // const yearArray = [""];
   useEffect(() => {
     axios
       .get(`https://kdt-sw-4-team14.elicecoding.com/api/box/${recoilUserId}`)
@@ -83,7 +82,7 @@ const Storage = (): JSX.Element => {
           //   console.log(data2023);
           // }
           const year2023 = "2023";
-          const year2022 = "2022";
+          // const year2022 = "2022";
           // const month=1;
           // // const index=Number(month)-1;
           for (let i = 0; i < yearArray.length; i++) {
