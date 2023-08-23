@@ -4,10 +4,12 @@ import LoginForm from "../../components/organisms/loginForm/LoginForm";
 import Stack from "@mui/material/Stack";
 import createTheme from "@mui/material/styles/createTheme";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { theme as design } from "../../common/core";
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#93ba7b",
+      main: design.green,
     },
   },
   components: {
@@ -37,7 +39,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: "#fff",
-          backgroundColor: "#3f3f3f",
+          backgroundColor: design.bg,
         },
       },
     },
@@ -71,7 +73,7 @@ function LoginPage() {
               sx={{ width: "100%" }}
               component="h1"
               variant="h4"
-              style={{ color: "#93BA7B", fontWeight: "900" }}
+              style={{ color: design.green, fontWeight: "900" }}
             >
               로그인
             </Typography>
