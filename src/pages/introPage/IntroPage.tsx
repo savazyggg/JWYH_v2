@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Box, Stack, ThemeProvider, createTheme } from "@mui/material";
 import EnvelopeIntro from "../../components/organisms/envelopeIntro/EnvelopeIntro";
+import { theme as design } from "../../common/core";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -68,7 +70,7 @@ function IntroPage() {
             <Box
               sx={{ width: "100%" }}
               style={{
-                color: "#93BA7B",
+                color: design.green,
                 fontWeight: "900",
                 letterSpacing: "-16px",
                 marginBottom: "160px",

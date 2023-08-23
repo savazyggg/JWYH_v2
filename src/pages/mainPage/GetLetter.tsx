@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { LetterInterface } from "./LetterCarousel";
+import { theme } from "../../common/core";
 
 interface LetterListProps {
   letters: LetterInterface[];
@@ -58,7 +59,7 @@ const Container = styled.div`
 `;
 const ShakingText = styled.div`
   font-size: 38px !important;
-  color: #93ba7b !important;
+  color: ${theme.green} !important;
   display: inline-block;
   animation: shake 0.4s ease-in-out infinite;
 

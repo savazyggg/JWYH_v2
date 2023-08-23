@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { isLoginedState, userIdState } from "../../recoilStore";
 import { LetterCarousel, LetterInterface } from "./LetterCarousel";
+import { theme } from "../../common/core";
 // recoil
 interface JwtDecoded {
   iat: number;
@@ -158,7 +159,7 @@ const ShareButton = muiStyled(Button)({
   height: "fit-content",
   margin: "15px auto",
   position: "initial",
-  backgroundColor: "#93BA7B",
+  backgroundColor: theme.green,
   borderRadius: "10px",
   fontWeight: "700",
   color: "#fff",

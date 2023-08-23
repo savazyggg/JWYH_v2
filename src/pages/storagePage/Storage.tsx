@@ -15,11 +15,6 @@ import {
 } from "../../recoilStore";
 //리코일
 import Header from "../../components/organisms/header/Header";
-// interface LetterCount {
-//   [year: string]: {
-//     [month: string]: number;
-//   };
-// }
 
 const Storage = (): JSX.Element => {
   //리코일
@@ -28,10 +23,9 @@ const Storage = (): JSX.Element => {
   const [recoilUserId, _setRecoilUserId] = useRecoilState(userIdState);
   const [myNickName, _setMyNickName] = useRecoilState(nickNameState);
   const [recoilJwtString, _setRecoilJwtString] = useRecoilState(jwtStringState);
-  // const [recoilProvider, setRecoilProvider] = useRecoilState(providerState);
+
   //리코일
 
-  // const [letterCount, setLetterCount] = useState<LetterCount>({});
   const MONTH_NUM = 12;
 
   const arr_2023 = new Array<number>(MONTH_NUM).fill(0);
@@ -75,21 +69,9 @@ const Storage = (): JSX.Element => {
           console.log(obj);
           const yearArray = Object.keys(obj);
           console.log(yearArray + "년도별 array");
-          // for (let i = 0; i < yearArray.length; i++) {
-          //   for (let j = 0; j < monthArray.length; j++) {
-          //         console.log(obj[yearArray[i]][monthArray[j]]+"여기임");
-          //         if(yearArray[i]==="2023"){
-          //           // setData2023(data2023=>[...data2023,[obj[yearArray[i]][monthArray[j]]]]);
-          //           // console.log("hi");
-          //         }
 
-          //   }
-          //   console.log(data2023);
-          // }
           const year2023 = "2023";
-          // const year2022 = "2022";
-          // const month=1;
-          // // const index=Number(month)-1;
+
           for (let i = 0; i < yearArray.length; i++) {
             for (let j = 0; j < monthArray.length; j++) {
               console.log(obj[year2023] + "안녕");
@@ -112,26 +94,7 @@ const Storage = (): JSX.Element => {
     console.log(myNickName);
     console.log(recoilUniqueId);
     console.log(recoilUserId);
-    // const tokenStr = localStorage.getItem("jwt");
-    // interface JwtDecoded {
-    //   iat: number;
-    //   id: string;
-    //   nickName: string;
-    //   objectId: string;
-    // }
-    // const JwtDecoded: JwtDecoded = jwt_decode(tokenStr);
-    // console.log("여기에서 찍혀야함" + JwtDecoded + "JWTDecoded");
-    // setNickname(JwtDecoded.nickName);
   }, []);
-
-  //   axios
-  //     .get(`https://kdt-sw-4-team14.elicecoding.com/api/nickName/${id}`)
-  //     .then((response) => {
-  //       setNickname(response.data[0].nickname);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error+"닉네임 못받아옴 로그인 하셈");
-  //     });
 
   return (
     <>

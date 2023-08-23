@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import FindPwForm from "../../components/organisms/findPwForm/FindPwForm";
+import { theme } from "../../common/core";
 
 function FindPwPage() {
   return (
@@ -15,7 +16,7 @@ function FindPwPage() {
             sx={{ width: "100%" }}
             component="h1"
             variant="h4"
-            style={{ color: "#93BA7B" }}
+            style={{ color: theme.green }}
           >
             비밀번호 찾기 페이지
           </Typography>

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { theme } from "../../common/core";
 
 const Notice = () => {
   return (
@@ -50,7 +51,7 @@ const Container = styled.div`
     margin-top: 5px;
   }
   .title {
-    color: #93ba7b;
+    color: ${theme.green};
     font-weight: 900;
     animation: shake 0.5s ease-in-out infinite;
 

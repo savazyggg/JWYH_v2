@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import { useRecoilState } from "recoil";
 import { isLoginedState } from "../../recoilStore";
+import { theme as design } from "../../common/core";
 
 // interface JwtDecoded {
 //   id: string;
@@ -20,7 +21,7 @@ function AcntUpdPage() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#93ba7b",
+        main: design.green,
       },
     },
     components: {

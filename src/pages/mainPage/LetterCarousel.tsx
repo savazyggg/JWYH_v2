@@ -20,12 +20,6 @@ interface LetterInterface {
   sender?: string;
   style?: string;
 }
-// const OkButton = muiStyled(Button)({
-//   backgroundColor: "#93BA7B",
-//   "&:hover": {
-//     backgroundColor: "#76ac56",
-//   },
-// });
 
 /**
  * 편지 캐러셀 컴포넌트
@@ -159,15 +153,6 @@ function LetterCarousel(props: LetterCarouselProps) {
               modalContent={modalContent}
               closeModal={closeModal}
             ></Envelope>
-            {/* <div>{modalContent.unlockDate}</div>
-            <div className="modal-sender">{`From .. ${modalContent.sender}`}</div>
-            <div
-              className="modal-content-div"
-              dangerouslySetInnerHTML={{ __html: modalContent.content }}
-            ></div>
-            <OkButton variant="contained" size="small" onClick={closeModal}>
-              닫기
-            </OkButton> */}
           </div>
         </div>
       )}

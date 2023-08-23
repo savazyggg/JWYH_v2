@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { isLoginedState, nickNameState } from "../../recoilStore";
 import { getLetters } from "../../apis/getLetters";
+import { theme } from "../../common/core";
 // recoil
 
 const GuestMainPage = () => {
@@ -92,7 +93,7 @@ const Info = muiStyled(Box)({
 
 const ShakingText = styled.div`
   font-size: 32px !important;
-  color: #93ba7b !important;
+  color: ${theme.green} !important;
   display: inline-block !important;
   whitespace: pre;
   animation: shake 0.6s ease-in-out infinite;

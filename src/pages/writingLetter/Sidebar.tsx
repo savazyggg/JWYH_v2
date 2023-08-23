@@ -3,6 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import LetterStyle from "./LetterStyle";
 import { useState, useEffect } from "react";
 import Notice from "./Notice";
+import { theme } from "../../common/core";
 interface Props {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
@@ -75,7 +76,7 @@ const SidebarNav = styled.div<{ show: boolean }>`
     margin: 0px;
   }
   li {
-    background-color: #93ba7b;
+    background-color: ${theme.green};
     list-style: none;
     float: left;
     padding: 0 15px;
@@ -84,7 +85,7 @@ const SidebarNav = styled.div<{ show: boolean }>`
     text-align: center;
     cursor: pointer;
     &:hover {
-      color: #93ba7b;
+      color: ${theme.green};
       background-color: white;
     }
   }
@@ -106,7 +107,7 @@ const Button = styled.button`
   left: 0;
   margin-left: -9px;
   position: fixed;
-  background-color: #93ba7b;
+  background-color: ${theme.green};
   font-size: 15px;
   font-weight: 700;
   color: white;

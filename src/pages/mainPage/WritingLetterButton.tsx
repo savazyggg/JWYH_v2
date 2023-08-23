@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { uniqueIdState } from "../../recoilStore";
+import { theme } from "../../common/core";
 
 interface WritingLetterButtonProps {
   isLogin: boolean;
@@ -26,7 +27,7 @@ export default WritingLetterButton;
 const Button = styled.button`
   margin-top: 12px;
   border-radius: 13px;
-  background-color: #93ba7b;
+  background-color: ${theme.green};
   width: 150px;
   height: 50px;
   color: white;
