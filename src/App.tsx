@@ -1,24 +1,23 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
-import CssBaseline from "@mui/material/CssBaseline";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import IntroPage from "./pages/introPage/IntroPage";
-import WritingLetterPage from "./pages/writingLetter/WritingLetterPage";
-import "./App.css";
-import MainPage from "./pages/mainPage/MainPage";
-import Storage from "./pages/storagePage/Storage";
-import ErrorPage from "./pages/errorPage/ErrorPage";
-import SignUpPage from "./pages/signUpPage/SignUpPage";
-import LoginPage from "./pages/loginPage/LoginPage";
-import StorageLetter from "./pages/storagePage/StorageLetter";
-import GuestMainPage from "./pages/mainPage/GuestMainPage";
-import AcntUpdPage from "./pages/acntUpdPage/AcntUpdPage";
+import { Suspense, lazy } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Layout from "./Root";
+import ReactDOM from "react-dom/client";
+import IntroPage from "./pages/introPage/IntroPage";
+import "./App.css";
+
+const MainPage = lazy(() => import("./pages/mainPage/MainPage"));
+const Storage = lazy(() => import("./pages/storagePage/Storage"));
+const ErrorPage = lazy(() => import("./pages/errorPage/ErrorPage"));
+const SignUpPage = lazy(() => import("./pages/signUpPage/SignUpPage"));
+const LoginPage = lazy(() => import("./pages/loginPage/LoginPage"));
+const StorageLetter = lazy(() => import("./pages/storagePage/StorageLetter"));
+const GuestMainPage = lazy(() => import("./pages/mainPage/GuestMainPage"));
+const AcntUpdPage = lazy(() => import("./pages/acntUpdPage/AcntUpdPage"));
+const WritingLetterPage = lazy(
+  () => import("./pages/writingLetter/WritingLetterPage")
+);
 
 const router = createBrowserRouter([
   {
@@ -27,10 +26,19 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <IntroPage /> },
-      { path: "/login", element: <LoginPage /> },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
       { path: "/signup", element: <SignUpPage /> },
-      { path: "/mypage", element: <AcntUpdPage /> },
-      { path: "/writingletter/:_id", element: <WritingLetterPage /> },
+      {
+        path: "/mypage",
+        element: <AcntUpdPage />,
+      },
+      {
+        path: "/writingletter/:_id",
+        element: <WritingLetterPage />,
+      },
       { path: "/main", element: <MainPage /> },
       { path: "/main/:_id", element: <GuestMainPage /> },
       { path: "/storage", element: <Storage /> },
@@ -42,7 +50,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <RecoilRoot>
     <GoogleOAuthProvider clientId="221947933367-6qlcs81lju9hsahq4gi97q9vsatpq394.apps.googleusercontent.com">
-      <RouterProvider router={router} />
+      <Suspense fallback={<div>loading...</div>}>
+        <RouterProvider router={router} />
+      </Suspense>
     </GoogleOAuthProvider>
   </RecoilRoot>
 );

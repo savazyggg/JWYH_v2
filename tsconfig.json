@@ -10,7 +10,7 @@
     //Mac 에러 해결
     // "module": "ESNext",
     // "moduleResolution": "bundler",
-    "module": "es2015",
+    "module": "es2020",
     "moduleResolution": "node",
     //Mac 에러 해결
 
