@@ -54,7 +54,7 @@ const theme = createTheme({
     },
   },
 });
-console.log("hello world");
+
 function LoginPage() {
   return (
     <>
