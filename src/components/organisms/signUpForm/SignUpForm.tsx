@@ -164,6 +164,7 @@ export default function SignUpForm() {
       </FormControl>
       <PasswordInput
         isPwError={isIdError}
+        pwErMsg={erMsg}
         pwValue={pwValue}
         passwordInputChange={passwordInputChange}
       >
