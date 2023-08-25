@@ -3,14 +3,7 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import { LoginData, login } from "../../../apis/loginApi";
 import { Link, useNavigate } from "react-router-dom";
-import FormControl from "@mui/material/FormControl";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormHelperText from "@mui/material/FormHelperText";
+
 import Grid from "@mui/material/Grid";
 import jwt_decode from "jwt-decode";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -25,6 +18,8 @@ import {
   nickNameState,
   providerState,
 } from "../../../recoilStore";
+import IdInput from "../../molecules/IdInput";
+import PasswordInput from "../../molecules/PasswordInput";
 //리코일
 
 export default function LoginForm() {
@@ -34,6 +29,15 @@ export default function LoginForm() {
   const [isPwError, setPwIsError] = useState(false);
   const [pwErMsg, _setPwErMsg] = useState("로그인 실패!!");
   const [showPassword, setShowPassword] = useState(false);
+
+  const idInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIdIsError(false);
+    setIdValue(e.target.value);
+  };
+  const passwordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPwIsError(false);
+    setPwValue(e.target.value);
+  };
 
   //리코일
   const [recoilIsLogined, setRecoilIsLogined] = useRecoilState(isLoginedState);
@@ -139,48 +143,20 @@ export default function LoginForm() {
         gridGap: "25px",
       }}
     >
-      <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
-        <InputLabel htmlFor="identification">아이디</InputLabel>
-        <OutlinedInput
-          id="identification"
-          type="text"
-          value={idValue}
-          aria-describedby="id-input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setIdIsError(false);
-            setIdValue(e.target.value);
-          }}
-          label="아이디"
-        />
-        <FormHelperText></FormHelperText>
-      </FormControl>
-      <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
-        <InputLabel htmlFor="password">비밀번호</InputLabel>
-        <OutlinedInput
-          id="password"
-          type={showPassword ? "text" : "password"}
-          value={pwValue}
-          aria-describedby="password-input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPwIsError(false);
-            setPwValue(e.target.value);
-          }}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="비밀번호"
-        />
-        <FormHelperText>{isPwError && pwErMsg}</FormHelperText>
-      </FormControl>
+      <IdInput
+        isIdError={isIdError}
+        idValue={idValue}
+        idInputChange={idInputChange}
+      />
+      <PasswordInput
+        isPwError={isPwError}
+        showPassword={showPassword}
+        pwErMsg={pwErMsg}
+        pwValue={pwValue}
+        passwordInputChange={passwordInputChange}
+        handleClickShowPassword={handleClickShowPassword}
+        handleMouseDownPassword={handleMouseDownPassword}
+      />
       <div></div>
       <Grid container rowSpacing={1} justifyContent={"center"}>
         <Grid item xs={6} padding={"8px"}>

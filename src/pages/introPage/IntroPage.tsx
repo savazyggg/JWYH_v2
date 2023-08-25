@@ -101,10 +101,6 @@ function IntroPage() {
               }}
             >
               <EnvelopeIntro></EnvelopeIntro>
-              {/* <img
-              style={{ width: "100%" }}
-              src="https://dummyimage.com/400x400/bababa/000000"
-            ></img> */}
             </Box>
             <Stack direction={"row"}>
               <Link style={{ width: "100%" }} to="/login">

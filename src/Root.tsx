@@ -7,21 +7,21 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 const Layout = () => {
   return (
-    <>
+    <SLayOut>
       <CssBaseline />
       <Outlet />
-    </>
+    </SLayOut>
   );
 };
 
 export default Layout;
 
-// const SLayOut = styled.main`
-//   display: flex;
-//   align-items: center;
-//   margin: 0 auto;
-//   min-height: 100vh;
-//   * {
-//     font-family: "Noto Sans KR", sans-serif;
-//   }
-// `;
+const SLayOut = styled.main`
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  min-height: 100vh;
+  * {
+    font-family: "Noto Sans KR", sans-serif;
+  }
+`;

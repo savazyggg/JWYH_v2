@@ -70,7 +70,6 @@ function LoginPage() {
         >
           <Stack sx={{ paddingTop: "50px" }} direction={"column"} spacing={2}>
             <Typography
-              sx={{ width: "100%" }}
               component="h1"
               variant="h4"
               style={{ color: design.green, fontWeight: "900" }}
