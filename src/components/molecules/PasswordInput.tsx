@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -11,13 +11,18 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const PasswordInput = ({
   isPwError,
-  showPassword,
   pwErMsg,
   pwValue,
   passwordInputChange,
-  handleClickShowPassword,
-  handleMouseDownPassword,
+  children,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
   return (
     <FormControl error={isPwError} sx={{ width: "100%" }} variant="outlined">
       <InputLabel htmlFor="password">비밀번호</InputLabel>
@@ -41,7 +46,7 @@ const PasswordInput = ({
         }
         label="비밀번호"
       />
-      <FormHelperText>{isPwError && pwErMsg}</FormHelperText>
+      <FormHelperText>{children}</FormHelperText>
     </FormControl>
   );
 };

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Children } from "react";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 
-const IdInput = ({ isIdError, idValue, idInputChange }) => {
+const IdInput = ({ isIdError, idValue, idInputChange, children }) => {
   return (
     <FormControl error={isIdError} sx={{ width: "100%" }} variant="outlined">
       <InputLabel htmlFor="identification">아이디</InputLabel>
@@ -16,7 +16,7 @@ const IdInput = ({ isIdError, idValue, idInputChange }) => {
         onChange={idInputChange}
         label="아이디"
       />
-      <FormHelperText></FormHelperText>
+      <FormHelperText>{children}</FormHelperText>
     </FormControl>
   );
 };

@@ -49,13 +49,6 @@ export default function LoginForm() {
 
   //리코일
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
   const setRecoilInit = (data: any) => {
     //레거시
     const jwt = JSON.stringify(data);
@@ -150,13 +143,12 @@ export default function LoginForm() {
       />
       <PasswordInput
         isPwError={isPwError}
-        showPassword={showPassword}
         pwErMsg={pwErMsg}
         pwValue={pwValue}
         passwordInputChange={passwordInputChange}
-        handleClickShowPassword={handleClickShowPassword}
-        handleMouseDownPassword={handleMouseDownPassword}
-      />
+      >
+        {isPwError && pwErMsg}
+      </PasswordInput>
       <div></div>
       <Grid container rowSpacing={1} justifyContent={"center"}>
         <Grid item xs={6} padding={"8px"}>
@@ -194,7 +186,6 @@ export default function LoginForm() {
           </Link>
         </Grid>
       </Grid>
-      {/* // </Stack> */}
     </div>
   );
 }
